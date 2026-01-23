@@ -1,6 +1,6 @@
 /**
- *	\file		dial.h
- *	\brief		Spécification de la couche dialogue de l'application
+ *	\file		repReq.h
+ *	\brief		Spécification de la couche repReq de l'application
  *	\author		Louis ARCELON, Baptiste PICAVET, Mathieu MARTEL
  *	\date		23 janvier 2026
  *	\version	1.0

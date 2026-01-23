@@ -1,11 +1,11 @@
 /**
- *	\file		dial.c
- *	\brief		Implémentation de la couche dialogue de l'application
+ *	\file		repReq.c
+ *	\brief		Implémentation de la couche repReq de l'application
  *	\author		Louis ARCELON, Baptiste PICAVET, Mathieu MARTEL
  *	\date		23 janvier 2026
  *	\version	1.0
  */
-#include "dial.h"
+#include "repReq.h"
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
