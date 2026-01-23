@@ -16,7 +16,6 @@
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
  */
-#define VERB_LENGTH	20
 #define OPT_LENGTH	100
 /*
 *****************************************************************************************
@@ -31,9 +30,9 @@
  */
 typedef struct request {
 	
-	short idReq;
-	char verbReq[VERB_LENGTH];
-	char optReq[OPT_LENGTH];
+	short id;
+	uint8_t verb[VERB_LENGTH];
+	char opt[OPT_LENGTH];
 	
 	
 } req_t;
@@ -46,9 +45,9 @@ typedef struct request {
  */
 typedef struct response {
 	
-	short idRep;
-	char verbRep[VERB_LENGTH];
-	char optRep[OPT_LENGTH];
+	short id;
+	uint8_t verb;
+	char opt[OPT_LENGTH];
 	
 } rep_t;
 /*
