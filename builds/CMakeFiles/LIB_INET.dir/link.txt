@@ -1,0 +1,2 @@
+/usr/bin/ar qc libLIB_INET.a CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o
+/usr/bin/ranlib libLIB_INET.a
