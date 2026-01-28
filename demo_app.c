@@ -8,6 +8,7 @@
 #include <libgen.h>
 #include <data.h>
 #include <logging.h>
+#include <repReq.h>
 
 /*
 *****************************************************************************************
@@ -23,6 +24,19 @@
  *	\brief		Numéro de port par défaut du serveur
  */
 #define PORT_SRV	50000
+
+#define ASK 100
+#define OK 200
+#define NOK 300
+
+#define CONNECT 0
+#define DISCONNECT 1
+#define SHOOT 2
+#define REVEAL 3
+#define START 4
+#define END 5
+#define NEXT 6
+#define PLACE 7
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -51,6 +65,29 @@ char *progName;
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
+
+
+void dialClt2srv(socket_t *sockAppel) {
+
+	rep_t response;
+	req_t request;
+
+	while (1) {
+
+		request.id = ASK;
+		request.verb = CONNECT;
+		strcpy(request.opt, "HELLO WORLD");
+
+		// Dialoguer avec le serveur
+		envoyer(sockAppel,(generic) &request, (pFct) req2str);
+		recevoir(sockAppel,(generic) &response, (pFct) str2rep);
+		logMessage("[%i] %hhu : %s\n", DEBUG, response.id, response.verb, response.opt);
+		
+	}
+
+}
+
+
 /**
  *	\fn			void client (char *adrIP, int port)
  *	\brief		lance un client STREAM connecté à l'adresse applicative adrIP:port 
@@ -59,28 +96,61 @@ char *progName;
  */
 void client (char *adrIP, int port) {
 	socket_t sockAppel;	// socket d'appel
-	buffer_t buff;
-	
-	req_t request;
-	
-	printf("Entrez un code de statut: ");
-	scanf("%i", &request.idReq);
-	
-	strcpy(request.verbReq, "SAY");
-	strcpy(request.optReq, "HELLO WORLD");
-	
-	rep_t response;
+
+	printf("Demande de connexion: ");
 
 	// Créer une connexion avec le serveur
 	sockAppel = connecterClt2Srv (adrIP, port);
-	// Dialoguer avec le serveur
-	envoyer(&sockAppel,(generic) &request, (pFct) req2str);
-	recevoir(&sockAppel,(generic) &response, (pFct) str2rep);
-	logMessage("[Statut: %i] %s : %s\n", DEBUG, response.idRep, response.verbRep, response.optRep);
+
+	dialClt2srv(&sockAppel);
+
 	PAUSE("Fin du client");
 	// Fermer la socket d'appel
 	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");
+
+	
 }
+
+void dialSrv2clt(socket_t *sockDial) {
+
+	while(1)	// daemon !
+	{	
+		
+		req_t request;
+		rep_t response;
+		
+		// Dialoguer avec le client connecté
+		recevoir(sockDial, (generic) &request, (pFct) str2req);
+		logMessage("[%i] %hhu : %s\n", DEBUG, request.id, request.verb, request.opt);
+		
+		
+		switch (request.id) {
+			
+			case 100: 
+				response.id = OK;
+				response.verb = request.verb;
+				strcpy(response.opt, "ACCEPTED");
+				break;
+				
+			case 101:
+				response.id = NOK;
+				response.verb = request.verb;
+				strcpy(response.opt, "REFUSED");
+				break;
+				
+			default:
+				response.id = NOK;
+				response.verb = request.verb;
+				strcpy(response.opt, "INVALID");
+				break;
+			
+		}
+		
+		envoyer(sockDial, (generic) &response, (pFct) rep2str);
+	}
+
+}
+
 /**
  *	\fn				void serveur (char *adrIP, int port)
  *	\brief			lance un serveur STREAM en écoute sur l'adresse applicative adrIP:port
@@ -94,45 +164,14 @@ void serveur (char *adrIP, int port) {
 	
 	// sockEcoute est une variable externe
 	sockEcoute = creerSocketEcoute(adrIP, port);
-	while(1)	// daemon !
-	{	
-		
-		req_t request;
-		rep_t response;
-		
-		// Accepter une connexion
-		sockDial = accepterClt(sockEcoute);
-		// Dialoguer avec le client connecté
-		recevoir(&sockDial, (generic) &request, (pFct) str2req);
-		logMessage("[%i] %s : %s\n", DEBUG, request.idReq, request.verbReq, request.optReq);
-		
-		
-		switch (request.idReq) {
-			
-			case 100: 
-				response.idRep = 50;
-				strcpy(response.verbRep, "RECEIVED");
-				strcpy(response.optRep, "ACCEPTED");
-				break;
-				
-			case 101:
-				response.idRep = 100;
-				strcpy(response.verbRep, "RECEIVED");
-				strcpy(response.optRep, "REFUSED");
-				break;
-				
-			default:
-				response.idRep = 404;
-				strcpy(response.verbRep, "UNKNOWN");
-				strcpy(response.optRep, "USE 100 OR 200 CODE");
-				break;
-			
-		}
-		
-		envoyer(&sockDial, (generic) &response, (pFct) rep2str);
-		// Fermer la socket d'écoute
-		CHECK(close(sockDial.fd),"-- PB close() --");
-	}
+
+	// Accepter une connexion
+	sockDial = accepterClt(sockEcoute);
+	
+	dialSrv2clt(&sockDial);
+
+	// Fermer la socket d'écoute
+	CHECK(close(sockDial.fd),"-- PB close() --");
 	// Fermer la socket d'écoute
 	CHECK(close(sockEcoute.fd),"-- PB close() --");
 }
@@ -148,6 +187,7 @@ void serveur (char *adrIP, int port) {
  */
 int main(int argc, char** argv) {
 	progName = argv[0];
+
 #ifdef CLIENT
 	if (argc<3) {
 		fprintf(stderr,"usage : %s @IP port\n", basename(progName));

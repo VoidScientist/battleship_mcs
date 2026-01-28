@@ -31,7 +31,7 @@
 typedef struct request {
 	
 	short id;
-	uint8_t verb[VERB_LENGTH];
+	uint8_t verb;
 	char opt[OPT_LENGTH];
 	
 	
