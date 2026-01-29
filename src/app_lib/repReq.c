@@ -70,7 +70,7 @@ void rep2str(rep_t *rep, char *str) {
 
 
 void str2rep(char *str, rep_t *rep) {
-	sscanf(str, REQ_STR_IN, &rep->id, &rep->data);
+	sscanf(str, REP_STR_IN, &rep->id, &rep->data);
 	
 }
 
@@ -93,21 +93,25 @@ void rcvRequest(socket_t *sockDial, req_t *request) {
 
 	recevoir(sockDial,(generic) request, (pFct) str2req);
 
+#ifdef DEBUG_ENABLED
 	logMessage("[%i] %hhu : %s\n"
 		, DEBUG
 		, request->id
 		, request->verb
 		, request->data
 	);
+#endif
 }
 
 
 void rcvResponse(socket_t *sockAppel, rep_t *response) {
 	recevoir(sockAppel,(generic) response, (pFct) str2rep);
 
+#ifdef DEBUG_ENABLED
 	logMessage("[%i] %s\n"
 		, DEBUG
 		, response->id
 		, response->data
 	);
+#endif
 }

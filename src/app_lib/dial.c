@@ -7,22 +7,7 @@
  */
 #include "logging.h"
 #include "dial.h"
-/*
-*****************************************************************************************
- *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
- */
-#define ASK 100
-#define OK 200
-#define NOK 300
-
-#define CONNECT 0
-#define DISCONNECT 1
-#define SHOOT 2
-#define REVEAL 3
-#define START 4
-#define END 5
-#define NEXT 6
-#define PLACE 7
+#include "protocol.h"
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -48,13 +33,23 @@
 void dialClt2Srv(socket_t *sockAppel) {
 
 	rep_t response;
-	req_t request;
 
 	while (1) {
 
-		sendRequest(sockAppel, ASK, CONNECT, "HELLO", NULL);
+		int status = enum2status(REQ, CONNECT);
+		sendRequest(sockAppel, status, POST, "HELLO", NULL);
 
 		rcvResponse(sockAppel, &response);
+
+		switch (getStatusRange(response.id)) {
+
+
+			case ERR:
+				logMessage("An error occurred: %s\n", ERROR, response.data);
+				break;
+
+
+		}
 		
 	}
 
@@ -73,29 +68,20 @@ void dialSrv2Clt(socket_t *sockDial) {
 	while(1)	// daemon !
 	{	
 		
-		req_t request;
-		rep_t response;
-		
+		req_t request;		
 		rcvRequest(sockDial, &request);
 		
 		
 		switch (request.id) {
-			
-			case 100:
-				response = creerReponse(OK, "ACCEPTED", NULL);
-				break;
-				
-			case 101:
-				response = creerReponse(NOK, "REFUSED", NULL);
-				break;
 				
 			default:
-				response = creerReponse(NOK, "INVALID", NULL);
+				action_t act = getAction(request.id);
+				int status = enum2status(ERR, act);
+				sendResponse(sockDial, status, "Unable to connect", NULL);
 				break;
 			
 		}
 		
-		envoyer(sockDial, (generic) &response, (pFct) rep2str);
 	}
 
 }
