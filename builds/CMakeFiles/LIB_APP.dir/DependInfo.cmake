@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/dial.c" "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o" "gcc" "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o.d"
+  "/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c" "CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o" "gcc" "CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o.d"
   "/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/repReq.c" "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o" "gcc" "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o.d"
   )
 

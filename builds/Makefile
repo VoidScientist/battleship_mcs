@@ -239,6 +239,30 @@ src/app_lib/dial.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s
 .PHONY : src/app_lib/dial.c.s
 
+src/app_lib/protocol.o: src/app_lib/protocol.c.o
+.PHONY : src/app_lib/protocol.o
+
+# target to build an object file
+src/app_lib/protocol.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o
+.PHONY : src/app_lib/protocol.c.o
+
+src/app_lib/protocol.i: src/app_lib/protocol.c.i
+.PHONY : src/app_lib/protocol.i
+
+# target to preprocess a source file
+src/app_lib/protocol.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.i
+.PHONY : src/app_lib/protocol.c.i
+
+src/app_lib/protocol.s: src/app_lib/protocol.c.s
+.PHONY : src/app_lib/protocol.s
+
+# target to generate assembly for a file
+src/app_lib/protocol.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.s
+.PHONY : src/app_lib/protocol.c.s
+
 src/app_lib/repReq.o: src/app_lib/repReq.c.o
 .PHONY : src/app_lib/repReq.o
 
@@ -355,6 +379,9 @@ help:
 	@echo "... src/app_lib/dial.o"
 	@echo "... src/app_lib/dial.i"
 	@echo "... src/app_lib/dial.s"
+	@echo "... src/app_lib/protocol.o"
+	@echo "... src/app_lib/protocol.i"
+	@echo "... src/app_lib/protocol.s"
 	@echo "... src/app_lib/repReq.o"
 	@echo "... src/app_lib/repReq.i"
 	@echo "... src/app_lib/repReq.s"

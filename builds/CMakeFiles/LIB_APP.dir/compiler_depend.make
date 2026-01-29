@@ -3,6 +3,7 @@
 
 CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/dial.c \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h \
@@ -93,6 +94,10 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: /home/voidscientist/Développement/
   /usr/include/unistd.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
+
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h \
+  /usr/include/stdc-predef.h
 
 CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/repReq.c \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
@@ -189,6 +194,8 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/repReq.c:
 
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c:
+
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h:
@@ -233,15 +240,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /usr/include/bits/types/struct_FILE.h:
 
-/usr/include/linux/posix_types.h:
-
-/usr/include/bits/libc-header-start.h:
+/usr/include/bits/types/sigset_t.h:
 
 /usr/include/bits/floatn-common.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/bits/environments.h:
 
 /usr/include/bits/confname.h:
 
@@ -264,6 +265,12 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 /usr/include/stdc-predef.h:
 
 /usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/types/FILE.h:
 
 /usr/include/bits/waitflags.h:
 
@@ -295,6 +302,12 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /usr/include/alloca.h:
 
+/usr/include/bits/floatn.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/asm/bitsperlong.h:
+
 /usr/include/sys/socket.h:
 
 /usr/include/asm-generic/sockios.h:
@@ -307,11 +320,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /usr/include/bits/types/clock_t.h:
 
-/usr/include/bits/floatn.h:
+/usr/include/linux/posix_types.h:
 
-/usr/include/asm/socket.h:
-
-/usr/include/asm/bitsperlong.h:
+/usr/include/bits/libc-header-start.h:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
 
@@ -353,19 +364,17 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /usr/include/bits/stdio_lim.h:
 
-/usr/include/bits/types/sigset_t.h:
+/usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/stdlib-float.h:
 
 /usr/include/bits/types/time_t.h:
 
 /usr/include/bits/struct_rwlock.h:
 
-/usr/include/bits/types/FILE.h:
-
-/usr/include/bits/stdlib-float.h:
-
-/usr/include/bits/types/__FILE.h:
-
 /usr/include/bits/types/__fpos_t.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h:
 
 /usr/include/bits/types/__mbstate_t.h:
 

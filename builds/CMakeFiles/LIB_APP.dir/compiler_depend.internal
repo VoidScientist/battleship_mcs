@@ -4,6 +4,7 @@
 CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/dial.c
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h
@@ -94,6 +95,11 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
  /usr/include/unistd.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
+
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h
+ /usr/include/stdc-predef.h
 
 CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/repReq.c

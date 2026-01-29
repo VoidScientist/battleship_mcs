@@ -53,4 +53,5 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: \
  /usr/include/bits/types/struct_osockaddr.h /usr/include/netinet/in.h \
  /usr/include/bits/stdint-uintn.h /usr/include/bits/in.h \
  /usr/include/arpa/inet.h \
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/protocol.h

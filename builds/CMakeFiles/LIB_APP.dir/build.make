@@ -100,19 +100,35 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/dial.c -o CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s
 
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o: CMakeFiles/LIB_APP.dir/flags.make
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o: CMakeFiles/LIB_APP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o -MF CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o.d -o CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c
+
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c > CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.i
+
+CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/protocol.c -o CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.s
+
 # Object files for target LIB_APP
 LIB_APP_OBJECTS = \
 "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o" \
-"CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o"
+"CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o" \
+"CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o"
 
 # External object files for target LIB_APP
 LIB_APP_EXTERNAL_OBJECTS =
 
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
+libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/build.make
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library libLIB_APP.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C static library libLIB_APP.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/LIB_APP.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LIB_APP.dir/link.txt --verbose=$(VERBOSE)
 
