@@ -33,12 +33,6 @@
  *	\brief		Flags à utiliser en émission
  */
 #define SEND_FLAGS 	0
-
-#define REQ_STR_OUT "%i:%s:%s"
-#define REQ_STR_IN "%i:%[^:]:%[^\n]"
-#define REP_STR_OUT "%i:%s:%s"
-#define REP_STR_IN "%i:%[^:]:%[^\n]"
-
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -179,7 +173,7 @@ void envoyer(socket_t *sockEch, generic quoi, pFct serial, ...) {
 		va_end(pArg);
 		}	
 }
-/**
+/**cpy(buff , (char *)quoi);
  *	\fn			void recevoir(socket_t *sockEch, generic quoi, pFct deSerial)
  *	\brief		Réception d'une requête/réponse sur une socket
  *	\param 		sockEch : socket d'échange à utiliser pour la réception
@@ -198,28 +192,4 @@ void recevoir(socket_t *sockEch, generic quoi, pFct deSerial) {
 	// Dé-serialiser la requête/réponse
 	if (deSerial != NULL) deSerial(buff, quoi);
 	else strcpy((char *) quoi, buff);
-}
-
-
-void req2str(req_t *req, char *str) {
-	sprintf(str, REQ_STR_OUT, req->idReq, req->verbReq, req->optReq);
-	
-}
-
-
-void str2req(char *str, req_t *req) {
-	sscanf(str, REQ_STR_IN, &req->idReq, &req->verbReq, &req->optReq);
-	
-}
-
-
-void rep2str(rep_t *rep, char *str) {
-	sprintf(str, REP_STR_OUT, rep->idRep, rep->verbRep, rep->optRep);
-	
-}
-
-
-void str2rep(char *str, rep_t *rep) {
-	sscanf(str, REQ_STR_IN, &rep->idRep, &rep->verbRep, &rep->optRep);
-	
 }

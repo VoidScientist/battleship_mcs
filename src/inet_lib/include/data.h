@@ -1,8 +1,8 @@
 /**
  *	\file		data.h
  *	\brief		Spécification de la couche Data Representation
- *	\author		Samir El Khattabi
- *	\date		3 mars 2023
+ *	\author		Louis ARCELON
+ *	\date		23 janvier 2026
  *	\version	1.0
  */
 #ifndef DATA_H
@@ -40,23 +40,6 @@ typedef void * generic;
  *	\brief		pointer sur fonction générique à 2 parametres génériques
  */
 typedef void (*pFct) (generic, generic);
-
-typedef struct request {
-	
-	short idReq;
-	char verbReq[20];
-	char optReq[100];
-	
-	
-} req_t;
-
-typedef struct response {
-	
-	short idRep;
-	char verbRep[20];
-	char optRep[100];
-	
-} rep_t;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S
@@ -83,14 +66,6 @@ void envoyer(socket_t *sockEch, generic quoi, pFct serial, ...);
  *				paramètre sockEch modifié pour le mode DGRAM
  */
 void recevoir(socket_t *sockEch, generic quoi, pFct deSerial);
-
-void req2str(req_t *requete, char *str);
-
-void str2req(char *str, req_t *requete);
-
-void rep2str(rep_t *reponse, char *str);
-
-void str2rep(char *str, rep_t *reponse);
 
 
 #endif /* DATA_H */
