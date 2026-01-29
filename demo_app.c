@@ -1,15 +1,15 @@
 /**
- *	\file		useLibInet.c
+ *	\file		demo_app.c
  *	\brief		Exemple d'utilisation de la librairie libinet.a
- *	\author		Samir El Khattabi
- *	\date		3 mars 2023
+ *	\author		ARCELON Louis
+ *	\date		28 janvier 2026
  *	\version	1.0
  */
 #include <libgen.h>
-#include <data.h>
 #include <logging.h>
+#include <data.h>
 #include <repReq.h>
-
+#include <dial.h>
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
@@ -24,19 +24,6 @@
  *	\brief		Numéro de port par défaut du serveur
  */
 #define PORT_SRV	50000
-
-#define ASK 100
-#define OK 200
-#define NOK 300
-
-#define CONNECT 0
-#define DISCONNECT 1
-#define SHOOT 2
-#define REVEAL 3
-#define START 4
-#define END 5
-#define NEXT 6
-#define PLACE 7
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -65,29 +52,6 @@ char *progName;
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
-
-
-void dialClt2srv(socket_t *sockAppel) {
-
-	rep_t response;
-	req_t request;
-
-	while (1) {
-
-		request.id = ASK;
-		request.verb = CONNECT;
-		strcpy(request.opt, "HELLO WORLD");
-
-		// Dialoguer avec le serveur
-		envoyer(sockAppel,(generic) &request, (pFct) req2str);
-		recevoir(sockAppel,(generic) &response, (pFct) str2rep);
-		logMessage("[%i] %hhu : %s\n", DEBUG, response.id, response.verb, response.opt);
-		
-	}
-
-}
-
-
 /**
  *	\fn			void client (char *adrIP, int port)
  *	\brief		lance un client STREAM connecté à l'adresse applicative adrIP:port 
@@ -102,7 +66,7 @@ void client (char *adrIP, int port) {
 	// Créer une connexion avec le serveur
 	sockAppel = connecterClt2Srv (adrIP, port);
 
-	dialClt2srv(&sockAppel);
+	dialClt2Srv(&sockAppel);
 
 	PAUSE("Fin du client");
 	// Fermer la socket d'appel
@@ -110,47 +74,6 @@ void client (char *adrIP, int port) {
 
 	
 }
-
-void dialSrv2clt(socket_t *sockDial) {
-
-	while(1)	// daemon !
-	{	
-		
-		req_t request;
-		rep_t response;
-		
-		// Dialoguer avec le client connecté
-		recevoir(sockDial, (generic) &request, (pFct) str2req);
-		logMessage("[%i] %hhu : %s\n", DEBUG, request.id, request.verb, request.opt);
-		
-		
-		switch (request.id) {
-			
-			case 100: 
-				response.id = OK;
-				response.verb = request.verb;
-				strcpy(response.opt, "ACCEPTED");
-				break;
-				
-			case 101:
-				response.id = NOK;
-				response.verb = request.verb;
-				strcpy(response.opt, "REFUSED");
-				break;
-				
-			default:
-				response.id = NOK;
-				response.verb = request.verb;
-				strcpy(response.opt, "INVALID");
-				break;
-			
-		}
-		
-		envoyer(sockDial, (generic) &response, (pFct) rep2str);
-	}
-
-}
-
 /**
  *	\fn				void serveur (char *adrIP, int port)
  *	\brief			lance un serveur STREAM en écoute sur l'adresse applicative adrIP:port
@@ -168,7 +91,7 @@ void serveur (char *adrIP, int port) {
 	// Accepter une connexion
 	sockDial = accepterClt(sockEcoute);
 	
-	dialSrv2clt(&sockDial);
+	dialSrv2Clt(&sockDial);
 
 	// Fermer la socket d'écoute
 	CHECK(close(sockDial.fd),"-- PB close() --");

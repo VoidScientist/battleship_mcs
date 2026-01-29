@@ -15,14 +15,17 @@ CLIENT
  /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so
  /usr/lib64/libc_nonshared.a
  /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/CLIENT.dir/demo_app.c.o
- /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_LAYERS.a
+ /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_APP.a
+ /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_INET.a
+ /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_LOGGING.a
 
 CMakeFiles/CLIENT.dir/demo_app.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/data.h
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/logging.h
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/repReq.h
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/session.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h
  /usr/include/alloca.h
  /usr/include/arpa/inet.h
  /usr/include/asm-generic/bitsperlong.h

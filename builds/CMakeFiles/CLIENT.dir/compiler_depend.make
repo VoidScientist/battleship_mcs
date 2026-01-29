@@ -14,13 +14,16 @@ CLIENT: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
   /usr/lib64/libc_nonshared.a \
   CMakeFiles/CLIENT.dir/demo_app.c.o \
-  libLIB_LAYERS.a
+  libLIB_APP.a \
+  libLIB_INET.a \
+  libLIB_LOGGING.a
 
 CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c \
-  /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/data.h \
-  /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/logging.h \
-  /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/repReq.h \
-  /home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/session.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h \
   /usr/include/alloca.h \
   /usr/include/arpa/inet.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -168,25 +171,15 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
 
 /usr/include/bits/types/FILE.h:
 
-/usr/include/bits/types/__sigset_t.h:
-
-/usr/include/asm-generic/posix_types.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/session.h:
-
-/usr/include/asm/socket.h:
-
 /usr/include/arpa/inet.h:
+
+libLIB_APP.a:
 
 /usr/include/bits/getopt_posix.h:
 
-/usr/include/bits/thread-shared-types.h:
+/usr/include/bits/types/__sigset_t.h:
 
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/logging.h:
-
-/usr/include/strings.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
+/usr/include/asm-generic/posix_types.h:
 
 /usr/include/sys/socket.h:
 
@@ -198,13 +191,25 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
 
 /usr/lib64/crt1.o:
 
-/usr/include/bits/types/locale_t.h:
+libLIB_LOGGING.a:
 
-/lib64/libc.so.6:
+/usr/include/features-time64.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/bits/thread-shared-types.h:
+
+libLIB_INET.a:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h:
 
 CMakeFiles/CLIENT.dir/demo_app.c.o:
 
 /usr/include/bits/byteswap.h:
+
+/usr/include/strings.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
 /lib64/libgcc_s.so.1:
 
@@ -216,7 +221,15 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 
 /usr/include/bits/struct_rwlock.h:
 
-/usr/include/bits/pthreadtypes.h:
+/usr/include/bits/types/locale_t.h:
+
+/lib64/libc.so.6:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h:
+
+/usr/include/bits/confname.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h:
 
 /usr/include/linux/posix_types.h:
 
@@ -234,43 +247,31 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 
 /usr/include/bits/atomic_wide_counter.h:
 
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/data.h:
-
 /lib64/ld-linux-x86-64.so.2:
 
-/usr/include/bits/types/__FILE.h:
-
-/usr/include/bits/stdlib-float.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
-
 /usr/include/bits/select.h:
-
-/usr/include/features-time64.h:
-
-/usr/include/asm-generic/socket.h:
-
-/usr/include/asm/posix_types_64.h:
-
-/usr/include/asm/posix_types.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a:
 
 /usr/include/alloca.h:
 
 /usr/include/asm/bitsperlong.h:
 
-libLIB_LAYERS.a:
-
 /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
 
 /usr/lib64/libc_nonshared.a:
 
+/usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/asm/posix_types_64.h:
+
+/usr/include/asm/socket.h:
+
 /usr/include/asm/sockios.h:
 
-/usr/include/bits/confname.h:
+/usr/include/bits/timesize.h:
 
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/layers_lib/include/repReq.h:
+/usr/include/bits/endian.h:
 
 /usr/include/bits/endianness.h:
 
@@ -290,17 +291,19 @@ libLIB_LAYERS.a:
 
 /usr/include/bits/in.h:
 
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
+
 /usr/include/bits/long-double.h:
 
 /usr/include/bits/posix_opt.h:
 
-/usr/include/bits/endian.h:
-
-/usr/include/bits/timesize.h:
-
 /usr/include/stdc-predef.h:
 
 /usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h:
 
 /usr/include/bits/sockaddr.h:
 
@@ -321,3 +324,9 @@ libLIB_LAYERS.a:
 /usr/include/bits/socket.h:
 
 /usr/include/bits/stdint-uintn.h:
+
+/usr/include/bits/types/__FILE.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/usr/include/bits/stdlib-float.h:

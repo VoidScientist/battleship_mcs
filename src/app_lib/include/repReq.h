@@ -11,12 +11,13 @@
 *****************************************************************************************
  *	\noop		I N C L U D E S   S P E C I F I Q U E S
  */
+#include <string.h>
 #include "data.h"
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
  */
-#define OPT_LENGTH	100
+#define DATA_LENGTH	100
 /*
 *****************************************************************************************
  *	\noop		S T R C T U R E S   DE   D O N N E E S
@@ -24,36 +25,42 @@
 /**
  * \struct  request
  * \brief 	définition de la struct de requête
- * \note	- idReq est le status de la requête
- * 			- verbReq est le verbe de la requête
- *    		- optReq est le contenu de la requête
+ * \note	- id est le status de la requête
+ * 			- verb est le verbe de la requête
+ *    		- data représente les données de réponse
  */
 typedef struct request {
 	
 	short id;
 	uint8_t verb;
-	char opt[OPT_LENGTH];
+	char data[DATA_LENGTH];
 	
 	
 } req_t;
 /**
  * \struct  response
  * \brief 	définition de la struct de réponse
- * \note	- idRep est le status de la réponse
- * 			- verbRep est le verbe de la réponse
- *    		- optRep est le contenu de la réponse
+ * \note	- id est le status de la réponse
+ *    		- data représente les données de réponse
  */
 typedef struct response {
 	
 	short id;
-	uint8_t verb;
-	char opt[OPT_LENGTH];
+	char data[DATA_LENGTH];
 	
 } rep_t;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S
  */
+req_t creerRequete(int status, uint8_t verb, generic data, pFct serial);
+rep_t creerReponse(int status, generic data, pFct serial);
+
+void sendRequest(socket_t *sockAppel, int status, uint8_t verb, generic data, pFct serial);
+void sendResponse(socket_t *sockDial, int status, generic data, pFct serial);
+
+void rcvRequest(socket_t *sockDial, req_t *request);
+void rcvResponse(socket_t *sockAppel, rep_t *response);
 /**
  * \brief      fonction de sérialisation des requêtes
  *

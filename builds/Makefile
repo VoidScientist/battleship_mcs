@@ -215,6 +215,30 @@ demo_app.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/demo_app.c.s
 .PHONY : demo_app.c.s
 
+src/app_lib/dial.o: src/app_lib/dial.c.o
+.PHONY : src/app_lib/dial.o
+
+# target to build an object file
+src/app_lib/dial.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
+.PHONY : src/app_lib/dial.c.o
+
+src/app_lib/dial.i: src/app_lib/dial.c.i
+.PHONY : src/app_lib/dial.i
+
+# target to preprocess a source file
+src/app_lib/dial.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.i
+.PHONY : src/app_lib/dial.c.i
+
+src/app_lib/dial.s: src/app_lib/dial.c.s
+.PHONY : src/app_lib/dial.s
+
+# target to generate assembly for a file
+src/app_lib/dial.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s
+.PHONY : src/app_lib/dial.c.s
+
 src/app_lib/repReq.o: src/app_lib/repReq.c.o
 .PHONY : src/app_lib/repReq.o
 
@@ -328,6 +352,9 @@ help:
 	@echo "... demo_app.o"
 	@echo "... demo_app.i"
 	@echo "... demo_app.s"
+	@echo "... src/app_lib/dial.o"
+	@echo "... src/app_lib/dial.i"
+	@echo "... src/app_lib/dial.s"
 	@echo "... src/app_lib/repReq.o"
 	@echo "... src/app_lib/repReq.i"
 	@echo "... src/app_lib/repReq.s"

@@ -34,8 +34,10 @@ target_link_libraries(LIB_INET PUBLIC LIB_LOGGING)
 add_library(
 	LIB_APP
 	"${LIB_APP_PATH}/include/repReq.h"
+	"${LIB_APP_PATH}/include/dial.h"
 
 	"${LIB_APP_PATH}/repReq.c"
+	"${LIB_APP_PATH}/dial.c"
 )
 target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
 target_link_libraries(LIB_APP PUBLIC LIB_INET)

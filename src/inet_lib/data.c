@@ -173,7 +173,7 @@ void envoyer(socket_t *sockEch, generic quoi, pFct serial, ...) {
 		va_end(pArg);
 		}	
 }
-/**
+/**cpy(buff , (char *)quoi);
  *	\fn			void recevoir(socket_t *sockEch, generic quoi, pFct deSerial)
  *	\brief		Réception d'une requête/réponse sur une socket
  *	\param 		sockEch : socket d'échange à utiliser pour la réception

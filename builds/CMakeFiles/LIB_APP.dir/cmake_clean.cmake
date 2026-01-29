@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o"
+  "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o.d"
   "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o"
   "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o.d"
   "libLIB_APP.a"
