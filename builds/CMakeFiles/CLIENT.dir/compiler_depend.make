@@ -13,12 +13,12 @@ CLIENT: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
   /usr/lib64/libc_nonshared.a \
-  CMakeFiles/CLIENT.dir/demo_app.c.o \
+  CMakeFiles/CLIENT.dir/src/demo_app.c.o \
   libLIB_APP.a \
   libLIB_INET.a \
   libLIB_LOGGING.a
 
-CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c \
+CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
@@ -171,25 +171,29 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
 
 /usr/include/bits/types/FILE.h:
 
+/usr/include/sys/socket.h:
+
+/usr/include/asm-generic/sockios.h:
+
 /usr/include/arpa/inet.h:
 
 libLIB_APP.a:
 
 /usr/include/bits/getopt_posix.h:
 
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/lib64/crt1.o:
+
+/usr/include/bits/confname.h:
+
 /usr/include/bits/types/__sigset_t.h:
 
 /usr/include/asm-generic/posix_types.h:
 
-/usr/include/sys/socket.h:
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c:
 
-/usr/include/asm-generic/sockios.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/lib64/crt1.o:
+/usr/include/bits/struct_mutex.h:
 
 libLIB_LOGGING.a:
 
@@ -203,9 +207,17 @@ libLIB_INET.a:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h:
 
-CMakeFiles/CLIENT.dir/demo_app.c.o:
+/usr/include/bits/types/locale_t.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h:
+
+/lib64/libc.so.6:
 
 /usr/include/bits/byteswap.h:
+
+/usr/include/bits/sockaddr.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h:
 
 /usr/include/strings.h:
 
@@ -220,14 +232,6 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 /usr/include/bits/types/time_t.h:
 
 /usr/include/bits/struct_rwlock.h:
-
-/usr/include/bits/types/locale_t.h:
-
-/lib64/libc.so.6:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h:
-
-/usr/include/bits/confname.h:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h:
 
@@ -250,6 +254,12 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 /lib64/ld-linux-x86-64.so.2:
 
 /usr/include/bits/select.h:
+
+CMakeFiles/CLIENT.dir/src/demo_app.c.o:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/environments.h:
 
 /usr/include/alloca.h:
 
@@ -275,10 +285,6 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 
 /usr/include/bits/endianness.h:
 
-/usr/include/sys/select.h:
-
-/usr/include/bits/environments.h:
-
 /usr/include/bits/floatn-common.h:
 
 /usr/include/bits/floatn.h:
@@ -302,12 +308,6 @@ CMakeFiles/CLIENT.dir/demo_app.c.o:
 /usr/include/bits/pthreadtypes-arch.h:
 
 /usr/include/bits/pthreadtypes.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h:
-
-/usr/include/bits/sockaddr.h:
-
-/usr/include/bits/struct_mutex.h:
 
 /usr/include/bits/types/struct_osockaddr.h:
 
