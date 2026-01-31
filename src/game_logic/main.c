@@ -36,6 +36,11 @@ int bateaux_ids[] = {2, 3, 4, 5, 6};
  */
 int bateaux_longueurs[] = {5, 4, 3, 3, 2};
 
+ /*
+ *****************************************************************************************
+ *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
+ */
+ 
 // phase de placement pour une equipe
 void placer_equipe(Equipe *equipe) {
     clear_screen();
@@ -136,3 +141,18 @@ int main() {
     
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

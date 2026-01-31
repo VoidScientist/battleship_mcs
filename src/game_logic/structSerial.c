@@ -4,7 +4,6 @@
  *	\author		MARTEL Mathieu
  *	\version	1.0
  */
-
  /*
  *****************************************************************************************
  *	\noop		I N C L U D E S 
@@ -24,10 +23,16 @@
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
  */
  #define JOUEUR_STR_OUT "%d,%s"
- #define JOUEUR_STR_IN ""
+ #define JOUEUR_STR_IN "%d,%49[^\n]"
  
- #define RESULT_STR_OUT "%d,%d,%d"
- #define RESULT_STR_IN ""
+ #define RESULTAT_STR_OUT "%d,%d,%d,%d,%d"
+ #define RESULTAT_STR_IN "%d,%d,%d,%d,%d"
+ 
+ #define PLACEMENT_STR_OUT "%d,%d,%d,%d,%d"
+ #define PLACEMENT_STR_IN "%d,%d,%d,%d,%d"
+ 
+ #define TOUR_STR_OUT "%d,%d,%d"
+ #define TOUR_STR_IN "%d,%d,%d"
  
  /*
  *****************************************************************************************
@@ -38,51 +43,44 @@
  *	Fonctions pour la structure Joueur
  */
  void joueur2str(const Joueur * joueur, char * str) {
- 	sprintf(str, JOUEUR_STR_OUT, Joueur->id, Joueur->nom);
+ 	sprintf(str, JOUEUR_STR_OUT, joueur->id, joueur->nom);
  }
  
   void str2joueur(const char * str, Joueur * joueur) {
- 	sscanf(str, JOUEUR_STR_IN, &Joueur->id, &Joueur->nom);
+ 	sscanf(str, JOUEUR_STR_IN, &joueur->id, joueur->nom);
  }
  
   /**
  *	Fonctions pour la structure Resultat
  */
-  void result2str(const Resultat * resultat, char * str) {
- 	sprintf(str, RESULT_STR_OUT, Resultat->touche, Resultat->coule, Resultat->id_coule);
+  void resultat2str(const Resultat * resultat, char * str) {
+ 	sprintf(str, RESULTAT_STR_OUT, resultat->ligne, resultat->col, resultat->touche, resultat->coule, resultat->id_coule);
   }
  
-  void str2result(const char * str, Joueur * joueur) {
- 	sscanf(str, RESULT_STR_IN, &Resultat->touche, &Resultat->coule, &Resultat->id_coule);
+  void str2resultat(const char * str, Resultat * resultat) {
+ 	sscanf(str, RESULTAT_STR_IN, &resultat->ligne, &resultat->col, &resultat->touche, &resultat->coule, &resultat->id_coule);
+  }
+  
+  /**
+ *	Fonctions pour la structure Placement
+ */
+  void place(const Placement * msg, char * str) {
+ 	sprintf(str, PLACEMENT_STR_OUT, msg->id, msg->longueur, msg->ligne, msg->col, msg->orient);
   }
  
+  void str2place(const char * str, Placement * place) {
+  	int orient;
+ 	sscanf(str, PLACEMENT_STR_IN, &place->id, &place->longueur, &place->ligne, &place->col, &orient);
+ 	place->orient = (Orientation)orient;
+  }
+  
+  /**
+ *	Fonctions pour la structure Tour
+ */
+  void tour2str(const Tour * tour, char * str) {
+ 	sprintf(str, TOUR_STR_OUT, tour->equipe_id, tour->joueur_id, tour->phase);
+  }
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  void str2tour(const char * str, Tour * tour) {
+ 	sscanf(str, TOUR_STR_IN, &tour->equipe_id, &tour->joueur_id, &tour->phase);
+  }

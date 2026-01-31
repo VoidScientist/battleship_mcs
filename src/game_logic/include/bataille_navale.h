@@ -63,6 +63,17 @@ typedef struct {
 } Jeu;
 
 typedef struct {
+	int id, longueur, ligne, col;
+	Orientation orient;
+} Placement;
+
+typedef struct {
+	int equipe_id, joueur_id;
+	int phase; 		// 0 = placement	|	1 = bataille 
+} Tour;
+
+typedef struct {
+	int ligne, col;
     int touche, coule, id_coule;
 } Resultat;
 

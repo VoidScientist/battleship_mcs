@@ -17,6 +17,11 @@
  */
 #include "include/logic.h"
 
+ /*
+ *****************************************************************************************
+ *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
+ */
+ 
 // initialise une grille vide
 void init_grille(Grille *grille) {
     memset(grille->cases, 0, sizeof(grille->cases));
@@ -121,7 +126,7 @@ Bateau* trouver_bateau(Grille *grille, int id) {
 Resultat tirer(Grille *cible, int vue[TAILLE][TAILLE], int ligne, int col) {
 	int valeur_case;
 	
-    Resultat resultat = {0, 0, 0};
+    Resultat resultat = {ligne, col, 0, 0, 0};
     if(ligne < 0 || col < 0 || ligne >= TAILLE || col >= TAILLE) return resultat;
     
     valeur_case = cible->cases[ligne][col];
