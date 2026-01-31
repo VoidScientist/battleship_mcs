@@ -72,28 +72,28 @@ include CMakeFiles/CLIENT.dir/flags.make
 CMakeFiles/CLIENT.dir/codegen:
 .PHONY : CMakeFiles/CLIENT.dir/codegen
 
-CMakeFiles/CLIENT.dir/src/demo_app.c.o: CMakeFiles/CLIENT.dir/flags.make
-CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c
-CMakeFiles/CLIENT.dir/src/demo_app.c.o: CMakeFiles/CLIENT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CLIENT.dir/src/demo_app.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CLIENT.dir/src/demo_app.c.o -MF CMakeFiles/CLIENT.dir/src/demo_app.c.o.d -o CMakeFiles/CLIENT.dir/src/demo_app.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c
+CMakeFiles/CLIENT.dir/demo_app.c.o: CMakeFiles/CLIENT.dir/flags.make
+CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
+CMakeFiles/CLIENT.dir/demo_app.c.o: CMakeFiles/CLIENT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CLIENT.dir/demo_app.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CLIENT.dir/demo_app.c.o -MF CMakeFiles/CLIENT.dir/demo_app.c.o.d -o CMakeFiles/CLIENT.dir/demo_app.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
 
-CMakeFiles/CLIENT.dir/src/demo_app.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CLIENT.dir/src/demo_app.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c > CMakeFiles/CLIENT.dir/src/demo_app.c.i
+CMakeFiles/CLIENT.dir/demo_app.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CLIENT.dir/demo_app.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c > CMakeFiles/CLIENT.dir/demo_app.c.i
 
-CMakeFiles/CLIENT.dir/src/demo_app.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CLIENT.dir/src/demo_app.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c -o CMakeFiles/CLIENT.dir/src/demo_app.c.s
+CMakeFiles/CLIENT.dir/demo_app.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CLIENT.dir/demo_app.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c -o CMakeFiles/CLIENT.dir/demo_app.c.s
 
 # Object files for target CLIENT
 CLIENT_OBJECTS = \
-"CMakeFiles/CLIENT.dir/src/demo_app.c.o"
+"CMakeFiles/CLIENT.dir/demo_app.c.o"
 
 # External object files for target CLIENT
 CLIENT_EXTERNAL_OBJECTS =
 
-CLIENT: CMakeFiles/CLIENT.dir/src/demo_app.c.o
+CLIENT: CMakeFiles/CLIENT.dir/demo_app.c.o
 CLIENT: CMakeFiles/CLIENT.dir/build.make
 CLIENT: CMakeFiles/CLIENT.dir/compiler_depend.ts
 CLIENT: libLIB_APP.a

@@ -66,20 +66,16 @@ CMAKE_BINARY_DIR = /home/voidscientist/Développement/C/260123_battleship_mcs/bu
 all: CMakeFiles/LIB_LOGGING.dir/all
 all: CMakeFiles/LIB_INET.dir/all
 all: CMakeFiles/LIB_APP.dir/all
-all: CMakeFiles/LIB_UI.dir/all
 all: CMakeFiles/SERVER.dir/all
 all: CMakeFiles/CLIENT.dir/all
-all: CMakeFiles/APP.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/LIB_LOGGING.dir/codegen
 codegen: CMakeFiles/LIB_INET.dir/codegen
 codegen: CMakeFiles/LIB_APP.dir/codegen
-codegen: CMakeFiles/LIB_UI.dir/codegen
 codegen: CMakeFiles/SERVER.dir/codegen
 codegen: CMakeFiles/CLIENT.dir/codegen
-codegen: CMakeFiles/APP.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -90,10 +86,8 @@ preinstall:
 clean: CMakeFiles/LIB_LOGGING.dir/clean
 clean: CMakeFiles/LIB_INET.dir/clean
 clean: CMakeFiles/LIB_APP.dir/clean
-clean: CMakeFiles/LIB_UI.dir/clean
 clean: CMakeFiles/SERVER.dir/clean
 clean: CMakeFiles/CLIENT.dir/clean
-clean: CMakeFiles/APP.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -103,7 +97,7 @@ clean: CMakeFiles/APP.dir/clean
 CMakeFiles/LIB_LOGGING.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_LOGGING.dir/build.make CMakeFiles/LIB_LOGGING.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_LOGGING.dir/build.make CMakeFiles/LIB_LOGGING.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=12,13 "Built target LIB_LOGGING"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=10,11 "Built target LIB_LOGGING"
 .PHONY : CMakeFiles/LIB_LOGGING.dir/all
 
 # Build rule for subdir invocation for target.
@@ -120,7 +114,7 @@ LIB_LOGGING: CMakeFiles/LIB_LOGGING.dir/rule
 # codegen rule for target.
 CMakeFiles/LIB_LOGGING.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_LOGGING.dir/build.make CMakeFiles/LIB_LOGGING.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=12,13 "Finished codegen for target LIB_LOGGING"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=10,11 "Finished codegen for target LIB_LOGGING"
 .PHONY : CMakeFiles/LIB_LOGGING.dir/codegen
 
 # clean rule for target.
@@ -135,7 +129,7 @@ CMakeFiles/LIB_LOGGING.dir/clean:
 CMakeFiles/LIB_INET.dir/all: CMakeFiles/LIB_LOGGING.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_INET.dir/build.make CMakeFiles/LIB_INET.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_INET.dir/build.make CMakeFiles/LIB_INET.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=9,10,11 "Built target LIB_INET"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=7,8,9 "Built target LIB_INET"
 .PHONY : CMakeFiles/LIB_INET.dir/all
 
 # Build rule for subdir invocation for target.
@@ -152,7 +146,7 @@ LIB_INET: CMakeFiles/LIB_INET.dir/rule
 # codegen rule for target.
 CMakeFiles/LIB_INET.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_INET.dir/build.make CMakeFiles/LIB_INET.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=9,10,11 "Finished codegen for target LIB_INET"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=7,8,9 "Finished codegen for target LIB_INET"
 .PHONY : CMakeFiles/LIB_INET.dir/codegen
 
 # clean rule for target.
@@ -168,7 +162,7 @@ CMakeFiles/LIB_APP.dir/all: CMakeFiles/LIB_LOGGING.dir/all
 CMakeFiles/LIB_APP.dir/all: CMakeFiles/LIB_INET.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=5,6,7,8 "Built target LIB_APP"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=3,4,5,6 "Built target LIB_APP"
 .PHONY : CMakeFiles/LIB_APP.dir/all
 
 # Build rule for subdir invocation for target.
@@ -185,45 +179,13 @@ LIB_APP: CMakeFiles/LIB_APP.dir/rule
 # codegen rule for target.
 CMakeFiles/LIB_APP.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=5,6,7,8 "Finished codegen for target LIB_APP"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=3,4,5,6 "Finished codegen for target LIB_APP"
 .PHONY : CMakeFiles/LIB_APP.dir/codegen
 
 # clean rule for target.
 CMakeFiles/LIB_APP.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/clean
 .PHONY : CMakeFiles/LIB_APP.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/LIB_UI.dir
-
-# All Build rule for target.
-CMakeFiles/LIB_UI.dir/all: CMakeFiles/LIB_LOGGING.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_UI.dir/build.make CMakeFiles/LIB_UI.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_UI.dir/build.make CMakeFiles/LIB_UI.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=14,15 "Built target LIB_UI"
-.PHONY : CMakeFiles/LIB_UI.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/LIB_UI.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/LIB_UI.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles 0
-.PHONY : CMakeFiles/LIB_UI.dir/rule
-
-# Convenience name for target.
-LIB_UI: CMakeFiles/LIB_UI.dir/rule
-.PHONY : LIB_UI
-
-# codegen rule for target.
-CMakeFiles/LIB_UI.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_UI.dir/build.make CMakeFiles/LIB_UI.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=14,15 "Finished codegen for target LIB_UI"
-.PHONY : CMakeFiles/LIB_UI.dir/codegen
-
-# clean rule for target.
-CMakeFiles/LIB_UI.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_UI.dir/build.make CMakeFiles/LIB_UI.dir/clean
-.PHONY : CMakeFiles/LIB_UI.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/SERVER.dir
@@ -234,7 +196,7 @@ CMakeFiles/SERVER.dir/all: CMakeFiles/LIB_INET.dir/all
 CMakeFiles/SERVER.dir/all: CMakeFiles/LIB_APP.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=16,17 "Built target SERVER"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=12,13 "Built target SERVER"
 .PHONY : CMakeFiles/SERVER.dir/all
 
 # Build rule for subdir invocation for target.
@@ -251,7 +213,7 @@ SERVER: CMakeFiles/SERVER.dir/rule
 # codegen rule for target.
 CMakeFiles/SERVER.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=16,17 "Finished codegen for target SERVER"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=12,13 "Finished codegen for target SERVER"
 .PHONY : CMakeFiles/SERVER.dir/codegen
 
 # clean rule for target.
@@ -268,7 +230,7 @@ CMakeFiles/CLIENT.dir/all: CMakeFiles/LIB_INET.dir/all
 CMakeFiles/CLIENT.dir/all: CMakeFiles/LIB_APP.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=3,4 "Built target CLIENT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=1,2 "Built target CLIENT"
 .PHONY : CMakeFiles/CLIENT.dir/all
 
 # Build rule for subdir invocation for target.
@@ -285,46 +247,13 @@ CLIENT: CMakeFiles/CLIENT.dir/rule
 # codegen rule for target.
 CMakeFiles/CLIENT.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=3,4 "Finished codegen for target CLIENT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=1,2 "Finished codegen for target CLIENT"
 .PHONY : CMakeFiles/CLIENT.dir/codegen
 
 # clean rule for target.
 CMakeFiles/CLIENT.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/clean
 .PHONY : CMakeFiles/CLIENT.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/APP.dir
-
-# All Build rule for target.
-CMakeFiles/APP.dir/all: CMakeFiles/LIB_LOGGING.dir/all
-CMakeFiles/APP.dir/all: CMakeFiles/LIB_UI.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/APP.dir/build.make CMakeFiles/APP.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/APP.dir/build.make CMakeFiles/APP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=1,2 "Built target APP"
-.PHONY : CMakeFiles/APP.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/APP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/APP.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles 0
-.PHONY : CMakeFiles/APP.dir/rule
-
-# Convenience name for target.
-APP: CMakeFiles/APP.dir/rule
-.PHONY : APP
-
-# codegen rule for target.
-CMakeFiles/APP.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/APP.dir/build.make CMakeFiles/APP.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=1,2 "Finished codegen for target APP"
-.PHONY : CMakeFiles/APP.dir/codegen
-
-# clean rule for target.
-CMakeFiles/APP.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/APP.dir/build.make CMakeFiles/APP.dir/clean
-.PHONY : CMakeFiles/APP.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

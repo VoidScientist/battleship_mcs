@@ -14,13 +14,13 @@ CLIENT
  /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a
  /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so
  /usr/lib64/libc_nonshared.a
- /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/CLIENT.dir/src/demo_app.c.o
+ /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/CLIENT.dir/demo_app.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_APP.a
  /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_INET.a
  /home/voidscientist/Développement/C/260123_battleship_mcs/builds/libLIB_LOGGING.a
 
-CMakeFiles/CLIENT.dir/src/demo_app.c.o
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c
+CMakeFiles/CLIENT.dir/demo_app.c.o
+ /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h

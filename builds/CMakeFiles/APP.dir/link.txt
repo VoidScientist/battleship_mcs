@@ -1,1 +1,0 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/APP.dir/link.d CMakeFiles/APP.dir/src/test_form.c.o -o APP  libLIB_UI.a libLIB_LOGGING.a -lcurses /usr/lib64/libform.so

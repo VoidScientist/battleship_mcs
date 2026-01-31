@@ -2,7 +2,7 @@ CLIENT: \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crt1.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crti.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
-  CMakeFiles/CLIENT.dir/src/demo_app.c.o \
+  CMakeFiles/CLIENT.dir/demo_app.c.o \
   libLIB_APP.a \
   libLIB_INET.a \
   libLIB_LOGGING.a \
@@ -34,7 +34,7 @@ CLIENT: \
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
-CMakeFiles/CLIENT.dir/src/demo_app.c.o:
+CMakeFiles/CLIENT.dir/demo_app.c.o:
 
 libLIB_APP.a:
 

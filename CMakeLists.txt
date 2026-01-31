@@ -4,15 +4,10 @@ cmake_minimum_required(VERSION 3.31.0 FATAL_ERROR)
 # déclaration du projet
 project(BATTLESHIPS VERSION 0.1.0 LANGUAGES C)
 
+set(LIB_INET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/inet_lib")
+set(LIB_LOGGING_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/logging_lib")
+set(LIB_APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/app_lib")
 
-find_package(Curses REQUIRED)
-
-
-set(SRC "${CMAKE_CURRENT_SOURCE_DIR}/src")
-set(LIB_INET_PATH "${SRC}/inet_lib")
-set(LIB_LOGGING_PATH "${SRC}/logging_lib")
-set(LIB_APP_PATH "${SRC}/app_lib")
-set(LIB_UI_PATH "${SRC}/interface_lib")
 
 add_library(
 	LIB_LOGGING
@@ -50,26 +45,10 @@ target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
 target_link_libraries(LIB_APP PUBLIC LIB_INET)
 
 
-add_library(
-	LIB_UI
-	"${LIB_UI_PATH}/include/sprite.h"
-
-	"${LIB_UI_PATH}/sprite.c"
-)
-target_include_directories(LIB_UI PUBLIC "${LIB_UI_PATH}/include")
-target_link_libraries(LIB_UI PRIVATE LIB_LOGGING)
-target_link_libraries(LIB_UI PUBLIC ${CURSES_LIBRARIES})
-target_include_directories(LIB_UI PUBLIC ${CURSES_INCLUDE_DIRS})
-
-
-add_executable(SERVER "${SRC}/demo_app.c")
+add_executable(SERVER "demo_app.c")
 target_compile_definitions(SERVER PRIVATE SERVER)
 target_link_libraries(SERVER LIB_APP)
 
-add_executable(CLIENT "${SRC}/demo_app.c")
+add_executable(CLIENT "demo_app.c")
 target_compile_definitions(CLIENT PRIVATE CLIENT)
 target_link_libraries(CLIENT LIB_APP)
-
-add_executable(APP "${SRC}/test_form.c")
-target_link_libraries(APP LIB_UI)
-target_compile_definitions(APP PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources")

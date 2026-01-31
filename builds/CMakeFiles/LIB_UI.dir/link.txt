@@ -1,2 +1,0 @@
-/usr/bin/ar qc libLIB_UI.a CMakeFiles/LIB_UI.dir/src/interface_lib/sprite.c.o
-/usr/bin/ranlib libLIB_UI.a

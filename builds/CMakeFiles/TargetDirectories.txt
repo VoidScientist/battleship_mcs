@@ -1,9 +1,7 @@
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/LIB_LOGGING.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/LIB_INET.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/LIB_APP.dir
-/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/LIB_UI.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/SERVER.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/CLIENT.dir
-/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/APP.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/edit_cache.dir
 /home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles/rebuild_cache.dir
