@@ -5,6 +5,7 @@
  *	\date		28 janvier 2026
  *	\version	1.0
  */
+#include <semaphore.h>
 #include <string.h>
 #include "logging.h"
 #include "dial.h"
@@ -38,23 +39,32 @@ volatile sig_atomic_t mustDisconnect = 0;
  * 
  * \note 		s'occupe donc de l'envoi de requêtes et réception de réponses
  */
-void dialClt2SrvE(socket_t *sockAppel) {
+void dialClt2SrvE(eCltThreadParams_t *params) {
 
-	clientInfo_t 	infos;
 	int 			status;
 	rep_t 			response;
 
-	status = enum2status(REQ, CONNECT);
-	createClientInfo(&infos, "USER", PLAYER, "127.0.1.2", 4999);
 
-	sendRequest(sockAppel, status, POST, &infos, (pFct) clientInfo2str);
+	socket_t	 *sockAppel		= params->sockAppel;
+	clientInfo_t *infos 		= params->infos;
+	sem_t 		 *semCanClose	= params->semCanClose;
+
+	free(params);
+
+	// logMessage("Client: %s, %d, %s, %d\n", DEBUG, infos->name, infos->role, infos->address, infos->port);
+
+
+	status = enum2status(REQ, CONNECT);
+	sendRequest(sockAppel, status, POST, infos, (pFct) clientInfo2str);
+	
 
 	rcvResponse(sockAppel, &response);
-
 	if (response.id != enum2status(ACK, CONNECT)) {
 		logMessage("[%d] Failed to connect: %s.\n", DEBUG, response.id, response.data);
+		sem_post(semCanClose);
 		return;
 	}
+
 
 	while (1) {
 		
@@ -68,6 +78,7 @@ void dialClt2SrvE(socket_t *sockAppel) {
 			if (response.id == enum2status(ACK, CONNECT)) {
 			
 				logMessage("[%d] %s\n", DEBUG, response.id, response.data);
+				sem_post(semCanClose);
 				mustDisconnect = 0;
 			
 				break;

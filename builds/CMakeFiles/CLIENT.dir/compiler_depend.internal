@@ -26,14 +26,16 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h
  /usr/include/alloca.h
  /usr/include/arpa/inet.h
  /usr/include/asm-generic/bitsperlong.h
+ /usr/include/asm-generic/errno-base.h
+ /usr/include/asm-generic/errno.h
  /usr/include/asm-generic/posix_types.h
  /usr/include/asm-generic/socket.h
  /usr/include/asm-generic/sockios.h
  /usr/include/asm/bitsperlong.h
+ /usr/include/asm/errno.h
  /usr/include/asm/posix_types.h
  /usr/include/asm/posix_types_64.h
  /usr/include/asm/socket.h
@@ -41,9 +43,11 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/bits/atomic_wide_counter.h
  /usr/include/bits/byteswap.h
  /usr/include/bits/confname.h
+ /usr/include/bits/cpu-set.h
  /usr/include/bits/endian.h
  /usr/include/bits/endianness.h
  /usr/include/bits/environments.h
+ /usr/include/bits/errno.h
  /usr/include/bits/floatn-common.h
  /usr/include/bits/floatn.h
  /usr/include/bits/getopt_core.h
@@ -52,10 +56,14 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
  /usr/include/bits/posix_opt.h
+ /usr/include/bits/pthread_stack_min-dynamic.h
+ /usr/include/bits/pthread_stack_min.h
  /usr/include/bits/pthreadtypes-arch.h
  /usr/include/bits/pthreadtypes.h
+ /usr/include/bits/sched.h
  /usr/include/bits/select.h
  /usr/include/bits/semaphore.h
+ /usr/include/bits/setjmp.h
  /usr/include/bits/sigaction.h
  /usr/include/bits/sigcontext.h
  /usr/include/bits/sigevent-consts.h
@@ -78,6 +86,7 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/bits/struct_mutex.h
  /usr/include/bits/struct_rwlock.h
  /usr/include/bits/thread-shared-types.h
+ /usr/include/bits/time.h
  /usr/include/bits/time64.h
  /usr/include/bits/timesize.h
  /usr/include/bits/types.h
@@ -100,11 +109,15 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/bits/types/sigval_t.h
  /usr/include/bits/types/stack_t.h
  /usr/include/bits/types/struct_FILE.h
+ /usr/include/bits/types/struct___jmp_buf_tag.h
  /usr/include/bits/types/struct_iovec.h
+ /usr/include/bits/types/struct_itimerspec.h
  /usr/include/bits/types/struct_osockaddr.h
+ /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/types/struct_sigstack.h
  /usr/include/bits/types/struct_timespec.h
  /usr/include/bits/types/struct_timeval.h
+ /usr/include/bits/types/struct_tm.h
  /usr/include/bits/types/time_t.h
  /usr/include/bits/types/timer_t.h
  /usr/include/bits/typesizes.h
@@ -114,14 +127,18 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/bits/waitstatus.h
  /usr/include/bits/wordsize.h
  /usr/include/endian.h
+ /usr/include/errno.h
  /usr/include/features-time64.h
  /usr/include/features.h
  /usr/include/gnu/stubs-64.h
  /usr/include/gnu/stubs.h
  /usr/include/libgen.h
+ /usr/include/linux/errno.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
  /usr/include/netinet/in.h
+ /usr/include/pthread.h
+ /usr/include/sched.h
  /usr/include/semaphore.h
  /usr/include/signal.h
  /usr/include/stdc-predef.h
@@ -134,6 +151,7 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /usr/include/sys/socket.h
  /usr/include/sys/types.h
  /usr/include/sys/ucontext.h
+ /usr/include/time.h
  /usr/include/unistd.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h
  /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h

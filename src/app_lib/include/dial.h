@@ -30,6 +30,15 @@ typedef struct {
 } eServThreadParams_t;
 
 
+typedef struct {
+
+	socket_t 		*sockAppel;
+	clientInfo_t	*infos;
+	sem_t 			*semCanClose;
+
+} eCltThreadParams_t;
+
+
 
 extern volatile sig_atomic_t mustDisconnect;
 /*
@@ -45,7 +54,7 @@ extern volatile sig_atomic_t mustDisconnect;
  * 
  * \note 		s'occupe donc de l'envoi de requêtes et réception de réponses
  */
-void dialClt2SrvE(socket_t *sockAppel);
+void dialClt2SrvE(eCltThreadParams_t *params);
 /**
  * \fn 			dialSrvE2Clt()
  * \brief       fonction s'occupant du dialogue entre le serveur d'enregistrement et le client

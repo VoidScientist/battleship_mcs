@@ -2,7 +2,7 @@
  *	\file		datastructs.h
  *	\brief		Fichier en-tête représentant les structures de données d'échange
  *	\author		ARCELON Louis
- *	\date		28 janvier 2026
+ *	\date		31 janvier 2026
  *	\version	1.0
  */
 

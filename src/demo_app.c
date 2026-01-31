@@ -5,13 +5,16 @@
  *	\date		28 janvier 2026
  *	\version	1.0
  */
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <signal.h>
 #include <libgen.h>
-#include <logging.h>
-#include <data.h>
-#include <repReq.h>
+#include <string.h>
+#include <errno.h>
+
 #include <dial.h>
 #include <datastructs.h>
-#include <signal.h>
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
@@ -26,6 +29,8 @@
  *	\brief		Numéro de port par défaut du serveur
  */
 #define PORT_SRV	50000
+
+#define USER_BUFFER_SIZE 100
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -50,7 +55,14 @@
  *	\brief		Nom de l'exécutable : libnet nécessite cette variable qui pointe sur argv[0]
  */
 
-char *progName;
+char 			*progName;
+pthread_t 		dialServE;
+
+socket_t 		sockAppel;	// socket d'appel
+
+sem_t			semCanClose;
+
+clientInfo_t 	self;
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
@@ -68,8 +80,96 @@ void initClient() {
 	struct sigaction sa;
 	CHECK(sigemptyset(&sa.sa_mask), "sigemptyset()");
 	sa.sa_handler 	= onSignal;
-	sa.sa_flags 	= SA_RESTART;
+	sa.sa_flags 	= 0;
 	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction();");
+
+
+	CHECK(sem_init(&semCanClose, 0, 0), "sem_init()"); 
+
+}
+
+
+void setupUserInfos() {
+
+	char 		pseudo[PSEUDO_SIZE];
+	userRole_t 	role;
+	char *		fgetsResult;
+	int 		scanfResult;
+
+	printf("\nConfiguration du profil utilisateur:\n");
+	
+	do {
+
+		printf("Nom d'utilisateur (3-10 chars): ");
+		fgetsResult = fgets(pseudo, PSEUDO_SIZE, stdin);
+		sscanf(pseudo, "%[^\n]\n", pseudo);
+		
+		if (fgetsResult == NULL) {
+			printf("\nDon't CTRL+D please...\n");
+			clearerr(stdin);
+		}
+
+	} while (strlen(pseudo) < 3);
+
+	strcpy(self.name, pseudo);
+
+	do {
+		printf("Role (0: PLAYER, 1: HOST): ");
+		scanfResult = scanf("%d", &role);
+
+		if (scanfResult == EOF) {
+			printf("\nDon't CTRL+D please...\n");
+			clearerr(stdin);
+		}
+
+	} while (role != PLAYER && role != HOST);
+
+	if (role == HOST) {
+
+		strcpy(self.address, "0.0.0.0");
+		self.port = 4000;
+
+	}
+
+	self.role = HOST;
+
+}
+
+
+void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort) {
+
+	char 	buffer[USER_BUFFER_SIZE];
+	char	*fgetsResult;
+	int 	matched;
+
+	printf("\nConnexion au serveur d'écoute:\n");
+	printf("Adresse Applicative (%s:%d): ", adrIP, port);
+	
+
+	fgetsResult = fgets(buffer, USER_BUFFER_SIZE, stdin);
+
+	if (fgetsResult == NULL) {
+		printf("\nErreur de lecture, utilisation des valeurs par défaut...\n");
+		strcpy(userIP, adrIP);
+		*userPort = port;
+		return;
+	}
+
+	if (buffer[0] == '\n') {
+		printf("Utilisation des valeurs par défaut...\n");
+		strcpy(userIP, adrIP);
+		*userPort = port;
+		return;
+	}
+
+	matched = sscanf(buffer, "%[^:]:%hd\n", userIP, userPort);
+
+	if (matched != 2) {
+		printf("Mauvais format, utilisation des valeurs par défaut...\n");
+		strcpy(userIP, adrIP);
+		*userPort = port;
+		return;
+	}
 
 }
 
@@ -79,15 +179,44 @@ void initClient() {
  *	\param 		adrIP : adresse IP du serveur à connecter
  *	\param 		port : port du serveur à connecter
  */
-void client (char *adrIP, int port) {
-	socket_t sockAppel;	// socket d'appel
+void client (char *adrIP, unsigned short port) {
+
+	char 				userIP[USER_BUFFER_SIZE];
+	short				userPort;
+	eCltThreadParams_t	*params;
 
 	initClient();
 
-	// Créer une connexion avec le serveur
-	sockAppel = connecterClt2Srv (adrIP, port);
+	getSrvEAddress(adrIP, port, userIP, &userPort);
 
-	dialClt2SrvE(&sockAppel);
+	setupUserInfos();
+
+	// Créer une connexion avec le serveur
+	sockAppel = connecterClt2Srv (userIP, userPort);
+
+
+
+
+	params 					= malloc(sizeof(params));
+	params->sockAppel 		= &sockAppel;
+	params->infos 			= &self;
+	params->semCanClose		= &semCanClose;
+
+	pthread_create(&dialServE, 0, (void*)(void *) dialClt2SrvE, params);
+
+
+
+
+
+
+
+
+
+
+	if (sem_wait(&semCanClose) == -1 && errno != EINTR) {
+		perror("sem_wait()");
+		exit(EXIT_FAILURE);
+	}
 
 	// Fermer la socket d'appel
 	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");

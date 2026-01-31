@@ -135,8 +135,6 @@ void updateCurrentClient(int *current) {
 
 void disconnectClient(int id) {
 
-	clientInfo_t *client = &clients[id];
-
 	updateCurrentClient(&currentClient);
 
 }
@@ -170,14 +168,14 @@ void displayClient() {
 
 				case DISCONNECTED: continue;
 				case CONNECTING: status = "CONNECTING"; break;
-				case CONNECTED: status = "CONNECTED"; break;
+				case CONNECTED: status 	= "CONNECTED"; break;
 
 			}
 
 			switch (clients[i].role) {
 
-				case PLAYER: role = "PLAYER"; break;
-				case HOST: role = "HOST"; break;
+				case PLAYER: role 	= "PLAYER"; break;
+				case HOST: role 	= "HOST"; break;
 
 			}
 
