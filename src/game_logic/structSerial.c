@@ -64,8 +64,8 @@
   /**
  *	Fonctions pour la structure Placement
  */
-  void place2str(const Placement * msg, char * str) {
- 	sprintf(str, PLACEMENT_STR_OUT, msg->id, msg->longueur, msg->ligne, msg->col, msg->orient);
+  void place2str(const Placement * place, char * str) {
+ 	sprintf(str, PLACEMENT_STR_OUT, place->id, place->longueur, place->ligne, place->col, place->orient);
   }
  
   void str2place(const char * str, Placement * place) {
