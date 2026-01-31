@@ -61,6 +61,11 @@ socket_t creerSocketAdr (int mode, char *adrIP, short port) {
 	socket_t newSocket = creerSocket(mode);
 
 	adr2struct(&newSocket.addrLoc, adrIP, port);
+
+	// permet de relancer une socket d'écoute à la même addresse
+	// directement après fin de programme.
+	int opt = 1;
+	setsockopt(newSocket.fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 	
 	CHECK(
 		bind(newSocket.fd

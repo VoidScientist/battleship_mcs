@@ -188,32 +188,29 @@ CLIENT/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/build
 .PHONY : CLIENT/fast
 
-demo_app.o: demo_app.c.o
-.PHONY : demo_app.o
+src/app_lib/datastructs.o: src/app_lib/datastructs.c.o
+.PHONY : src/app_lib/datastructs.o
 
 # target to build an object file
-demo_app.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/demo_app.c.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/demo_app.c.o
-.PHONY : demo_app.c.o
+src/app_lib/datastructs.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o
+.PHONY : src/app_lib/datastructs.c.o
 
-demo_app.i: demo_app.c.i
-.PHONY : demo_app.i
+src/app_lib/datastructs.i: src/app_lib/datastructs.c.i
+.PHONY : src/app_lib/datastructs.i
 
 # target to preprocess a source file
-demo_app.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/demo_app.c.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/demo_app.c.i
-.PHONY : demo_app.c.i
+src/app_lib/datastructs.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.i
+.PHONY : src/app_lib/datastructs.c.i
 
-demo_app.s: demo_app.c.s
-.PHONY : demo_app.s
+src/app_lib/datastructs.s: src/app_lib/datastructs.c.s
+.PHONY : src/app_lib/datastructs.s
 
 # target to generate assembly for a file
-demo_app.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/demo_app.c.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/demo_app.c.s
-.PHONY : demo_app.c.s
+src/app_lib/datastructs.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.s
+.PHONY : src/app_lib/datastructs.c.s
 
 src/app_lib/dial.o: src/app_lib/dial.c.o
 .PHONY : src/app_lib/dial.o
@@ -287,6 +284,30 @@ src/app_lib/repReq.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.s
 .PHONY : src/app_lib/repReq.c.s
 
+src/demo_app.o: src/demo_app.c.o
+.PHONY : src/demo_app.o
+
+# target to build an object file
+src/demo_app.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/src/demo_app.c.o
+.PHONY : src/demo_app.c.o
+
+src/demo_app.i: src/demo_app.c.i
+.PHONY : src/demo_app.i
+
+# target to preprocess a source file
+src/demo_app.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/src/demo_app.c.i
+.PHONY : src/demo_app.c.i
+
+src/demo_app.s: src/demo_app.c.s
+.PHONY : src/demo_app.s
+
+# target to generate assembly for a file
+src/demo_app.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CLIENT.dir/build.make CMakeFiles/CLIENT.dir/src/demo_app.c.s
+.PHONY : src/demo_app.c.s
+
 src/inet_lib/data.o: src/inet_lib/data.c.o
 .PHONY : src/inet_lib/data.o
 
@@ -359,6 +380,30 @@ src/logging_lib/logging.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_LOGGING.dir/build.make CMakeFiles/LIB_LOGGING.dir/src/logging_lib/logging.c.s
 .PHONY : src/logging_lib/logging.c.s
 
+src/serveurEnregistrement.o: src/serveurEnregistrement.c.o
+.PHONY : src/serveurEnregistrement.o
+
+# target to build an object file
+src/serveurEnregistrement.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o
+.PHONY : src/serveurEnregistrement.c.o
+
+src/serveurEnregistrement.i: src/serveurEnregistrement.c.i
+.PHONY : src/serveurEnregistrement.i
+
+# target to preprocess a source file
+src/serveurEnregistrement.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.i
+.PHONY : src/serveurEnregistrement.c.i
+
+src/serveurEnregistrement.s: src/serveurEnregistrement.c.s
+.PHONY : src/serveurEnregistrement.s
+
+# target to generate assembly for a file
+src/serveurEnregistrement.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SERVER.dir/build.make CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.s
+.PHONY : src/serveurEnregistrement.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -373,9 +418,9 @@ help:
 	@echo "... LIB_INET"
 	@echo "... LIB_LOGGING"
 	@echo "... SERVER"
-	@echo "... demo_app.o"
-	@echo "... demo_app.i"
-	@echo "... demo_app.s"
+	@echo "... src/app_lib/datastructs.o"
+	@echo "... src/app_lib/datastructs.i"
+	@echo "... src/app_lib/datastructs.s"
 	@echo "... src/app_lib/dial.o"
 	@echo "... src/app_lib/dial.i"
 	@echo "... src/app_lib/dial.s"
@@ -385,6 +430,9 @@ help:
 	@echo "... src/app_lib/repReq.o"
 	@echo "... src/app_lib/repReq.i"
 	@echo "... src/app_lib/repReq.s"
+	@echo "... src/demo_app.o"
+	@echo "... src/demo_app.i"
+	@echo "... src/demo_app.s"
 	@echo "... src/inet_lib/data.o"
 	@echo "... src/inet_lib/data.i"
 	@echo "... src/inet_lib/data.s"
@@ -394,6 +442,9 @@ help:
 	@echo "... src/logging_lib/logging.o"
 	@echo "... src/logging_lib/logging.i"
 	@echo "... src/logging_lib/logging.s"
+	@echo "... src/serveurEnregistrement.o"
+	@echo "... src/serveurEnregistrement.i"
+	@echo "... src/serveurEnregistrement.s"
 .PHONY : help
 
 

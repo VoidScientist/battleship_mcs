@@ -13,12 +13,13 @@ CLIENT: /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a \
   /usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so \
   /usr/lib64/libc_nonshared.a \
-  CMakeFiles/CLIENT.dir/demo_app.c.o \
+  CMakeFiles/CLIENT.dir/src/demo_app.c.o \
   libLIB_APP.a \
   libLIB_INET.a \
   libLIB_LOGGING.a
 
-CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c \
+CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
@@ -52,9 +53,22 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
+  /usr/include/bits/semaphore.h \
+  /usr/include/bits/sigaction.h \
+  /usr/include/bits/sigcontext.h \
+  /usr/include/bits/sigevent-consts.h \
+  /usr/include/bits/siginfo-arch.h \
+  /usr/include/bits/siginfo-consts.h \
+  /usr/include/bits/signal_ext.h \
+  /usr/include/bits/signum-arch.h \
+  /usr/include/bits/signum-generic.h \
+  /usr/include/bits/sigstack.h \
+  /usr/include/bits/sigstksz.h \
+  /usr/include/bits/sigthread.h \
   /usr/include/bits/sockaddr.h \
   /usr/include/bits/socket.h \
   /usr/include/bits/socket_type.h \
+  /usr/include/bits/ss_flags.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-uintn.h \
   /usr/include/bits/stdio_lim.h \
@@ -72,14 +86,21 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
   /usr/include/bits/types/__locale_t.h \
   /usr/include/bits/types/__mbstate_t.h \
   /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/__sigval_t.h \
   /usr/include/bits/types/clock_t.h \
   /usr/include/bits/types/clockid_t.h \
   /usr/include/bits/types/cookie_io_functions_t.h \
   /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/sig_atomic_t.h \
+  /usr/include/bits/types/sigevent_t.h \
+  /usr/include/bits/types/siginfo_t.h \
   /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/sigval_t.h \
+  /usr/include/bits/types/stack_t.h \
   /usr/include/bits/types/struct_FILE.h \
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/bits/types/struct_osockaddr.h \
+  /usr/include/bits/types/struct_sigstack.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
   /usr/include/bits/types/time_t.h \
@@ -99,6 +120,8 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
   /usr/include/netinet/in.h \
+  /usr/include/semaphore.h \
+  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -108,6 +131,7 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
   /usr/include/sys/select.h \
   /usr/include/sys/socket.h \
   /usr/include/sys/types.h \
+  /usr/include/sys/ucontext.h \
   /usr/include/unistd.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h
@@ -119,214 +143,262 @@ CMakeFiles/CLIENT.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_
 
 /usr/include/unistd.h:
 
-/usr/include/sys/cdefs.h:
-
-/usr/include/stdlib.h:
-
-/usr/include/netinet/in.h:
-
 /usr/include/sys/types.h:
 
-/usr/include/linux/stddef.h:
+/usr/include/bits/signum-arch.h:
 
-/usr/include/libgen.h:
+/usr/include/bits/types/struct_sigstack.h:
 
-/usr/include/gnu/stubs.h:
+/usr/include/sys/ucontext.h:
 
-/usr/include/gnu/stubs-64.h:
-
-/usr/include/features.h:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/bits/waitstatus.h:
-
-/usr/include/bits/unistd_ext.h:
-
-/usr/include/bits/uintn-identity.h:
-
-/usr/include/bits/typesizes.h:
-
-/usr/include/stdio.h:
-
-/usr/include/bits/types/timer_t.h:
-
-/usr/include/bits/types/struct_timespec.h:
-
-/usr/include/bits/types/struct_iovec.h:
-
-/usr/include/bits/types/struct_FILE.h:
-
-/usr/include/bits/types/sigset_t.h:
-
-/usr/include/bits/types/clock_t.h:
-
-/usr/include/bits/types/__mbstate_t.h:
-
-/usr/include/bits/types/__locale_t.h:
-
-/usr/include/bits/types/__fpos_t.h:
-
-/usr/include/bits/types/__fpos64_t.h:
-
-/usr/include/bits/types/FILE.h:
-
-/usr/include/arpa/inet.h:
-
-libLIB_APP.a:
-
-/usr/include/bits/getopt_posix.h:
-
-/usr/include/bits/types/__sigset_t.h:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/include/sys/socket.h:
-
-/usr/include/asm-generic/sockios.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/lib64/crt1.o:
-
-libLIB_LOGGING.a:
-
-/usr/include/features-time64.h:
-
-/usr/include/asm-generic/socket.h:
-
-/usr/include/bits/thread-shared-types.h:
-
-libLIB_INET.a:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h:
-
-CMakeFiles/CLIENT.dir/demo_app.c.o:
-
-/usr/include/bits/byteswap.h:
-
-/usr/include/strings.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
-
-/lib64/libgcc_s.so.1:
-
-/usr/include/bits/types/struct_timeval.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/types/time_t.h:
-
-/usr/include/bits/struct_rwlock.h:
-
-/usr/include/bits/types/locale_t.h:
-
-/lib64/libc.so.6:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h:
-
-/usr/include/bits/confname.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/bits/libc-header-start.h:
-
-/usr/include/string.h:
-
-/usr/include/bits/time64.h:
-
-/usr/lib64/libc.so:
-
-/usr/include/bits/types/clockid_t.h:
-
-/usr/lib64/crtn.o:
-
-/usr/include/bits/atomic_wide_counter.h:
-
-/lib64/ld-linux-x86-64.so.2:
-
-/usr/include/bits/select.h:
-
-/usr/include/alloca.h:
-
-/usr/include/asm/bitsperlong.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
+/usr/include/bits/signal_ext.h:
 
 /usr/lib64/libc_nonshared.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a:
+/usr/include/bits/sigcontext.h:
 
-/usr/include/asm/posix_types.h:
+/usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
 
-/usr/include/asm/posix_types_64.h:
+/usr/include/asm/bitsperlong.h:
 
-/usr/include/asm/socket.h:
+/usr/include/bits/semaphore.h:
 
-/usr/include/asm/sockios.h:
+/usr/include/bits/sigthread.h:
 
-/usr/include/bits/timesize.h:
+/usr/include/bits/types/stack_t.h:
 
-/usr/include/bits/endian.h:
+/usr/include/bits/sigevent-consts.h:
 
-/usr/include/bits/endianness.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/bits/environments.h:
-
-/usr/include/bits/floatn-common.h:
-
-/usr/include/bits/floatn.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/getopt_core.h:
-
-/usr/include/bits/waitflags.h:
-
-/usr/include/bits/in.h:
-
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
-
-/usr/include/bits/long-double.h:
-
-/usr/include/bits/posix_opt.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/bits/pthreadtypes-arch.h:
+/usr/include/bits/types/struct_timespec.h:
 
 /usr/include/bits/pthreadtypes.h:
 
-/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h:
+/usr/include/bits/long-double.h:
 
-/usr/include/bits/sockaddr.h:
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
 
-/usr/include/bits/struct_mutex.h:
+/usr/include/bits/in.h:
 
-/usr/include/bits/types/struct_osockaddr.h:
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/floatn.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/types/__sigval_t.h:
+
+/usr/include/asm/sockios.h:
+
+/usr/include/asm/posix_types_64.h:
+
+/usr/include/asm/posix_types.h:
+
+/usr/include/bits/siginfo-arch.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libgcc.a:
+
+/usr/include/bits/environments.h:
+
+/usr/include/sys/select.h:
+
+CMakeFiles/CLIENT.dir/src/demo_app.c.o:
+
+/usr/include/bits/select.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+
+/usr/include/bits/types/__FILE.h:
+
+/lib64/ld-linux-x86-64.so.2:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/atomic_wide_counter.h:
+
+/usr/lib64/crtn.o:
+
+/usr/include/bits/types/clockid_t.h:
+
+/usr/lib64/libc.so:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/bits/time64.h:
+
+/usr/include/string.h:
+
+/usr/include/bits/libc-header-start.h:
+
+/usr/include/bits/siginfo-consts.h:
+
+/usr/include/linux/posix_types.h:
 
 /usr/lib64/crti.o:
 
 /usr/include/bits/socket_type.h:
 
+/usr/include/bits/types/struct_osockaddr.h:
+
+/lib64/libgcc_s.so.1:
+
+/usr/include/strings.h:
+
+/usr/include/alloca.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h:
+
+/usr/include/bits/sockaddr.h:
+
+/usr/include/bits/byteswap.h:
+
+/lib64/libc.so.6:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h:
+
+/usr/include/bits/types/locale_t.h:
+
+libLIB_APP.a:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h:
+
+/usr/include/bits/getopt_posix.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h:
+
+/usr/include/bits/thread-shared-types.h:
+
+/usr/include/features-time64.h:
+
+libLIB_LOGGING.a:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
+
+/usr/include/bits/sigaction.h:
+
+/usr/include/bits/getopt_core.h:
+
+/usr/include/bits/sigstack.h:
+
+/usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/gnu/stubs.h:
+
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/bits/types/__sigset_t.h:
+
+/usr/include/bits/confname.h:
+
+/usr/lib64/crt1.o:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/bits/signum-generic.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/bits/sigstksz.h:
+
 /usr/include/bits/stdint-intn.h:
 
-/usr/include/endian.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/logging_lib/include/logging.h:
 
 /usr/include/bits/socket.h:
 
 /usr/include/bits/stdint-uintn.h:
 
-/usr/include/bits/types/__FILE.h:
+/usr/include/bits/types/cookie_io_functions_t.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
+/usr/include/endian.h:
 
-/usr/include/bits/stdlib-float.h:
+/usr/include/bits/types/struct_timeval.h:
+
+/usr/include/bits/struct_mutex.h:
+
+/usr/include/bits/struct_rwlock.h:
+
+/usr/include/bits/types/time_t.h:
+
+/usr/include/bits/types/FILE.h:
+
+/usr/include/bits/types/__fpos64_t.h:
+
+/usr/include/bits/types/__locale_t.h:
+
+/usr/include/semaphore.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/bits/types/__fpos_t.h:
+
+/usr/include/bits/types/clock_t.h:
+
+libLIB_INET.a:
+
+/usr/include/bits/types/sigevent_t.h:
+
+/usr/include/bits/types/siginfo_t.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/bits/types/sigset_t.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/bits/types/sigval_t.h:
+
+/usr/include/bits/ss_flags.h:
+
+/usr/include/bits/types/struct_FILE.h:
+
+/usr/include/bits/types/struct_iovec.h:
+
+/usr/include/bits/types/timer_t.h:
+
+/usr/include/stdio.h:
+
+/usr/include/bits/types/sig_atomic_t.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/uintn-identity.h:
+
+/usr/include/bits/unistd_ext.h:
+
+/usr/include/bits/timesize.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/bits/endianness.h:
+
+/usr/include/features.h:
+
+/usr/include/libgen.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/netinet/in.h:
+
+/usr/include/signal.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/sys/cdefs.h:

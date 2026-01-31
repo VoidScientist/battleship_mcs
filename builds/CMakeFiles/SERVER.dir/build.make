@@ -72,28 +72,28 @@ include CMakeFiles/SERVER.dir/flags.make
 CMakeFiles/SERVER.dir/codegen:
 .PHONY : CMakeFiles/SERVER.dir/codegen
 
-CMakeFiles/SERVER.dir/demo_app.c.o: CMakeFiles/SERVER.dir/flags.make
-CMakeFiles/SERVER.dir/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
-CMakeFiles/SERVER.dir/demo_app.c.o: CMakeFiles/SERVER.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SERVER.dir/demo_app.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SERVER.dir/demo_app.c.o -MF CMakeFiles/SERVER.dir/demo_app.c.o.d -o CMakeFiles/SERVER.dir/demo_app.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c
+CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o: CMakeFiles/SERVER.dir/flags.make
+CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/serveurEnregistrement.c
+CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o: CMakeFiles/SERVER.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o -MF CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o.d -o CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/src/serveurEnregistrement.c
 
-CMakeFiles/SERVER.dir/demo_app.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/SERVER.dir/demo_app.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c > CMakeFiles/SERVER.dir/demo_app.c.i
+CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/src/serveurEnregistrement.c > CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.i
 
-CMakeFiles/SERVER.dir/demo_app.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/SERVER.dir/demo_app.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c -o CMakeFiles/SERVER.dir/demo_app.c.s
+CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/serveurEnregistrement.c -o CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.s
 
 # Object files for target SERVER
 SERVER_OBJECTS = \
-"CMakeFiles/SERVER.dir/demo_app.c.o"
+"CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o"
 
 # External object files for target SERVER
 SERVER_EXTERNAL_OBJECTS =
 
-SERVER: CMakeFiles/SERVER.dir/demo_app.c.o
+SERVER: CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o
 SERVER: CMakeFiles/SERVER.dir/build.make
 SERVER: CMakeFiles/SERVER.dir/compiler_depend.ts
 SERVER: libLIB_APP.a

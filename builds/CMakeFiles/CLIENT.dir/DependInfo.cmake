@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/voidscientist/Développement/C/260123_battleship_mcs/demo_app.c" "CMakeFiles/CLIENT.dir/demo_app.c.o" "gcc" "CMakeFiles/CLIENT.dir/demo_app.c.o.d"
+  "/home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c" "CMakeFiles/CLIENT.dir/src/demo_app.c.o" "gcc" "CMakeFiles/CLIENT.dir/src/demo_app.c.o.d"
   "" "CLIENT" "gcc" "CMakeFiles/CLIENT.dir/link.d"
   )
 

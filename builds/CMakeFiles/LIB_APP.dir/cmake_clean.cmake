@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o"
+  "CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o.d"
   "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o"
   "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o.d"
   "CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o"

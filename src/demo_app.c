@@ -10,6 +10,8 @@
 #include <data.h>
 #include <repReq.h>
 #include <dial.h>
+#include <datastructs.h>
+#include <signal.h>
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
@@ -47,11 +49,30 @@
  *	\var		progName
  *	\brief		Nom de l'exécutable : libnet nécessite cette variable qui pointe sur argv[0]
  */
+
 char *progName;
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
+
+void onSignal(int code) {
+
+	mustDisconnect = code == SIGINT;
+
+}
+
+
+void initClient() {
+
+	struct sigaction sa;
+	CHECK(sigemptyset(&sa.sa_mask), "sigemptyset()");
+	sa.sa_handler 	= onSignal;
+	sa.sa_flags 	= SA_RESTART;
+	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction();");
+
+}
+
 /**
  *	\fn			void client (char *adrIP, int port)
  *	\brief		lance un client STREAM connecté à l'adresse applicative adrIP:port 
@@ -61,43 +82,19 @@ char *progName;
 void client (char *adrIP, int port) {
 	socket_t sockAppel;	// socket d'appel
 
-	printf("Demande de connexion: ");
+	initClient();
 
 	// Créer une connexion avec le serveur
 	sockAppel = connecterClt2Srv (adrIP, port);
 
-	dialClt2Srv(&sockAppel);
+	dialClt2SrvE(&sockAppel);
 
-	PAUSE("Fin du client");
 	// Fermer la socket d'appel
 	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");
 
 	
 }
-/**
- *	\fn				void serveur (char *adrIP, int port)
- *	\brief			lance un serveur STREAM en écoute sur l'adresse applicative adrIP:port
- *	\param 			adrIP : adresse IP du serveur à metrre en écoute
- *	\param 			port : port d'écoute
- */
-void serveur (char *adrIP, int port) {
-	socket_t sockEcoute;	// socket d'écoute de demande de connexion d'un client
-	socket_t sockDial;		// socket de dialogue avec un client
-	buffer_t buff;
-	
-	// sockEcoute est une variable externe
-	sockEcoute = creerSocketEcoute(adrIP, port);
 
-	// Accepter une connexion
-	sockDial = accepterClt(sockEcoute);
-	
-	dialSrv2Clt(&sockDial);
-
-	// Fermer la socket d'écoute
-	CHECK(close(sockDial.fd),"-- PB close() --");
-	// Fermer la socket d'écoute
-	CHECK(close(sockEcoute.fd),"-- PB close() --");
-}
 /**
  *	\fn				int main(int argc, char** argv)
  *	\brief			Programme principal d'un serveur STREAM ou d'un client STREAM
@@ -111,7 +108,7 @@ void serveur (char *adrIP, int port) {
 int main(int argc, char** argv) {
 	progName = argv[0];
 
-#ifdef CLIENT
+
 	if (argc<3) {
 		fprintf(stderr,"usage : %s @IP port\n", basename(progName));
 		 /*exit(-1);*/ 
@@ -124,21 +121,7 @@ int main(int argc, char** argv) {
 			getpid(), argv[1], atoi(argv[2]));
 		client(argv[1], atoi(argv[2]));
 	}
-#endif
 
-#ifdef SERVER
-	if (argc<3) {
-		fprintf(stderr, "usage: %s @IP port\n", basename(progName));
-		/*exit(-1);*/
-		fprintf(stderr,"lancement du serveur [PID:%d] sur l'adresse applicative [%s:%d]\n",
-			getpid(), IP_ANY, PORT_SRV);
-		serveur(IP_ANY, PORT_SRV);
-	}
-	else {
-		fprintf(stderr,"lancement du serveur [PID:%d] sur l'adresse applicative [%s:%d]\n",
-			getpid(), argv[1], atoi(argv[2]));
-		serveur(argv[1], atoi(argv[2]));
-	}
-#endif	
+
 	return 0;
 }
