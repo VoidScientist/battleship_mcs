@@ -17,6 +17,7 @@
  *	\noop		I N C L U D E S   S P E C I F I Q U E S
  */
  #include "include/bataille_navale.h"
+ #include "include/structSerial.h"
  
  /*
 *****************************************************************************************
@@ -24,6 +25,9 @@
  */
  #define JOUEUR_STR_OUT "%d,%s"
  #define JOUEUR_STR_IN "%d,%49[^\n]"
+ 
+ #define TIR_STR_OUT "%d,%d,%d"
+ #define TIR_STR_IN "%d,%d,%d"
  
  #define RESULTAT_STR_OUT "%d,%d,%d,%d,%d"
  #define RESULTAT_STR_IN "%d,%d,%d,%d,%d"
@@ -48,6 +52,17 @@
  
   void str2joueur(const char * str, Joueur * joueur) {
  	sscanf(str, JOUEUR_STR_IN, &joueur->id, joueur->nom);
+ }
+ 
+ /**
+ *	Fonctions pour la structure Tir
+ */
+ void tir2str(const Tir * tir, char * str) {
+ 	sprintf(str, TIR_STR_OUT, tir->ligne, tir->col, tir->equipe_id);
+ }
+ 
+  void str2tir(const char * str, Tir * tir) {
+ 	sscanf(str, TIR_STR_IN, &tir->ligne, &tir->col, &tir->equipe_id);
  }
  
   /**

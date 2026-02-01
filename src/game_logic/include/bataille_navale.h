@@ -68,6 +68,11 @@ typedef struct {
 } Placement;
 
 typedef struct {
+	int ligne, col;
+	int equipe_id;
+} Tir;
+
+typedef struct {
 	int equipe_id, joueur_id;
 	int phase; 		// 0 = placement	|	1 = bataille 
 } Tour;
