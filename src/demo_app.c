@@ -128,7 +128,7 @@ void initClient() {
 	// initialise les hôtes avec des valeurs pour éviter
 	// de lire n'importe quoi.
 	for (int i = 0; i < MAX_HOSTS_GET; i++) {
-		createClientInfo(&hosts[i], "", 0, "", 0);
+		createClientInfo(&hosts[i], "", PLAYER, "", 0);
 		hosts[i].status 	= DISCONNECTED;
 	}
 
@@ -171,8 +171,9 @@ void client(char *adrIP, unsigned short port) {
 
 	menuParams.showHosts	= onDisplayHosts;
 	menuParams.exitProgram	= onExit;
+	menuParams.hosts 		= hosts;
 
-	displayPlayerMenu(&menuParams);
+	displayPlayerMenu(menuParams);
 
 
 

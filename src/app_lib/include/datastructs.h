@@ -35,5 +35,7 @@ void clientInfo2str(clientInfo_t *infos, char *str);
 
 void str2clientInfo(char *str, clientInfo_t *infos);
 
+int getHostsAmount(clientInfo_t *clients, int size);
+
 
 #endif /* DATASTRUCTS_H */
