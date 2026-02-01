@@ -10,7 +10,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <semaphore.h>
+
 #include <session.h>
+
+#include "dial.h"
 #include "interface.h"
 
 
@@ -82,28 +86,32 @@ void setupUserInfos(clientInfo_t *infos) {
         do {
             printf("\nPort (2000-20000): ");
             result = retrieveInput("%hu", &port);
-            
-            if (result == FGETS_ERROR) {
-                printf("\nErreur de lecture. Réessayez.\n");
-                continue;
-            }
-            if (result == USE_DEFAULT) {
-                printf("Un port est requis!\n");
-                continue;
-            }
-            if (result == VSSCANF_ERROR) {
-                printf("Format invalide. Entrez un nombre.\n");
-                continue;
-            }
-            
-            if (port < 2000 || port > 20000) {
-                printf("Le port doit être entre 2000 et 20000.\n");
-            }
+
+            switch (result) {
+
+	        	case FGETS_ERROR: 
+	        		printf("\nErreur de lecture. Arrêt.\n");
+	        		exit(EXIT_FAILURE);
+
+	        	case USE_DEFAULT:
+	        		printf("Port par défaut choisi: %d\n", DEFAULT_PORT);
+	                port = DEFAULT_PORT;
+	        		continue;
+
+	        	case VSSCANF_ERROR:
+	        		printf("Format invalide. Entrez un nombre.\n");
+	        		continue;
+
+       		 }
+
+	        if (port < 2000 || port > 20000) {
+	            printf("Le port doit être entre 2000 et 20000.\n");
+	        }
+        
         } while (port < 2000 || port > 20000);
         
 
     } 
-    
     
     strcpy(infos->name, pseudo);
     getIpAddress(infos->address);
@@ -144,7 +152,7 @@ void displayHosts(clientInfo_t *hosts, int amount) {
 	for (int i = 0; i < amount; i++) {
 
 		if (hosts[i].role == HOST)
-			printf("\t- %s\n", hosts[i].name);
+			printf("\t( %d ) - %s\n", i+1, hosts[i].name);
 
 	}
 
@@ -244,5 +252,61 @@ int saferFgets(char *buffer, int size) {
 
 
 	return STEP_SUCCESS;
+
+}
+
+
+
+
+
+void displayPlayerMenu(playerMenuParams_t *params) {
+
+	int 		running 	= 1;
+	int 		result;
+	int 		action  	= 0;
+
+
+	callback	showHosts	= params->showHosts;
+	callback	exitProgram = params->exitProgram;
+
+	while (running) {
+
+
+		printf("\n");
+		printf("╔=======[BATTLESHIP]=======╗\n");
+		printf("║                          ║\n");
+		printf("║     [1]    Rejoindre     ║\n");
+		printf("║                          ║\n");
+		printf("║     [2]    Quitter       ║\n");
+		printf("║                          ║\n");
+		printf("╚==========================╝\n");
+
+		
+		do {
+
+			printf("\nAction: ");
+			result = retrieveInput("%d", &action);
+
+			if (result != STEP_SUCCESS) {
+
+				exitProgram();
+				return;
+
+			}
+
+			switch (action) {
+
+				case 1:
+					showHosts();
+					break;
+
+				case 2:
+					exitProgram();
+					break;
+			}
+
+		} while (action != 1 && action != 2);
+
+	}
 
 }

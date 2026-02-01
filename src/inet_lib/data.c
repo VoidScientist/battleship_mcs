@@ -1,8 +1,8 @@
 /**
  *	\file		data.c
  *	\brief		Implémentation de la couche Data Representation
- *	\author		Samir El Khattabi
- *	\date		3 mars 2023
+ *	\author		ARCELON Louis
+ *	\date		1 février 2026
  *	\version	1.0
  */
 #include <unistd.h>

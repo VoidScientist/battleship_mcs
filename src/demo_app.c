@@ -1,8 +1,8 @@
 /**
  *	\file		demo_app.c
- *	\brief		Exemple d'utilisation de la librairie libinet.a
+ *	\brief		Client de l'application
  *	\author		ARCELON Louis
- *	\date		28 janvier 2026
+ *	\date		1 février 2026
  *	\version	1.0
  */
 #include <stdlib.h>
@@ -69,11 +69,43 @@ clientInfo_t	hosts[MAX_HOSTS_GET];
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
 
+
 void onSignal(int code) {
 
 	mustDisconnect = code == SIGINT;
 
 }
+
+
+void onExit() {
+
+	int result;
+
+
+	mustDisconnect = 1;
+
+	// s'assure qu'on ait bien pu fermer la connexion
+	// avant de fermer le client
+	do {
+		result = sem_wait(&semCanClose);
+	} while (result == -1 && errno == EINTR);
+
+	// Fermer la socket d'appel
+	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");
+
+
+	exit(EXIT_SUCCESS);
+
+}
+
+
+void onDisplayHosts() {
+
+	postRequest(&requestHosts, &semRequestFin);
+	displayHosts(hosts, MAX_HOSTS_GET);
+
+}
+
 
 
 void initClient() {
@@ -104,12 +136,13 @@ void initClient() {
  *	\param 		adrIP : adresse IP du serveur à connecter
  *	\param 		port : port du serveur à connecter
  */
-void client (char *adrIP, unsigned short port) {
+void client(char *adrIP, unsigned short port) {
 
 	char 				userIP[USER_BUFFER_SIZE];
 	short				userPort;
 	eCltThreadParams_t	*params;
-	int 				result;
+	playerMenuParams_t	menuParams;
+	
 
 	initClient();
 
@@ -129,24 +162,19 @@ void client (char *adrIP, unsigned short port) {
 	params->semRequestFin 	= &semRequestFin;
 
 	pthread_create(&dialServE, 0, (void*)(void *) dialClt2SrvE, params);
-
-
-	postRequest(&requestHosts, &semRequestFin);
-
-
-	displayHosts(hosts, MAX_HOSTS_GET);
 	
 
+	menuParams.showHosts	= onDisplayHosts;
+	menuParams.exitProgram	= onExit;
+
+	displayPlayerMenu(&menuParams);
 
 
-	// s'assure qu'on ait bien pu fermer la connexion
-	// avant de fermer le client
-	do {
-		result = sem_wait(&semCanClose);
-	} while (result == -1 && errno == EINTR);
 
-	// Fermer la socket d'appel
-	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");
+
+
+
+	onExit();
 
 	
 }

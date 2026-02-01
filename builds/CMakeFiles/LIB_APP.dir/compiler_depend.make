@@ -157,7 +157,10 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: /home/voidscientist/Développement/
 
 CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/interface.c \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/interface.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h \
   /usr/include/alloca.h \
   /usr/include/arpa/inet.h \
@@ -188,9 +191,22 @@ CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développe
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
   /usr/include/bits/select.h \
+  /usr/include/bits/semaphore.h \
+  /usr/include/bits/sigaction.h \
+  /usr/include/bits/sigcontext.h \
+  /usr/include/bits/sigevent-consts.h \
+  /usr/include/bits/siginfo-arch.h \
+  /usr/include/bits/siginfo-consts.h \
+  /usr/include/bits/signal_ext.h \
+  /usr/include/bits/signum-arch.h \
+  /usr/include/bits/signum-generic.h \
+  /usr/include/bits/sigstack.h \
+  /usr/include/bits/sigstksz.h \
+  /usr/include/bits/sigthread.h \
   /usr/include/bits/sockaddr.h \
   /usr/include/bits/socket.h \
   /usr/include/bits/socket_type.h \
+  /usr/include/bits/ss_flags.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-uintn.h \
   /usr/include/bits/stdio_lim.h \
@@ -208,14 +224,21 @@ CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développe
   /usr/include/bits/types/__locale_t.h \
   /usr/include/bits/types/__mbstate_t.h \
   /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/__sigval_t.h \
   /usr/include/bits/types/clock_t.h \
   /usr/include/bits/types/clockid_t.h \
   /usr/include/bits/types/cookie_io_functions_t.h \
   /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/sig_atomic_t.h \
+  /usr/include/bits/types/sigevent_t.h \
+  /usr/include/bits/types/siginfo_t.h \
   /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/sigval_t.h \
+  /usr/include/bits/types/stack_t.h \
   /usr/include/bits/types/struct_FILE.h \
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/bits/types/struct_osockaddr.h \
+  /usr/include/bits/types/struct_sigstack.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
   /usr/include/bits/types/time_t.h \
@@ -236,6 +259,8 @@ CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développe
   /usr/include/netdb.h \
   /usr/include/netinet/in.h \
   /usr/include/rpc/netdb.h \
+  /usr/include/semaphore.h \
+  /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -245,6 +270,7 @@ CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développe
   /usr/include/sys/select.h \
   /usr/include/sys/socket.h \
   /usr/include/sys/types.h \
+  /usr/include/sys/ucontext.h \
   /usr/include/unistd.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h \
   /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h

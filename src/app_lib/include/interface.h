@@ -8,11 +8,14 @@
  */
 #include <stdio.h>
 #include <stdarg.h>
+#include <semaphore.h>
 #include "datastructs.h"
 
 
 #define USER_BUFFER_SIZE 	100
 #define INPUT_BUFFER_SIZE	256
+
+#define DEFAULT_PORT		15500
 
 #define STEP_SUCCESS		0
 #define FGETS_ERROR			-1
@@ -21,11 +24,25 @@
 #define EXPECT_ERROR		-4
 
 
+typedef void (*callback)();
+
+
+typedef struct {
+
+	callback 	showHosts;
+	callback 	exitProgram;
+	
+} playerMenuParams_t;
+
+
+
 void setupUserInfos(clientInfo_t *infos);
 
 void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort);
 
 void displayHosts(clientInfo_t *hosts, int amount);
+
+void displayPlayerMenu(playerMenuParams_t *params);
 
 int retrieveInput(char *fmt, ...);
 
