@@ -101,6 +101,11 @@ void onExit() {
 
 void onDisplayHosts() {
 
+	for (int i = 0; i < MAX_HOSTS_GET; i++) {
+		createClientInfo(&hosts[i], "", 0, "", 0);
+		hosts[i].status 	= DISCONNECTED;
+	}
+
 	postRequest(&requestHosts, &semRequestFin);
 	displayHosts(hosts, MAX_HOSTS_GET);
 

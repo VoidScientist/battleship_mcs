@@ -67,7 +67,7 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 		sem_post(semCanClose);
 		return;
 	} else {
-		logMessage("[%d] Connexion réussie: %s.\n", DEBUG, response.id, response.data);
+		//logMessage("[%d] Connexion réussie: %s.\n", DEBUG, response.id, response.data);
 	}
 
 
@@ -102,29 +102,23 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 
 		if (requestHosts) {
 
-			int p = 0;
+			for (int i = 0; i < MAX_HOSTS_GET; i++) {
 
-			status = enum2status(REQ, CONNECT);
-			sendRequest(sockAppel, status, GET, "", NULL);
+				status = enum2status(REQ, CONNECT);
+				sendRequest(sockAppel, status, GET, "", NULL);
 
-			// TODO: 	régler l'erreur ici ahahahahah
-			//			im going insane
-		
-			while (p < MAX_HOSTS_GET) {
-
-
-				logMessage("Attente d'une réponse.\n", DEBUG);
 				rcvResponse(sockAppel, &response);
-				logMessage("[%d] %s.\n", DEBUG, response.id, response.data);
 
 				if (response.id == enum2status(ACK, CONNECT)) {
 
-					str2clientInfo(response.data, &hosts[p++]);
+					//logMessage("Client reçu.\n", DEBUG);
+					str2clientInfo(response.data, &hosts[i]);
 
-				} else {
+				}
 
-					logMessage("Fin du GET.\n", DEBUG);
-					requestHosts = 0;
+				if (response.id == enum2status(ERR, CONNECT)) {
+
+					//logMessage("Plus de clients à recevoir.\n", DEBUG);
 					break;
 
 				}
@@ -132,6 +126,7 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 
 			}
 
+			requestHosts = 0;
 			sem_post(semRequestFin);
 			
 
@@ -219,24 +214,28 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 				if (request.verb == GET) {
 
-					int sent = 0;
+					int found = 0;
 
 					for (int i = 0; i < clientAmount; i++) {
-
-						if (sent >= MAX_HOSTS_GET) break;
 
 						if (clients[i].role == HOST && clients[i].status == CONNECTED) {
 
 							status = enum2status(ACK, CONNECT);
 							sendResponse(sockDial, status, &clients[i], (pFct) clientInfo2str);
-							sent++;
+
+							found   = 1;
 
 						}
 
 					}
 
-					status = enum2status(ERR, CONNECT);
-					sendResponse(sockDial, status, "", NULL);
+					if (!found) {
+					
+						status 	= enum2status(ERR, CONNECT);
+						sendResponse(sockDial, status, "", NULL);
+					
+					}
+
 					break;
 
 				}
@@ -273,9 +272,11 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 void postRequest(int *reqVar, sem_t *semReqAck) {
 
 	*reqVar = 1;
-	logMessage("Requête commencée...\n", DEBUG);
+	//logMessage("Requête commencée...\n", DEBUG);
+	
 	sem_wait(semReqAck);
-	logMessage("Requête finie.\n", DEBUG);
+	
+	//logMessage("Requête finie.\n", DEBUG);
 	*reqVar = 0;
 
 }
