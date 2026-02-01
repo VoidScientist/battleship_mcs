@@ -29,11 +29,15 @@ typedef void (*callback)();
 
 typedef struct {
 
-	callback 	showHosts;
-	callback 	exitProgram;
+	callback 		showHosts;
+	callback 		exitProgram;
+
+	clientInfo_t	*hosts;
 	
 } playerMenuParams_t;
 
+
+typedef enum {MAIN_MENU, JOIN_MENU} menuState_t;
 
 
 void setupUserInfos(clientInfo_t *infos);
@@ -42,7 +46,7 @@ void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userP
 
 void displayHosts(clientInfo_t *hosts, int amount);
 
-void displayPlayerMenu(playerMenuParams_t *params);
+void displayPlayerMenu(playerMenuParams_t params);
 
 int retrieveInput(char *fmt, ...);
 
@@ -60,3 +64,8 @@ int saferVsscanf(char *buff, char *fmt, va_list args);
  * \result     Le nombre de correspondances attendu.
  */
 int calculateExpectedFromFmt(char *fmt, int size);
+
+
+void displayMainMenu(playerMenuParams_t params, menuState_t *state);
+
+void displayJoinMenu(playerMenuParams_t params, menuState_t *state);

@@ -31,3 +31,18 @@ void str2clientInfo(char *str, clientInfo_t *infos) {
 	sscanf(str, CLIENT_INFO_IN, infos->name, &infos->role, infos->address, &infos->port);
 
 }
+
+
+int getHostsAmount(clientInfo_t *clients, int size) {
+
+	int result = 0;
+
+	for (int i = 0; i < size; i++) {
+
+		result += clients[i].role == HOST;
+
+	}
+
+	return result;
+
+}
