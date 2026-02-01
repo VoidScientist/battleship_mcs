@@ -287,6 +287,12 @@ void displayPlayerMenu(playerMenuParams_t *params) {
 			printf("\nAction: ");
 			result = retrieveInput("%d", &action);
 
+			if (result == USE_DEFAULT) {
+
+				continue;
+
+			}
+
 			if (result != STEP_SUCCESS) {
 
 				exitProgram();
