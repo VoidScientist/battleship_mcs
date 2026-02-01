@@ -18,12 +18,15 @@
 #include "datastructs.h"
 
 
+#define MAX_HOSTS_GET 10
+
 
 typedef struct {
 
 	int 			id;
 	socket_t 		*sockDial;
 	clientInfo_t 	*clientArray;
+	int 			clientAmount;
 	void 			(*terminationCallback)(int);
 	int 			(*canAccept)();
 
@@ -34,13 +37,17 @@ typedef struct {
 
 	socket_t 		*sockAppel;
 	clientInfo_t	*infos;
+	clientInfo_t	*hostBuffer;
 	sem_t 			*semCanClose;
+	sem_t 			*semRequestFin;
 
 } eCltThreadParams_t;
 
 
 
 extern volatile sig_atomic_t mustDisconnect;
+
+extern int requestHosts;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S

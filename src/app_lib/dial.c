@@ -25,6 +25,8 @@
 
 volatile sig_atomic_t mustDisconnect = 0;
 
+int requestHosts;
+
 
 /*
 *****************************************************************************************
@@ -47,7 +49,9 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 
 	socket_t	 *sockAppel		= params->sockAppel;
 	clientInfo_t *infos 		= params->infos;
+	clientInfo_t *hosts 		= params->hostBuffer;
 	sem_t 		 *semCanClose	= params->semCanClose;
+	sem_t 		 *semRequestFin = params->semRequestFin;
 
 	free(params);
 
@@ -93,6 +97,34 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 			
 		}
 
+
+		if (requestHosts) {
+
+			int p = 0;
+
+			status = enum2status(REQ, CONNECT);
+			sendRequest(sockAppel, status, GET, "", NULL);
+
+		
+			while (p < MAX_HOSTS_GET) {
+
+				rcvResponse(sockAppel, &response);
+
+				if (response.id == enum2status(ERR, CONNECT)) {
+
+					break;
+
+				}
+
+				str2clientInfo(response.data, &hosts[p++]);
+
+			} 
+
+			sem_post(semRequestFin);
+			requestHosts = 0;
+
+		}
+
 		
 	}
 
@@ -108,12 +140,16 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
  */
 void dialSrvE2Clt(eServThreadParams_t *params) {
 
-	int running				= 1;
+	int running					= 1;
 
 	int 			id 			= params->id;
 	socket_t 		*sockDial 	= params->sockDial;
 	clientInfo_t 	*clients 	= params->clientArray;
 	clientInfo_t 	*client 	= &clients[id];			// dangereux lorsque serv enr. plein. mais soit.
+
+
+	int 		clientAmount	= params->clientAmount;
+
 
 	void (*onDisconnect)(int) 	= params->terminationCallback;
 	int  (*canAccept)()			= params->canAccept;
@@ -165,6 +201,30 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 					status = enum2status(ACK, CONNECT);
 					sendResponse(sockDial, status, "Déconnexion réussie", NULL);
 					onDisconnect(id);
+					break;
+
+				}
+
+				if (request.verb == GET) {
+
+					int sent = 0;
+
+					for (int i = 0; i < clientAmount; i++) {
+
+						if (sent > MAX_HOSTS_GET) break;
+
+						if (clients[i].role == HOST) {
+
+							status = enum2status(ACK, CONNECT);
+							sendResponse(sockDial, status, &clients[i], (pFct) clientInfo2str);
+							sent++;
+
+						}
+
+					}
+
+					status = enum2status(ERR, CONNECT);
+					sendResponse(sockDial, status, "", NULL);
 					break;
 
 				}

@@ -228,6 +228,7 @@ void serveur (char *adrIP, int port) {
 		params->id 					= currentClient;
 		params->sockDial 			= sockDial;
 		params->clientArray 		= clients;
+		params->clientAmount		= MAX_CLIENTS;
 		params->terminationCallback = disconnectClient;
 		params->canAccept			= canAccept;
 

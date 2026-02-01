@@ -61,8 +61,10 @@ pthread_t 		dialServE;
 socket_t 		sockAppel;	// socket d'appel
 
 sem_t			semCanClose;
+sem_t 			semRequestFin;
 
 clientInfo_t 	self;
+clientInfo_t	hosts[MAX_HOSTS_GET];
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
@@ -84,7 +86,8 @@ void initClient() {
 	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction();");
 
 
-	CHECK(sem_init(&semCanClose, 0, 0), "sem_init()"); 
+	CHECK(sem_init(&semCanClose, 0, 0), "sem_init()");
+	CHECK(sem_init(&semRequestFin, 0, 0), "sem_init()"); 
 
 }
 
@@ -219,19 +222,26 @@ void client (char *adrIP, unsigned short port) {
 	sockAppel = connecterClt2Srv (userIP, userPort);
 
 
-
-
-	params 					= malloc(sizeof(params));
+	params 					= malloc(sizeof(eCltThreadParams_t));
 	params->sockAppel 		= &sockAppel;
 	params->infos 			= &self;
+	params->hostBuffer		= hosts;
 	params->semCanClose		= &semCanClose;
+	params->semRequestFin 	= &semRequestFin;
 
 	pthread_create(&dialServE, 0, (void*)(void *) dialClt2SrvE, params);
 
 
+	// get hosts.
+	requestHosts = 1;
+	sem_wait(&semRequestFin);
 
+	printf("Current hosts:\n");
+	for (int i = 0; i < MAX_HOSTS_GET; i++) {
 
+		printf("\t%s\n",hosts[i].name);
 
+	}
 
 
 
