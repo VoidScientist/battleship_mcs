@@ -126,13 +126,13 @@ void setupUserInfos(clientInfo_t *infos) {
 void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort) {
     int result;
     
-    printf("\nConnexion au serveur d'écoute:\n");
+    printf("\nConnexion au serveur d'enregistrement:\n");
 
     printf("Adresse Applicative (%s:%d): ", adrIP, port);
     
     result = retrieveInput("%[^:]:%hd", userIP, userPort);
     
-    if (result == USE_DEFAULT || result == FGETS_ERROR || result == VSSCANF_ERROR) {
+    if (result != STEP_SUCCESS) {
         printf("Utilisation des valeurs par défaut...\n");
         strcpy(userIP, adrIP);
         *userPort = port;
@@ -302,7 +302,7 @@ void displayPlayerMenu(playerMenuParams_t *params) {
 
 				case 2:
 					exitProgram();
-					break;
+					return;
 			}
 
 		} while (action != 1 && action != 2);

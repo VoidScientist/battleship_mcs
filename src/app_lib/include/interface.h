@@ -52,11 +52,11 @@ int saferFgets(char *buffer, int size);
 int saferVsscanf(char *buff, char *fmt, va_list args);
 
 /**
- * @brief      Calcule le résultat attendu de vsscanf à partir du format.
+ * \brief      Calcule le résultat attendu de vsscanf à partir du format.
  *
- * @param      fmt   Le format
- * @param[in]  size  La taille du buffer (avec \0)
+ * \param      fmt   Le format
+ * \param[in]  size  La taille du buffer (avec \0)
  *
- * @return     Le nombre de correspondances attendu.
+ * \result     Le nombre de correspondances attendu.
  */
 int calculateExpectedFromFmt(char *fmt, int size);

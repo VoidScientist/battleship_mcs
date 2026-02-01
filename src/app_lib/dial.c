@@ -77,12 +77,14 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 		if (mustDisconnect) {
 
 			status = enum2status(REQ, CONNECT);
+			logMessage("Demande de déconnexion.\n", DEBUG);
 			sendRequest(sockAppel, status, DELETE, "", NULL);
+			logMessage("Attente d'une réponse.\n", DEBUG);
 			rcvResponse(sockAppel, &response);
 
 			if (response.id == enum2status(ACK, CONNECT)) {
 			
-				logMessage("[%d] %s\n", DEBUG, response.id, response.data);
+				logMessage("[%d] Déconnexion: %s\n", DEBUG, response.id, response.data);
 				sem_post(semCanClose);
 				mustDisconnect = 0;
 			
@@ -90,7 +92,7 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 			
 			} else {
 			
-				logMessage("[%d] %s\n", DEBUG, response.id, response.data);
+				logMessage("[%d] Erreur déconnexion: %s\n", DEBUG, response.id, response.data);
 				return;
 			
 			}
@@ -105,23 +107,33 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 			status = enum2status(REQ, CONNECT);
 			sendRequest(sockAppel, status, GET, "", NULL);
 
+			// TODO: 	régler l'erreur ici ahahahahah
+			//			im going insane
 		
 			while (p < MAX_HOSTS_GET) {
 
+
+				logMessage("Attente d'une réponse.\n", DEBUG);
 				rcvResponse(sockAppel, &response);
+				logMessage("[%d] %s.\n", DEBUG, response.id, response.data);
 
-				if (response.id == enum2status(ERR, CONNECT)) {
+				if (response.id == enum2status(ACK, CONNECT)) {
 
+					str2clientInfo(response.data, &hosts[p++]);
+
+				} else {
+
+					logMessage("Fin du GET.\n", DEBUG);
+					requestHosts = 0;
 					break;
 
 				}
 
-				str2clientInfo(response.data, &hosts[p++]);
 
-			} 
+			}
 
 			sem_post(semRequestFin);
-			requestHosts = 0;
+			
 
 		}
 
@@ -211,7 +223,7 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 					for (int i = 0; i < clientAmount; i++) {
 
-						if (sent > MAX_HOSTS_GET) break;
+						if (sent >= MAX_HOSTS_GET) break;
 
 						if (clients[i].role == HOST && clients[i].status == CONNECTED) {
 
@@ -253,15 +265,17 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 
 /**
- * @brief      Envoie une requête via un flag et attends une sémaphore.
+ * \brief      Envoie une requête via un flag et attends une sémaphore.
  *
- * @param      reqVar     Flag de la requête
- * @param      semReqAck  Sémaphore d'attente
+ * \param      reqVar     Flag de la requête
+ * \param      semReqAck  Sémaphore d'attente
  */
 void postRequest(int *reqVar, sem_t *semReqAck) {
 
 	*reqVar = 1;
+	logMessage("Requête commencée...\n", DEBUG);
 	sem_wait(semReqAck);
+	logMessage("Requête finie.\n", DEBUG);
 	*reqVar = 0;
 
 }

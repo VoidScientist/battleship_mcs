@@ -172,8 +172,6 @@ void client(char *adrIP, unsigned short port) {
 
 
 
-
-
 	onExit();
 
 	
