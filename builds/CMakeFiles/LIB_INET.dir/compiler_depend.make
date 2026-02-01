@@ -28,6 +28,7 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o: /home/voidscientist/Développemen
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -78,7 +79,9 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o: /home/voidscientist/Développemen
   /usr/include/libgen.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -118,6 +121,7 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -167,7 +171,9 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
   /usr/include/gnu/stubs.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -196,7 +202,11 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 
 /usr/include/stdlib.h:
 
+/usr/include/rpc/netdb.h:
+
 /usr/include/netinet/in.h:
+
+/usr/include/netdb.h:
 
 /usr/include/sys/types.h:
 
@@ -226,9 +236,7 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 
 /usr/include/bits/types/struct_timespec.h:
 
-/usr/include/stdc-predef.h:
-
-/usr/include/bits/pthreadtypes-arch.h:
+/usr/include/bits/floatn.h:
 
 /usr/include/linux/posix_types.h:
 
@@ -304,11 +312,13 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 
 /usr/include/bits/types/locale_t.h:
 
-/usr/include/bits/floatn.h:
-
 /usr/include/asm/bitsperlong.h:
 
 /usr/include/asm/socket.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/bits/pthreadtypes-arch.h:
 
 /usr/include/bits/pthreadtypes.h:
 
@@ -319,6 +329,10 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 /usr/include/bits/sockaddr.h:
 
 /usr/include/bits/struct_mutex.h:
+
+/usr/include/bits/types/struct_osockaddr.h:
+
+/usr/include/bits/socket_type.h:
 
 /usr/include/bits/stdint-intn.h:
 
@@ -352,6 +366,8 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 
 /usr/include/bits/types/__fpos_t.h:
 
+/usr/include/bits/netdb.h:
+
 /usr/include/bits/types/__mbstate_t.h:
 
 /usr/include/bits/atomic_wide_counter.h:
@@ -359,7 +375,3 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o: /home/voidscientist/Développe
 /usr/include/bits/types/clockid_t.h:
 
 /usr/include/bits/types/struct_FILE.h:
-
-/usr/include/bits/socket_type.h:
-
-/usr/include/bits/types/struct_osockaddr.h:

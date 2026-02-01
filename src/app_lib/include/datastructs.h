@@ -13,7 +13,7 @@
 #define CLIENT_INFO_IN "%[^,],%d,%[^,],%d"
 
 #define ADDR_SIZE 15
-#define PSEUDO_SIZE 10
+#define PSEUDO_SIZE 11
 
 typedef enum {DISCONNECTED, CONNECTING, CONNECTED} userStatus_t;
 typedef enum {PLAYER, HOST} userRole_t;

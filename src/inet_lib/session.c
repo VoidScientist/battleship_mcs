@@ -170,3 +170,20 @@ socket_t connecterClt2Srv (char *adrIP, short port) {
 	
 }
 
+
+void getIpAddress(char *ipBuffer) {
+
+	char hostbuffer[256];
+    struct hostent *host_entry;
+    int hostname;
+
+    hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+
+    host_entry = gethostbyname(hostbuffer);
+
+    strcpy(
+    	ipBuffer
+    	, inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0]))
+    );
+
+}

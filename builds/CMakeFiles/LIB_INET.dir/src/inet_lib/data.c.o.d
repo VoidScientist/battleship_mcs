@@ -48,4 +48,5 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o: \
  /usr/include/bits/types/struct_osockaddr.h /usr/include/bits/in.h \
  /usr/include/arpa/inet.h \
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h \
+ /usr/include/netdb.h /usr/include/rpc/netdb.h /usr/include/bits/netdb.h

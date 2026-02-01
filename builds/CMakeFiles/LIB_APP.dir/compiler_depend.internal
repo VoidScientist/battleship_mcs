@@ -68,6 +68,7 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
  /usr/include/bits/in.h
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
+ /usr/include/bits/netdb.h
  /usr/include/bits/posix_opt.h
  /usr/include/bits/pthreadtypes-arch.h
  /usr/include/bits/pthreadtypes.h
@@ -137,7 +138,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
  /usr/include/gnu/stubs.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
+ /usr/include/netdb.h
  /usr/include/netinet/in.h
+ /usr/include/rpc/netdb.h
  /usr/include/semaphore.h
  /usr/include/signal.h
  /usr/include/stdc-predef.h
@@ -189,6 +192,7 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o
  /usr/include/bits/in.h
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
+ /usr/include/bits/netdb.h
  /usr/include/bits/posix_opt.h
  /usr/include/bits/pthreadtypes-arch.h
  /usr/include/bits/pthreadtypes.h
@@ -238,7 +242,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o
  /usr/include/gnu/stubs.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
+ /usr/include/netdb.h
  /usr/include/netinet/in.h
+ /usr/include/rpc/netdb.h
  /usr/include/stdc-predef.h
  /usr/include/stdio.h
  /usr/include/stdlib.h

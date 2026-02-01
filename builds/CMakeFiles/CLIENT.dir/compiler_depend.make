@@ -53,6 +53,7 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthread_stack_min.h \
@@ -134,8 +135,10 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
   /usr/include/linux/errno.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
   /usr/include/pthread.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/sched.h \
   /usr/include/semaphore.h \
   /usr/include/signal.h \
@@ -181,9 +184,13 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 
 /usr/include/sched.h:
 
+/usr/include/rpc/netdb.h:
+
 /usr/include/pthread.h:
 
 /usr/include/netinet/in.h:
+
+/usr/include/netdb.h:
 
 /usr/include/linux/stddef.h:
 
@@ -193,7 +200,7 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 
 /usr/include/libgen.h:
 
-/usr/include/bits/semaphore.h:
+/usr/include/gnu/stubs-64.h:
 
 /usr/include/time.h:
 
@@ -211,10 +218,6 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 
 /usr/include/bits/pthreadtypes-arch.h:
 
-/usr/include/bits/sigthread.h:
-
-/usr/include/bits/pthread_stack_min.h:
-
 /usr/include/bits/long-double.h:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
@@ -226,6 +229,8 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 /usr/include/bits/waitflags.h:
 
 /usr/include/bits/types.h:
+
+/usr/include/bits/netdb.h:
 
 /usr/include/bits/floatn.h:
 
@@ -258,6 +263,12 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 /usr/include/asm/bitsperlong.h:
 
 /usr/include/bits/sigcontext.h:
+
+/usr/include/bits/semaphore.h:
+
+/usr/include/bits/pthread_stack_min.h:
+
+/usr/include/bits/sigthread.h:
 
 /usr/include/bits/environments.h:
 
@@ -379,13 +390,19 @@ libLIB_LOGGING.a:
 
 /usr/include/bits/signum-generic.h:
 
-/usr/include/gnu/stubs-64.h:
-
 /usr/include/asm/socket.h:
 
 /usr/include/bits/sigstksz.h:
 
 /usr/include/bits/stdint-intn.h:
+
+/usr/include/semaphore.h:
+
+/usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/bits/stdio_lim.h:
 
 /usr/include/bits/types/struct_timeval.h:
 
@@ -398,14 +415,6 @@ libLIB_LOGGING.a:
 /usr/include/bits/types/__fpos64_t.h:
 
 /usr/include/bits/types/__locale_t.h:
-
-/usr/include/semaphore.h:
-
-/usr/include/bits/time.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/types/__mbstate_t.h:
 
 /usr/include/bits/types/__fpos_t.h:
 

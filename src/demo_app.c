@@ -91,10 +91,13 @@ void initClient() {
 
 void setupUserInfos() {
 
-	char 		pseudo[PSEUDO_SIZE];
-	userRole_t 	role;
-	char *		fgetsResult;
-	int 		scanfResult;
+	char 				pseudo[PSEUDO_SIZE];
+	userRole_t 			role;
+	unsigned short		port;
+
+	char *				fgetsResult;
+	int 				scanfResult;
+
 
 	printf("\nConfiguration du profil utilisateur:\n");
 	
@@ -124,14 +127,34 @@ void setupUserInfos() {
 
 	} while (role != PLAYER && role != HOST);
 
+
+	self.role = role;
+
 	if (role == HOST) {
 
 		strcpy(self.address, "0.0.0.0");
-		self.port = 4000;
+		
+		do {
+
+			printf("Port (2000-20000): ");
+			scanfResult = scanf("%hu", &port);
+
+			if (scanfResult == EOF) {
+				printf("\nDon't CTRL+D please...\n");
+				clearerr(stdin);
+			}
+
+		} while (port < 2000 || port > 20000);
+
+		self.port = port;
+
+	} else {
+
+		self.port = 0;
 
 	}
-
-	self.role = HOST;
+	
+	getIpAddress(self.address);
 
 }
 
@@ -184,6 +207,7 @@ void client (char *adrIP, unsigned short port) {
 	char 				userIP[USER_BUFFER_SIZE];
 	short				userPort;
 	eCltThreadParams_t	*params;
+	int 				result;
 
 	initClient();
 
@@ -211,12 +235,11 @@ void client (char *adrIP, unsigned short port) {
 
 
 
-
-
-	if (sem_wait(&semCanClose) == -1 && errno != EINTR) {
-		perror("sem_wait()");
-		exit(EXIT_FAILURE);
-	}
+	// s'assure qu'on ait bien pu fermer la connexion
+	// avant de fermer le client
+	do {
+		result = sem_wait(&semCanClose);
+	} while (result == -1 && errno == EINTR);
 
 	// Fermer la socket d'appel
 	CHECK(shutdown(sockAppel.fd, SHUT_WR),"-- PB shutdown() --");

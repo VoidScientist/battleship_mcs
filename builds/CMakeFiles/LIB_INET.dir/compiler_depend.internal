@@ -29,6 +29,7 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o
  /usr/include/bits/in.h
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
+ /usr/include/bits/netdb.h
  /usr/include/bits/posix_opt.h
  /usr/include/bits/pthreadtypes-arch.h
  /usr/include/bits/pthreadtypes.h
@@ -79,7 +80,9 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/data.c.o
  /usr/include/libgen.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
+ /usr/include/netdb.h
  /usr/include/netinet/in.h
+ /usr/include/rpc/netdb.h
  /usr/include/stdc-predef.h
  /usr/include/stdio.h
  /usr/include/stdlib.h
@@ -120,6 +123,7 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o
  /usr/include/bits/in.h
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
+ /usr/include/bits/netdb.h
  /usr/include/bits/posix_opt.h
  /usr/include/bits/pthreadtypes-arch.h
  /usr/include/bits/pthreadtypes.h
@@ -169,7 +173,9 @@ CMakeFiles/LIB_INET.dir/src/inet_lib/session.c.o
  /usr/include/gnu/stubs.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
+ /usr/include/netdb.h
  /usr/include/netinet/in.h
+ /usr/include/rpc/netdb.h
  /usr/include/stdc-predef.h
  /usr/include/stdio.h
  /usr/include/stdlib.h

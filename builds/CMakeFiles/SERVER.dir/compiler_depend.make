@@ -32,6 +32,7 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o: /home/voidscientist/Dévelo
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthread_stack_min.h \
@@ -111,8 +112,10 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o: /home/voidscientist/Dévelo
   /usr/include/libgen.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
   /usr/include/pthread.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/sched.h \
   /usr/include/semaphore.h \
   /usr/include/signal.h \
@@ -177,7 +180,13 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/include/stdarg.h:
 
+/usr/include/unistd.h:
+
 /usr/include/bits/stdint-uintn.h:
+
+/usr/include/time.h:
+
+/usr/include/bits/socket.h:
 
 /usr/include/bits/types/cookie_io_functions_t.h:
 
@@ -201,6 +210,10 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o:
 
 /usr/include/bits/types/struct_sigstack.h:
 
+/usr/include/sys/ucontext.h:
+
+/usr/include/bits/signal_ext.h:
+
 /usr/include/bits/types/struct_timeval.h:
 
 /usr/include/bits/siginfo-consts.h:
@@ -218,8 +231,6 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o:
 /usr/include/bits/sigstksz.h:
 
 /usr/include/asm/socket.h:
-
-/usr/include/bits/types/__FILE.h:
 
 /usr/include/bits/semaphore.h:
 
@@ -244,6 +255,16 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o:
 /usr/include/bits/long-double.h:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h:
+
+/usr/include/bits/netdb.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/semaphore.h:
+
+/usr/include/bits/types/__mbstate_t.h:
 
 /usr/include/bits/floatn.h:
 
@@ -282,10 +303,6 @@ libLIB_LOGGING.a:
 /usr/include/bits/types/struct_sched_param.h:
 
 /usr/include/bits/waitflags.h:
-
-/usr/include/bits/signal_ext.h:
-
-/usr/include/sys/ucontext.h:
 
 /usr/include/alloca.h:
 
@@ -333,6 +350,8 @@ libLIB_LOGGING.a:
 
 /usr/include/bits/getopt_posix.h:
 
+/usr/include/bits/types/__FILE.h:
+
 /usr/include/bits/struct_mutex.h:
 
 /usr/include/bits/types/time_t.h:
@@ -352,14 +371,6 @@ libLIB_LOGGING.a:
 /usr/include/bits/types/__locale_t.h:
 
 /usr/include/sched.h:
-
-/usr/include/bits/time.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/semaphore.h:
-
-/usr/include/bits/types/__mbstate_t.h:
 
 /usr/include/bits/types/__fpos_t.h:
 
@@ -419,9 +430,13 @@ libLIB_INET.a:
 
 /usr/include/libgen.h:
 
+/usr/include/netdb.h:
+
 /usr/include/netinet/in.h:
 
 /usr/include/pthread.h:
+
+/usr/include/rpc/netdb.h:
 
 /usr/include/signal.h:
 
@@ -432,9 +447,3 @@ libLIB_INET.a:
 /usr/include/sys/socket.h:
 
 /usr/include/sys/cdefs.h:
-
-/usr/include/bits/socket.h:
-
-/usr/include/time.h:
-
-/usr/include/unistd.h:

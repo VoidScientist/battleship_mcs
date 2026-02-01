@@ -33,6 +33,7 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o
  /usr/include/bits/in.h
  /usr/include/bits/libc-header-start.h
  /usr/include/bits/long-double.h
+ /usr/include/bits/netdb.h
  /usr/include/bits/posix_opt.h
  /usr/include/bits/pthread_stack_min-dynamic.h
  /usr/include/bits/pthread_stack_min.h
@@ -112,8 +113,10 @@ CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o
  /usr/include/libgen.h
  /usr/include/linux/posix_types.h
  /usr/include/linux/stddef.h
+ /usr/include/netdb.h
  /usr/include/netinet/in.h
  /usr/include/pthread.h
+ /usr/include/rpc/netdb.h
  /usr/include/sched.h
  /usr/include/semaphore.h
  /usr/include/signal.h

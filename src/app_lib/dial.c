@@ -1,6 +1,6 @@
 /**
- *	\file		dial.h
- *	\brief		Fichier en-tête représentant les dialogues applicatifs
+ *	\file		dial.c
+ *	\brief		Fichier implémentation représentant les dialogues applicatifs
  *	\author		ARCELON Louis
  *	\date		28 janvier 2026
  *	\version	1.0
@@ -53,16 +53,17 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 
 	// logMessage("Client: %s, %d, %s, %d\n", DEBUG, infos->name, infos->role, infos->address, infos->port);
 
-
 	status = enum2status(REQ, CONNECT);
 	sendRequest(sockAppel, status, POST, infos, (pFct) clientInfo2str);
 	
 
 	rcvResponse(sockAppel, &response);
 	if (response.id != enum2status(ACK, CONNECT)) {
-		logMessage("[%d] Failed to connect: %s.\n", DEBUG, response.id, response.data);
+		logMessage("[%d] Connexion échouée: %s.\n", DEBUG, response.id, response.data);
 		sem_post(semCanClose);
 		return;
+	} else {
+		logMessage("[%d] Connexion réussie: %s.\n", DEBUG, response.id, response.data);
 	}
 
 

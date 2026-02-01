@@ -66,6 +66,7 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: /home/voidscientist/Développement/
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -135,7 +136,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o: /home/voidscientist/Développement/
   /usr/include/gnu/stubs.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/semaphore.h \
   /usr/include/signal.h \
   /usr/include/stdc-predef.h \
@@ -185,6 +188,7 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
   /usr/include/bits/in.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/netdb.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -234,7 +238,9 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
   /usr/include/gnu/stubs.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
+  /usr/include/netdb.h \
   /usr/include/netinet/in.h \
+  /usr/include/rpc/netdb.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
@@ -259,7 +265,11 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 
 /usr/include/signal.h:
 
+/usr/include/rpc/netdb.h:
+
 /usr/include/netinet/in.h:
+
+/usr/include/netdb.h:
 
 /usr/include/sys/types.h:
 
@@ -396,6 +406,8 @@ CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o: /home/voidscientist/Développemen
 /usr/include/bits/stdlib-float.h:
 
 /usr/include/bits/types/__FILE.h:
+
+/usr/include/bits/netdb.h:
 
 /usr/include/bits/types/__mbstate_t.h:
 
