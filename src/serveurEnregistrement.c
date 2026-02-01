@@ -28,15 +28,13 @@
  *	\def		PORT_SRV
  *	\brief		Numéro de port par défaut du serveur
  */
-#define PORT_SRV	50000
+#define PORT_SRV			50000
+#define MAX_CLIENTS 		64
+#define DISPLAY_SLEEP 		0.1e9
 
-#define MAX_CLIENTS 64
-
-#define DISPLAY_SLEEP 0.1e9
-
-#define DISPLAY_HEADER_FMT "| %-15s | %-15s | %-15s | %-15s | %-5s |\n"
-#define DISPLAY_FMT "| %-15s | %-15s | %-15s | %-15s | %-5d |\n"
-#define DISPLAY_SEP "+-------------------------------------------------------------------------------+\n"
+#define DISPLAY_HEADER_FMT 	"| %-15s | %-15s | %-15s | %-15s | %-5s |\n"
+#define DISPLAY_FMT 		"| %-15s | %-15s | %-15s | %-15s | %-5d |\n"
+#define DISPLAY_SEP 		"+-------------------------------------------------------------------------------+\n"
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -166,16 +164,16 @@ void displayClient() {
 
 			switch (clients[i].status) {
 
-				case DISCONNECTED: continue;
-				case CONNECTING: status = "CONNECTING"; break;
-				case CONNECTED: status 	= "CONNECTED"; break;
+				case DISCONNECTED: 	continue;
+				case CONNECTING: 	status 		= "CONNECTING"; break;
+				case CONNECTED: 	status 		= "CONNECTED"; 	break;
 
 			}
 
 			switch (clients[i].role) {
 
-				case PLAYER: role 	= "PLAYER"; break;
-				case HOST: role 	= "HOST"; break;
+				case PLAYER: 		role 	= "PLAYER"; break;
+				case HOST: 			role 	= "HOST"; 	break;
 
 			}
 

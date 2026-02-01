@@ -236,6 +236,30 @@ src/app_lib/dial.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.s
 .PHONY : src/app_lib/dial.c.s
 
+src/app_lib/interface.o: src/app_lib/interface.c.o
+.PHONY : src/app_lib/interface.o
+
+# target to build an object file
+src/app_lib/interface.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o
+.PHONY : src/app_lib/interface.c.o
+
+src/app_lib/interface.i: src/app_lib/interface.c.i
+.PHONY : src/app_lib/interface.i
+
+# target to preprocess a source file
+src/app_lib/interface.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.i
+.PHONY : src/app_lib/interface.c.i
+
+src/app_lib/interface.s: src/app_lib/interface.c.s
+.PHONY : src/app_lib/interface.s
+
+# target to generate assembly for a file
+src/app_lib/interface.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LIB_APP.dir/build.make CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.s
+.PHONY : src/app_lib/interface.c.s
+
 src/app_lib/protocol.o: src/app_lib/protocol.c.o
 .PHONY : src/app_lib/protocol.o
 
@@ -424,6 +448,9 @@ help:
 	@echo "... src/app_lib/dial.o"
 	@echo "... src/app_lib/dial.i"
 	@echo "... src/app_lib/dial.s"
+	@echo "... src/app_lib/interface.o"
+	@echo "... src/app_lib/interface.i"
+	@echo "... src/app_lib/interface.s"
 	@echo "... src/app_lib/protocol.o"
 	@echo "... src/app_lib/protocol.i"
 	@echo "... src/app_lib/protocol.s"

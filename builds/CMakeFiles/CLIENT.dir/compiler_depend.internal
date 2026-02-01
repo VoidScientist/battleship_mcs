@@ -23,6 +23,7 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/interface.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h

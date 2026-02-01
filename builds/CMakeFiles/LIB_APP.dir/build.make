@@ -128,12 +128,27 @@ CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/datastructs.c -o CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.s
 
+CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: CMakeFiles/LIB_APP.dir/flags.make
+CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/interface.c
+CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o: CMakeFiles/LIB_APP.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o -MF CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o.d -o CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o -c /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/interface.c
+
+CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/interface.c > CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.i
+
+CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/interface.c -o CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.s
+
 # Object files for target LIB_APP
 LIB_APP_OBJECTS = \
 "CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o" \
 "CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o" \
 "CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o" \
-"CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o"
+"CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o" \
+"CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o"
 
 # External object files for target LIB_APP
 LIB_APP_EXTERNAL_OBJECTS =
@@ -142,9 +157,10 @@ libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/repReq.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/dial.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/protocol.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/datastructs.c.o
+libLIB_APP.a: CMakeFiles/LIB_APP.dir/src/app_lib/interface.c.o
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/build.make
 libLIB_APP.a: CMakeFiles/LIB_APP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C static library libLIB_APP.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/voidscientist/Développement/C/260123_battleship_mcs/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C static library libLIB_APP.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/LIB_APP.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LIB_APP.dir/link.txt --verbose=$(VERBOSE)
 

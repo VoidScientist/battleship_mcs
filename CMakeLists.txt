@@ -39,11 +39,13 @@ add_library(
 	"${LIB_APP_PATH}/include/dial.h"
 	"${LIB_APP_PATH}/include/protocol.h"
 	"${LIB_APP_PATH}/include/datastructs.h"
+	"${LIB_APP_PATH}/include/interface.h"
 
 	"${LIB_APP_PATH}/repReq.c"
 	"${LIB_APP_PATH}/dial.c"
 	"${LIB_APP_PATH}/protocol.c"
 	"${LIB_APP_PATH}/datastructs.c"
+	"${LIB_APP_PATH}/interface.c"
 )
 target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
 target_link_libraries(LIB_APP PUBLIC LIB_INET)

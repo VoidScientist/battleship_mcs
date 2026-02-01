@@ -78,4 +78,5 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: \
  /usr/include/arpa/inet.h \
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h \
- /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h \
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/interface.h

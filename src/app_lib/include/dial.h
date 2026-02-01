@@ -84,4 +84,14 @@ void dialSrvE2Clt(eServThreadParams_t *params);
  */
 void handleResponseSrvE2Clt();
 
+
+/**
+ * @brief      Envoie une requête via un flag et attends une sémaphore.
+ *
+ * @param      reqVar     Flag de la requête
+ * @param      semReqAck  Sémaphore d'attente
+ */
+void postRequest(int *reqVar, sem_t *semReqAck);
+
+
 #endif /* DIAL_H */

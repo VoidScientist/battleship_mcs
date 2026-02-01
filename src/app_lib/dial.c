@@ -140,7 +140,7 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
  */
 void dialSrvE2Clt(eServThreadParams_t *params) {
 
-	int running					= 1;
+	int 			running		= 1;
 
 	int 			id 			= params->id;
 	socket_t 		*sockDial 	= params->sockDial;
@@ -213,7 +213,7 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 						if (sent > MAX_HOSTS_GET) break;
 
-						if (clients[i].role == HOST) {
+						if (clients[i].role == HOST && clients[i].status == CONNECTED) {
 
 							status = enum2status(ACK, CONNECT);
 							sendResponse(sockDial, status, &clients[i], (pFct) clientInfo2str);
@@ -247,5 +247,21 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 	// supprimer la socket_t du heap
 	free(sockDial);
+
+}
+
+
+
+/**
+ * @brief      Envoie une requête via un flag et attends une sémaphore.
+ *
+ * @param      reqVar     Flag de la requête
+ * @param      semReqAck  Sémaphore d'attente
+ */
+void postRequest(int *reqVar, sem_t *semReqAck) {
+
+	*reqVar = 1;
+	sem_wait(semReqAck);
+	*reqVar = 0;
 
 }

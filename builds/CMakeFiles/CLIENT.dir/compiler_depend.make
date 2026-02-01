@@ -21,6 +21,7 @@ CLIENT: /lib64/ld-linux-x86-64.so.2 \
 CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260123_battleship_mcs/src/demo_app.c \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/dial.h \
+  /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/interface.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/repReq.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/data.h \
   /home/voidscientist/Développement/C/260123_battleship_mcs/src/inet_lib/include/session.h \
@@ -236,6 +237,10 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 
 /usr/include/bits/floatn-common.h:
 
+/usr/include/features.h:
+
+/usr/include/bits/endianness.h:
+
 /usr/include/bits/endian.h:
 
 /usr/include/bits/types/__sigval_t.h:
@@ -258,12 +263,6 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 
 /usr/include/bits/signal_ext.h:
 
-/usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
-
-/usr/include/asm/bitsperlong.h:
-
-/usr/include/bits/sigcontext.h:
-
 /usr/include/bits/semaphore.h:
 
 /usr/include/bits/pthread_stack_min.h:
@@ -273,8 +272,6 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o: /home/voidscientist/Développement/C/260
 /usr/include/bits/environments.h:
 
 CMakeFiles/CLIENT.dir/src/demo_app.c.o:
-
-/usr/include/bits/select.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
@@ -328,6 +325,12 @@ CMakeFiles/CLIENT.dir/src/demo_app.c.o:
 
 /usr/include/bits/types/locale_t.h:
 
+/usr/include/asm/bitsperlong.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/15/libgcc_s.so:
+
+/usr/include/bits/sigcontext.h:
+
 libLIB_APP.a:
 
 /home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/datastructs.h:
@@ -342,9 +345,9 @@ libLIB_APP.a:
 
 /usr/include/asm-generic/errno.h:
 
-/usr/include/bits/thread-shared-types.h:
-
 /usr/include/features-time64.h:
+
+/usr/include/bits/thread-shared-types.h:
 
 /usr/include/bits/pthread_stack_min-dynamic.h:
 
@@ -368,7 +371,11 @@ libLIB_LOGGING.a:
 
 /usr/include/asm-generic/bitsperlong.h:
 
+/home/voidscientist/Développement/C/260123_battleship_mcs/src/app_lib/include/interface.h:
+
 /usr/include/arpa/inet.h:
+
+/usr/include/bits/select.h:
 
 /usr/lib/gcc/x86_64-redhat-linux/15/crtend.o:
 
@@ -461,7 +468,3 @@ libLIB_INET.a:
 /usr/include/bits/waitstatus.h:
 
 /usr/include/bits/wordsize.h:
-
-/usr/include/bits/endianness.h:
-
-/usr/include/features.h:

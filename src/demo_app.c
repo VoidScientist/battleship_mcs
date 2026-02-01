@@ -15,6 +15,7 @@
 
 #include <dial.h>
 #include <datastructs.h>
+#include <interface.h>
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
@@ -29,8 +30,6 @@
  *	\brief		Numéro de port par défaut du serveur
  */
 #define PORT_SRV	50000
-
-#define USER_BUFFER_SIZE 100
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   M A C R O S
@@ -87,117 +86,17 @@ void initClient() {
 
 
 	CHECK(sem_init(&semCanClose, 0, 0), "sem_init()");
-	CHECK(sem_init(&semRequestFin, 0, 0), "sem_init()"); 
+	CHECK(sem_init(&semRequestFin, 0, 0), "sem_init()");
 
-}
-
-
-void setupUserInfos() {
-
-	char 				pseudo[PSEUDO_SIZE];
-	userRole_t 			role;
-	unsigned short		port;
-
-	char *				fgetsResult;
-	int 				scanfResult;
-
-
-	printf("\nConfiguration du profil utilisateur:\n");
-	
-	do {
-
-		printf("Nom d'utilisateur (3-10 chars): ");
-		fgetsResult = fgets(pseudo, PSEUDO_SIZE, stdin);
-		sscanf(pseudo, "%[^\n]\n", pseudo);
-		
-		if (fgetsResult == NULL) {
-			printf("\nDon't CTRL+D please...\n");
-			clearerr(stdin);
-		}
-
-	} while (strlen(pseudo) < 3);
-
-	strcpy(self.name, pseudo);
-
-	do {
-		printf("Role (0: PLAYER, 1: HOST): ");
-		scanfResult = scanf("%d", &role);
-
-		if (scanfResult == EOF) {
-			printf("\nDon't CTRL+D please...\n");
-			clearerr(stdin);
-		}
-
-	} while (role != PLAYER && role != HOST);
-
-
-	self.role = role;
-
-	if (role == HOST) {
-
-		strcpy(self.address, "0.0.0.0");
-		
-		do {
-
-			printf("Port (2000-20000): ");
-			scanfResult = scanf("%hu", &port);
-
-			if (scanfResult == EOF) {
-				printf("\nDon't CTRL+D please...\n");
-				clearerr(stdin);
-			}
-
-		} while (port < 2000 || port > 20000);
-
-		self.port = port;
-
-	} else {
-
-		self.port = 0;
-
-	}
-	
-	getIpAddress(self.address);
-
-}
-
-
-void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort) {
-
-	char 	buffer[USER_BUFFER_SIZE];
-	char	*fgetsResult;
-	int 	matched;
-
-	printf("\nConnexion au serveur d'écoute:\n");
-	printf("Adresse Applicative (%s:%d): ", adrIP, port);
-	
-
-	fgetsResult = fgets(buffer, USER_BUFFER_SIZE, stdin);
-
-	if (fgetsResult == NULL) {
-		printf("\nErreur de lecture, utilisation des valeurs par défaut...\n");
-		strcpy(userIP, adrIP);
-		*userPort = port;
-		return;
-	}
-
-	if (buffer[0] == '\n') {
-		printf("Utilisation des valeurs par défaut...\n");
-		strcpy(userIP, adrIP);
-		*userPort = port;
-		return;
-	}
-
-	matched = sscanf(buffer, "%[^:]:%hd\n", userIP, userPort);
-
-	if (matched != 2) {
-		printf("Mauvais format, utilisation des valeurs par défaut...\n");
-		strcpy(userIP, adrIP);
-		*userPort = port;
-		return;
+	// initialise les hôtes avec des valeurs pour éviter
+	// de lire n'importe quoi.
+	for (int i = 0; i < MAX_HOSTS_GET; i++) {
+		createClientInfo(&hosts[i], "", 0, "", 0);
+		hosts[i].status 	= DISCONNECTED;
 	}
 
 }
+
 
 /**
  *	\fn			void client (char *adrIP, int port)
@@ -216,7 +115,7 @@ void client (char *adrIP, unsigned short port) {
 
 	getSrvEAddress(adrIP, port, userIP, &userPort);
 
-	setupUserInfos();
+	setupUserInfos(&self);
 
 	// Créer une connexion avec le serveur
 	sockAppel = connecterClt2Srv (userIP, userPort);
@@ -232,16 +131,11 @@ void client (char *adrIP, unsigned short port) {
 	pthread_create(&dialServE, 0, (void*)(void *) dialClt2SrvE, params);
 
 
-	// get hosts.
-	requestHosts = 1;
-	sem_wait(&semRequestFin);
+	postRequest(&requestHosts, &semRequestFin);
 
-	printf("Current hosts:\n");
-	for (int i = 0; i < MAX_HOSTS_GET; i++) {
 
-		printf("\t%s\n",hosts[i].name);
-
-	}
+	displayHosts(hosts, MAX_HOSTS_GET);
+	
 
 
 
