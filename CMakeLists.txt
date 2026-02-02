@@ -55,12 +55,11 @@ add_library(
 )
 target_include_directories(LIB_GAME PUBLIC "${LIB_GAME_PATH}/include")
 
-add_executable(SERVER "${SRC}/serveurEnregistrement.c")
-target_link_libraries(SERVER LIB_APP LIB_GAME)
+add_executable(server "${SRC}/serveurEnregistrement.c")
+target_link_libraries(server LIB_APP LIB_GAME)
 
-add_executable(CLIENT "${SRC}/demo_app.c")
-target_compile_definitions(CLIENT PRIVATE CLIENT)
-target_link_libraries(CLIENT LIB_APP LIB_GAME)
+add_executable(client "${SRC}/client_louis.c")
+target_link_libraries(client LIB_APP LIB_GAME)
 
-add_executable(CLIENT_FINAL "${SRC}/client.c")
-target_link_libraries(CLIENT_FINAL LIB_GAME LIB_APP)
+add_executable(client_mat "${SRC}/client.c")
+target_link_libraries(client_mat LIB_GAME LIB_APP)
