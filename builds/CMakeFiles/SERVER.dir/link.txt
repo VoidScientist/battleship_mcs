@@ -1,1 +1,0 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/SERVER.dir/link.d CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o -o SERVER  libLIB_APP.a libLIB_GAME.a libLIB_INET.a libLIB_LOGGING.a

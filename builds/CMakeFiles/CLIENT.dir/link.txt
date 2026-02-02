@@ -1,1 +1,0 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/CLIENT.dir/link.d CMakeFiles/CLIENT.dir/src/demo_app.c.o -o CLIENT  libLIB_APP.a libLIB_GAME.a libLIB_INET.a libLIB_LOGGING.a

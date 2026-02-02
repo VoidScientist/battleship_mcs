@@ -40,14 +40,32 @@ typedef struct {
 typedef enum {MAIN_MENU, JOIN_MENU} menuState_t;
 
 
+/**
+ * @brief      demande à l'utilisateur les informations pour compléter son profil
+ *
+ * @param      infos  pointeur vers les infos client
+ */
 void setupUserInfos(clientInfo_t *infos);
-
+/**
+ * @brief      Demande à l'utilisateur l'adresse applicative du serveur 
+ * 			   d'enregistrement ou utilise celle par défaut.
+ *
+ * @param[in]   adrIP     l'adresse ip par défaut
+ * @param[in]  	port      le port par défaut
+ * @param[out]  userIP    pointeur vers la variable qui sera utilisée comme adresse IP
+ * @param[out]  userPort  pointeur vers la variable qui sera utilisée comme port
+ */
 void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort);
 
 void displayHosts(clientInfo_t *hosts, int amount);
 
 void displayPlayerMenu(playerMenuParams_t params);
-
+/**
+ * @brief      Récupère une entrée dans stdin avec des sécurités
+ *
+ * @param      fmt        Format d'entrée
+ * @param[in]  <unnamed>  { les pointeurs des variables dans lesquelles stocker les entrées }
+ */
 int retrieveInput(char *fmt, ...);
 
 int saferFgets(char *buffer, int size);
@@ -61,7 +79,7 @@ int saferVsscanf(char *buff, char *fmt, va_list args);
  * \param      fmt   Le format
  * \param[in]  size  La taille du buffer (avec \0)
  *
- * \result     Le nombre de correspondances attendu.
+ * \return     Le nombre de correspondances attendu.
  */
 int calculateExpectedFromFmt(char *fmt, int size);
 
