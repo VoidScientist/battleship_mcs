@@ -150,6 +150,7 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 void dialSrvE2Clt(eServThreadParams_t *params) {
 
 	int 			running		= 1;
+	int 			current	 	= 0;
 
 	int 			id 			= params->id;
 	socket_t 		*sockDial 	= params->sockDial;
@@ -218,7 +219,7 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 
 					int found = 0;
 
-					for (int i = 0; i < clientAmount; i++) {
+					for (int i = current; i < clientAmount; i++) {
 
 						if (clients[i].role == HOST && clients[i].status == CONNECTED) {
 
@@ -226,6 +227,7 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 							sendResponse(sockDial, status, &clients[i], (pFct) clientInfo2str);
 
 							found   = 1;
+							current = i+1;
 
 						}
 
@@ -235,6 +237,7 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 					
 						status 	= enum2status(ERR, CONNECT);
 						sendResponse(sockDial, status, "", NULL);
+						current = 0;
 					
 					}
 
