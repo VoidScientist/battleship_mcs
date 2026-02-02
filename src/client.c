@@ -143,7 +143,7 @@ void initClient() {
  */
 void client(char *adrIP, unsigned short port) {
 
-	char 				userIP[USER_BUFFER_SIZE];
+	char 				userIP[INPUT_BUFFER_SIZE];
 	short				userPort;
 	eCltThreadParams_t	*params;
 	playerMenuParams_t	menuParams;
