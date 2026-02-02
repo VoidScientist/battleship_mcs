@@ -22,10 +22,10 @@
 *****************************************************************************************
  *	\noop		I N C L U D E S   S P E C I F I Q U E S
  */
-#include "game_logic/include/bataille_navale.h"
-#include "game_logic/include/affichage.h"
-#include "game_logic/include/logic.h"
-#include "game_logic/include/structSerial.h"
+#include "bataille_navale.h"
+#include "affichage.h"
+#include "logic.h"
+#include "structSerial.h"
 
 #include <dial.h>
 #include <datastructs.h>
@@ -58,6 +58,9 @@ char 			*progName;
 // Serveur d'enregistrement
 socket_t 		sockEnregistrement;
 clientInfo_t 	self;
+/**
+ * @brief       liste d'hôtes maintenue par le client 
+ */
 clientInfo_t	hosts[MAX_HOSTS_GET];
 sem_t			semCanClose;
 sem_t 			semRequestFin;
@@ -95,16 +98,15 @@ int             attendsResultatTir = 0;
  */
 
 /**
- *	\fn			void onSignal(int code)
- *	\brief		Gestionnaire de signal SIGINT
+ * @brief      fonction de gestion des signaux
+ *
+ * @param[in]  code  code du signal
  */
 void onSignal(int code) {
 	mustDisconnect = code == SIGINT;
 }
-
 /**
- *	\fn			void onExit()
- *	\brief		Fonction appelée à la sortie du programme
+ * @brief      fonction à appeler pour fermer le client proprement
  */
 void onExit() {
 	int result;
@@ -123,10 +125,8 @@ void onExit() {
 	
 	exit(EXIT_SUCCESS);
 }
-
 /**
- *	\fn			void initClient()
- *	\brief		Initialise le client (signaux, sémaphores)
+ * @brief      initialisation du client (sémaphores, signaux etc...)
  */
 void initClient() {
 	struct sigaction sa;
