@@ -118,7 +118,7 @@ void setupUserInfos(clientInfo_t *infos) {
 
     infos->role 	= role;
     infos->port 	= port;
-    
+
 }
 
 
@@ -250,7 +250,7 @@ void displayHosts(clientInfo_t *hosts, int amount) {
 	for (int i = 0; i < amount; i++) {
 
 		if (hosts[i].role == HOST) {
-			printf("║    [ %d ]   %-10s   ║\n", i+1, hosts[i].name);
+			printf("║     %2d.    %-10s   ║\n", i+1, hosts[i].name);
 			printf("║                         ║\n");
 		}
 
