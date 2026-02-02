@@ -16,6 +16,7 @@ typedef enum {GET, POST, DELETE} verb_t;
 typedef enum {REQ, ACK, ERR} statusRange_t;
 
 typedef enum {CONNECT, CELL, GAME, CURRENT_PLAYER} action_t;
+
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S

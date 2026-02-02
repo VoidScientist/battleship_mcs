@@ -61,6 +61,11 @@ socket_t creerSocketAdr (int mode, char *adrIP, short port) {
 	socket_t newSocket = creerSocket(mode);
 
 	adr2struct(&newSocket.addrLoc, adrIP, port);
+
+	// permet de relancer une socket d'écoute à la même addresse
+	// directement après fin de programme.
+	int opt = 1;
+	setsockopt(newSocket.fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 	
 	CHECK(
 		bind(newSocket.fd
@@ -165,3 +170,20 @@ socket_t connecterClt2Srv (char *adrIP, short port) {
 	
 }
 
+
+void getIpAddress(char *ipBuffer) {
+
+	char hostbuffer[256];
+    struct hostent *host_entry;
+    int hostname;
+
+    hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+
+    host_entry = gethostbyname(hostbuffer);
+
+    strcpy(
+    	ipBuffer
+    	, inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0]))
+    );
+
+}

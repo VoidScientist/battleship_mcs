@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <netdb.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -100,5 +101,6 @@ socket_t accepterClt (const socket_t sockEcoute);
  */
 socket_t connecterClt2Srv (char *adrIP, short port);
 
+void getIpAddress(char *ipBuffer);
 
 #endif /* SESSION_H */
