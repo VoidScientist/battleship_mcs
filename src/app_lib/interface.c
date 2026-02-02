@@ -16,8 +16,10 @@
 
 #include "dial.h"
 #include "interface.h"
-
-
+/*
+*****************************************************************************************
+ *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
+ */
 /**
  * @brief      demande à l'utilisateur les informations pour compléter son profil
  *
@@ -125,8 +127,6 @@ void setupUserInfos(clientInfo_t *infos) {
     infos->port 	= port;
 
 }
-
-
 /**
  * @brief      Demande à l'utilisateur l'adresse applicative du serveur 
  * 			   d'enregistrement ou utilise celle par défaut.
@@ -154,16 +154,11 @@ void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userP
     
     printf("Connexion à %s:%d\n", userIP, *userPort);
 }
-
-
-
 /**
  * @brief      Récupère une entrée dans stdin avec des sécurités
  *
- * @param      fmt        Format d'entrée
- * @param[in]  <unnamed>  { les pointeurs des variables dans lesquelles stocker les entrées }
- *
- * @return     L'entrée.
+ * @param      fmt      Format d'entrée
+ * @param[in]  ...      les pointeurs des variables dans lesquelles stocker les entrées
  */
 int retrieveInput(char *fmt, ...) {
 
@@ -190,8 +185,6 @@ int retrieveInput(char *fmt, ...) {
 	return STEP_SUCCESS;
 
 }
-
-
 /**
  * @brief      Calcule le nombre d'entrées attendues à partir d'un format
  *
@@ -222,9 +215,16 @@ int calculateExpectedFromFmt(char *fmt, int size) {
 	return amount;
 
 }
-
-
-
+/**
+ * @brief      Récupère des entrées depuis un format, un string et les
+ *             stock dans les pointeurs (avec des sécurités)
+ *
+ * @param      buff  le buffer dans lequel récupérer les données
+ * @param      fmt   le format
+ * @param[in]  args  les pointeurs
+ *
+ * @return     STEP_SUCCESS en cas de réussite sinon VSSCANF_ERROR
+ */
 int saferVsscanf(char *buff, char *fmt, va_list args) {
 
 	int 	expected, matched;
@@ -239,11 +239,14 @@ int saferVsscanf(char *buff, char *fmt, va_list args) {
 	return STEP_SUCCESS;
 
 }
-
-
-
-
-
+/**
+ * @brief      fonctions permettant de récupérer une ligne dans stdin.
+ *
+ * @param      buffer  le buffer dans lequel stocker la ligne
+ * @param[in]  size    la taille du buffer
+ *
+ * @return     retourne STEP_SUCCESS, USE_DEFAULT ou FGETS_ERROR 
+ */
 int saferFgets(char *buffer, int size) {
 
 	char 	*readResult;
@@ -264,9 +267,12 @@ int saferFgets(char *buffer, int size) {
 	return STEP_SUCCESS;
 
 }
-
-
-
+/**
+ * @brief      Affiche une liste d'hôtes dans le terminal
+ *
+ * @param      hosts   les hôtes à afficher
+ * @param[in]  amount  la taille de `hosts`
+ */
 void displayHosts(clientInfo_t *hosts, int amount) {
 
 	if (getHostsAmount(hosts, amount) == 0) return;
@@ -287,9 +293,11 @@ void displayHosts(clientInfo_t *hosts, int amount) {
 
 
 }
-
-
-
+/**
+ * @brief      affiche les menus dans le terminal avec une machine à états
+ *
+ * @param[in]  params  paramètres utiles aux menus (callbacks etc...)
+ */
 void displayPlayerMenu(playerMenuParams_t params) {
 
 	int 		running 	= 1;
@@ -310,9 +318,12 @@ void displayPlayerMenu(playerMenuParams_t params) {
 	}
 
 }
-
-
-
+/**
+ * @brief      affiche le menu principal
+ *
+ * @param[in]  params  les paramètres utiles au menu (callbacks etc...)
+ * @param      state   pointeur de l'état de la MEF du menu
+ */
 void displayMainMenu(playerMenuParams_t params, menuState_t *state) {
 
 	int 	result;
@@ -362,9 +373,12 @@ void displayMainMenu(playerMenuParams_t params, menuState_t *state) {
 	} while (action != 1 && action != 2);
 
 }
-
-
-
+/**
+ * @brief      affiche le menu des hôtes
+ *
+ * @param[in]  params  les paramètres utiles au menu (callbacks etc...)
+ * @param      state   pointeur de l'état de la MEF du menu
+ */
 void displayJoinMenu(playerMenuParams_t params, menuState_t *state) {
 
 	int 	result;
