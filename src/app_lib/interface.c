@@ -18,6 +18,11 @@
 #include "interface.h"
 
 
+/**
+ * @brief      demande à l'utilisateur les informations pour compléter son profil
+ *
+ * @param      infos  pointeur vers les infos client
+ */
 void setupUserInfos(clientInfo_t *infos) {
 
     int                 result;
@@ -122,7 +127,15 @@ void setupUserInfos(clientInfo_t *infos) {
 }
 
 
-
+/**
+ * @brief      Demande à l'utilisateur l'adresse applicative du serveur 
+ * 			   d'enregistrement ou utilise celle par défaut.
+ *
+ * @param[in]	adrIP     l'adresse ip par défaut
+ * @param[in]  	port      le port par défaut
+ * @param[out]  userIP    pointeur vers la variable qui sera utilisée comme adresse IP
+ * @param[out]  userPort  pointeur vers la variable qui sera utilisée comme port
+ */
 void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userPort) {
     int result;
     
@@ -144,7 +157,14 @@ void getSrvEAddress(char* adrIP, unsigned short port, char *userIP, short *userP
 
 
 
-
+/**
+ * @brief      Récupère une entrée dans stdin avec des sécurités
+ *
+ * @param      fmt        Format d'entrée
+ * @param[in]  <unnamed>  { les pointeurs des variables dans lesquelles stocker les entrées }
+ *
+ * @return     L'entrée.
+ */
 int retrieveInput(char *fmt, ...) {
 
 	char 		buffer[INPUT_BUFFER_SIZE];
@@ -172,7 +192,14 @@ int retrieveInput(char *fmt, ...) {
 }
 
 
-
+/**
+ * @brief      Calcule le nombre d'entrées attendues à partir d'un format
+ *
+ * @param      fmt   Le format
+ * @param[in]  size  La taille du string
+ *
+ * @return     Le nombre d'entrée attendues.
+ */
 int calculateExpectedFromFmt(char *fmt, int size) {
 
 	int 	amount	= 0;
