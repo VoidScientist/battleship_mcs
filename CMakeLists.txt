@@ -51,9 +51,9 @@ target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
 target_link_libraries(LIB_APP PUBLIC LIB_INET)
 
 
-add_executable(SERVER "${SRC}/serveurEnregistrement.c")
-target_link_libraries(SERVER LIB_APP)
+add_executable(server "${SRC}/serveurEnregistrement.c")
+target_link_libraries(server LIB_APP)
 
-add_executable(CLIENT "${SRC}/demo_app.c")
-target_compile_definitions(CLIENT PRIVATE CLIENT)
-target_link_libraries(CLIENT LIB_APP)
+add_executable(client "${SRC}/client.c")
+target_compile_definitions(client PRIVATE CLIENT)
+target_link_libraries(client LIB_APP)
