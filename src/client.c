@@ -1,5 +1,5 @@
 /**
- *	\file		demo_app.c
+ *	\file		client.c
  *	\brief		Client de l'application
  *	\author		ARCELON Louis
  *	\date		1 février 2026
@@ -53,30 +53,49 @@
  *	\var		progName
  *	\brief		Nom de l'exécutable : libnet nécessite cette variable qui pointe sur argv[0]
  */
-
 char 			*progName;
+/**
+ * @brief 		id du thread de dialogue avec le serveur d'enregistrement
+ */
 pthread_t 		dialServE;
-
+/**
+ * @brief 		socket_t d'appel avec le serveur d'enregistrement
+ */	
 socket_t 		sockAppel;	// socket d'appel
-
+/**
+ * @brief  		sémaphore représentant la capacité de fermeture du programme
+ */
 sem_t			semCanClose;
+/**
+ * @brief		sémaphore permettant d'attendre la fin d'une requête
+ */
 sem_t 			semRequestFin;
-
+/**
+ * @brief       informations sur le client
+ */
 clientInfo_t 	self;
+/**
+ * @brief       liste d'hôtes maintenue par le client 
+ */
 clientInfo_t	hosts[MAX_HOSTS_GET];
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
 
-
+/**
+ * @brief      fonction de gestion des signaux
+ *
+ * @param[in]  code  code du signal
+ */
 void onSignal(int code) {
 
 	mustDisconnect = code == SIGINT;
 
 }
-
-
+/**
+ * @brief      fonction à appeler pour fermer le client proprement
+ */
 void onExit() {
 
 	int result;
@@ -97,8 +116,9 @@ void onExit() {
 	exit(EXIT_SUCCESS);
 
 }
-
-
+/**
+ * @brief     nettoyage, requêtes et affichage des hôtes
+ */
 void onDisplayHosts() {
 
 	for (int i = 0; i < MAX_HOSTS_GET; i++) {
@@ -110,9 +130,9 @@ void onDisplayHosts() {
 	displayHosts(hosts, MAX_HOSTS_GET);
 
 }
-
-
-
+/**
+ * @brief      initialisation du client (sémaphores, signaux etc...)
+ */
 void initClient() {
 
 	struct sigaction sa;
@@ -136,7 +156,7 @@ void initClient() {
 
 
 /**
- *	\fn			void client (char *adrIP, int port)
+ *	\fn			void client (char *adrIP, unsigned short port)
  *	\brief		lance un client STREAM connecté à l'adresse applicative adrIP:port 
  *	\param 		adrIP : adresse IP du serveur à connecter
  *	\param 		port : port du serveur à connecter

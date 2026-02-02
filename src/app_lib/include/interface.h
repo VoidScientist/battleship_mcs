@@ -21,33 +21,33 @@
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
  */
 /**
- * taille des buffer d'entrées utilisateur
+ * @brief 	taille des buffer d'entrées utilisateur
  */
 #define INPUT_BUFFER_SIZE	256
 /**
- * port par défaut choisi par l'interface
+ * @brief 	port par défaut choisi par l'interface
  */
 #define DEFAULT_PORT		15500
 /**
- * code de succès des fonctions d'entrées
+ * @brief 	code de succès des fonctions d'entrées
  */
 #define STEP_SUCCESS		0
 /**
- * code renvoyé lorsque fgets plante
+ * @brief 	code renvoyé lorsque fgets plante
  */
 #define FGETS_ERROR			-1
 /**
- * code renvoyé lorsque l'utilisateur fais une action qui 
- * implique choisir les valeurs par défaut
+ * @brief 	code renvoyé lorsque l'utilisateur fais une action qui 
+ * 			implique choisir les valeurs par défaut
  */
 #define USE_DEFAULT			-2
 /**
- * code renvoyé quand vsscanf rencontre une erreur
+ * @brief 	code renvoyé quand vsscanf rencontre une erreur
  */
 #define VSSCANF_ERROR		-3
 /**
- * code d'erreur lorsque l'on rencontre un problème
- * de détermination du nombre de valeurs attendues par un format
+ * @brief 	code d'erreur lorsque l'on rencontre un problème
+ * 			de détermination du nombre de valeurs attendues par un format
  */
 #define EXPECT_ERROR		-4
 /*
@@ -55,22 +55,24 @@
  *	\noop		S T R C T U R E S   DE   D O N N E E S
  */
 /**
- * type de fonction utilisé pour les callbacks des menus
+ * @brief      type de fonction utilisé pour les callbacks des menus
  */
 typedef void (*callback)();
 /**
- * Paramètres à fournir au menu pour son bon fonctionnement.
+ * @brief      Paramètres à fournir au menu pour son bon fonctionnement.
  */
 typedef struct {
 
+	/// callback d'affichage des hôtes
 	callback 		showHosts;
+	/// callback de fermeture du programme
 	callback 		exitProgram;
-
+	/// pointeur vers la liste d'hôtes maintenue par le client
 	clientInfo_t	*hosts;
 	
 } playerMenuParams_t;
 /**
- * Enum d'états possibles du menu. (pages)
+ * @brief 	Enum d'états possibles du menu. (pages)
  */
 typedef enum {MAIN_MENU, JOIN_MENU} menuState_t;
 /*

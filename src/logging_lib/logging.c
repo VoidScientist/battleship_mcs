@@ -1,6 +1,6 @@
 /**
- *	\file		session.h
- *	\brief		Spécification de la couche Session
+ *	\file		logging.c
+ *	\brief		implémentation de la lib de logging
  *	\author		ARCELON Louis
  *	\date		7 janvier 2026
  *	\version	1.0

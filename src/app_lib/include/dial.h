@@ -16,74 +16,85 @@
 #include "data.h"
 #include "repReq.h"
 #include "datastructs.h"
-
-
+/*
+*****************************************************************************************
+ *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
+ */
+/**
+ * @brief      maximum d'hôtes récupérables dans une commande CONNECT GET 
+ */
 #define MAX_HOSTS_GET 10
-
-
+/*
+*****************************************************************************************
+ *	\noop		S T R C T U R E S   DE   D O N N E E S
+ */
+/**
+ * @brief     	structure contenant les paramètres requis au dialogue du serveur 
+ * 				d'enregistrement vers un client.
+ */
 typedef struct {
 
-	int 			id;
+	/** id du thread, permet de stocker les infos client au bon endroit */
+	int 			id; 			
+	/** pointeur vers une structure socket_t pour le dialogue */
 	socket_t 		*sockDial;
+	/** tableau de clients pour envoi et modification (seulement clientArray[id] */
 	clientInfo_t 	*clientArray;
+	/** nombre de clients (max) */
 	int 			clientAmount;
+	/** callback de terminaison de thread */
 	void 			(*terminationCallback)(int);
+	/** fonction pour vérifier si le thread peut accepter l'utilisateur */
 	int 			(*canAccept)();
 
 } eServThreadParams_t;
-
-
+/**
+ * @brief      structure de paramètres de dialogue client vers serveur enregistrement.
+ */
 typedef struct {
 
+	/** socket d'appel du client */
 	socket_t 		*sockAppel;
+	/** pointeur vers les infos du client */
 	clientInfo_t	*infos;
+	/** tableau d'hôtes joignables du client */
 	clientInfo_t	*hostBuffer;
+	/** sémaphore permettant d'autoriser le client à se terminer */
 	sem_t 			*semCanClose;
+	/** sémaphore signalant la fin d'une requête */
 	sem_t 			*semRequestFin;
 
 } eCltThreadParams_t;
-
-
-
+/**
+ * @brief 	flag de déconnexion, fais pour être appelé dans un traitement de signal.
+ */
 extern volatile sig_atomic_t mustDisconnect;
-
+/**
+ * @brief 	flag de récupération des hôtes. {CONNECT GET}
+ */
 extern int requestHosts;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S
  */
 /**
- * \fn 			dialCltE2SrvE()
  * \brief       fonction s'occupant du dialogue entre le client et le serveur d'enregistrement
  * 
- * \param		sockAppel		structure socket_t contenant le descripteur
- * 								de fichier de la socket d'appel
+ * \param		params   		eCltThreadParams_t contenant les paramètres pour
+ * 								le dialogue. Doit être alloué avec `malloc()`
  * 
  * \note 		s'occupe donc de l'envoi de requêtes et réception de réponses
  */
 void dialClt2SrvE(eCltThreadParams_t *params);
 /**
- * \fn 			dialSrvE2Clt()
  * \brief       fonction s'occupant du dialogue entre le serveur d'enregistrement et le client
  * 
  * \param		*params		structure eServThreadParams contenant les paramètres
- * 								pour le dialogue. Doit être alloué avec malloc()
+ * 								pour le dialogue. Doit être alloué avec `malloc()`
  * 
  * \note		s'occupe donc de l'envoi de réponses et réception de réponses
  */
 void dialSrvE2Clt(eServThreadParams_t *params);
-
-/**
- * \fn 			dialSrv2Clt()
- * \brief       fonction s'occupant du dialogue entre le serveur d'enregistrement et le client
- * 
- * \param		*params		structure eServThreadParams contenant les paramètres
- * 								pour le dialogue. Doit être alloué avec malloc()
- * 
- * \note		s'occupe donc de l'envoi de réponses et réception de réponses
- */
-void handleResponseSrvE2Clt();
-
 
 /**
  * \brief      Envoie une requête via un flag et attends une sémaphore.

@@ -100,7 +100,11 @@ socket_t accepterClt (const socket_t sockEcoute);
  *	\result		socket connectée au serveur fourni en paramètre
  */
 socket_t connecterClt2Srv (char *adrIP, short port);
-
+/**
+ * @brief      récupère l'adresse IPv4 LAN du client
+ *
+ * @param      ipBuffer  le buffer à remplir avec l'adresse IPv4
+ */
 void getIpAddress(char *ipBuffer);
 
 #endif /* SESSION_H */
