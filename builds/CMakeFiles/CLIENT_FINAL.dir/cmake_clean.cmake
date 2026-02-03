@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/CLIENT_FINAL.dir/link.d"
   "CLIENT_FINAL"
   "CLIENT_FINAL.pdb"
   "CMakeFiles/CLIENT_FINAL.dir/src/client.c.o"

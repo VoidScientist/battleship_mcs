@@ -1,17 +1,13 @@
 CMakeFiles/LIB_GAME.dir/src/game_logic/logic.c.o: \
- /home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/src/game_logic/logic.c \
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/game_logic/logic.c \
  /usr/include/stdc-predef.h /usr/include/string.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/features-time64.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/timesize.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/bits/libc-header-start.h /usr/include/features.h \
+ /usr/include/features-time64.h /usr/include/bits/wordsize.h \
+ /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-redhat-linux/15/include/stddef.h \
+ /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
  /usr/include/strings.h \
- /home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/src/game_logic/include/logic.h \
- /home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/src/game_logic/include/bataille_navale.h
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/game_logic/include/logic.h \
+ /home/voidscientist/Développement/C/260123_battleship_mcs/src/game_logic/include/bataille_navale.h

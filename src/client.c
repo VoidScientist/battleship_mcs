@@ -38,10 +38,10 @@
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
  */
-#define IP_SERV_ENR		"127.0.0.1"
+#define IP_SERV_ENR		"0.0.0.0"
 #define PORT_SERV_ENR	50000
 #define PORT_JEU		50001
-#define MAX_JOUEURS 10
+#define MAX_JOUEURS     10
 
 /*
 *****************************************************************************************
@@ -497,7 +497,7 @@ void lancerModeHost() {
 	Equipe *monEquipe = monEquipeId == 0 ? &jeu.equipeA : &jeu.equipeB;
 	ajouter_joueur(monEquipe, self.name);
 	
-	gCltThreadParams_t *params = malloc(sizeof(gCltThreadParams_t));
+	gCltThreadParams_t *params  = malloc(sizeof(gCltThreadParams_t));
 	params->sockAppel 			= &sockJeu;
 	params->equipeId 			= &monEquipeId;
 	params->dernierResultat 	= &dernierResultat;
@@ -684,13 +684,13 @@ void client(char *adrIP, unsigned short port) {
 	if (choix == 1) {
 		self.role = HOST;
 		self.port = PORT_JEU;
-		strcpy(self.address, "127.0.0.1");
-		self.status = CONNECTED;
+		getIpAddress(self.address);
+		self.status = CONNECTING;
 	} else {
 		self.role = PLAYER;
 		self.port = 0;
-		strcpy(self.address, "");
-		self.status = CONNECTED;
+		getIpAddress(self.address);
+		self.status = CONNECTING;
 	}
 	
 	printf("\nConnexion au serveur d'enregistrement...\n");

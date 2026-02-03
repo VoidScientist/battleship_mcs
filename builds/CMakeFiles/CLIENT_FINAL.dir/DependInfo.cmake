@@ -8,15 +8,16 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/src/client.c" "CMakeFiles/CLIENT_FINAL.dir/src/client.c.o" "gcc" "CMakeFiles/CLIENT_FINAL.dir/src/client.c.o.d"
+  "/home/voidscientist/Développement/C/260123_battleship_mcs/src/client.c" "CMakeFiles/CLIENT_FINAL.dir/src/client.c.o" "gcc" "CMakeFiles/CLIENT_FINAL.dir/src/client.c.o.d"
+  "" "CLIENT_FINAL" "gcc" "CMakeFiles/CLIENT_FINAL.dir/link.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/builds/CMakeFiles/LIB_GAME.dir/DependInfo.cmake"
-  "/home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/builds/CMakeFiles/LIB_APP.dir/DependInfo.cmake"
-  "/home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/builds/CMakeFiles/LIB_INET.dir/DependInfo.cmake"
-  "/home/martel/Documents/LE3/MCS/PROJET/battleship_mcs/builds/CMakeFiles/LIB_LOGGING.dir/DependInfo.cmake"
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.
