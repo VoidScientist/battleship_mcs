@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/CLIENT_FINAL.dir/src/client.c.o -o CLIENT_FINAL  libLIB_GAME.a libLIB_APP.a libLIB_INET.a libLIB_LOGGING.a 

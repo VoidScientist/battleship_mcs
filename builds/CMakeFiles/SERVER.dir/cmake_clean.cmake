@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/SERVER.dir/link.d"
   "CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o"
   "CMakeFiles/SERVER.dir/src/serveurEnregistrement.c.o.d"
   "SERVER"

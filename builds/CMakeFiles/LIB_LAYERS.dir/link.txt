@@ -1,2 +1,0 @@
-/usr/bin/ar qc libLIB_LAYERS.a CMakeFiles/LIB_LAYERS.dir/src/layers_lib/session.c.o CMakeFiles/LIB_LAYERS.dir/src/layers_lib/logging.c.o CMakeFiles/LIB_LAYERS.dir/src/layers_lib/data.c.o CMakeFiles/LIB_LAYERS.dir/src/layers_lib/repReq.c.o
-/usr/bin/ranlib libLIB_LAYERS.a

@@ -15,7 +15,7 @@ typedef enum {GET, POST, DELETE} verb_t;
 
 typedef enum {REQ, ACK, ERR} statusRange_t;
 
-typedef enum {CONNECT, CELL, GAME, CURRENT_PLAYER} action_t;
+typedef enum {CONNECT, CELL, GAME, CURRENT_PLAYER, PLACE, SHOOT, NEXT_TURN, END_GAME, START_GAME} action_t;
 
 /*
 *****************************************************************************************

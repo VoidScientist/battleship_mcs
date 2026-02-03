@@ -134,6 +134,7 @@ Resultat tirer(Grille *cible, int vue[TAILLE][TAILLE], int ligne, int col) {
     
     if(EST_BATEAU(valeur_case)) {
         resultat.touche = 1;
+        resultat.id_coule = valeur_case;
         cible->cases[ligne][col] = TOUCHE(valeur_case);
         vue[ligne][col] = TOUCHE(valeur_case);
         
@@ -143,7 +144,6 @@ Resultat tirer(Grille *cible, int vue[TAILLE][TAILLE], int ligne, int col) {
             if(bateau->touches >= bateau->longueur) {
                 bateau->coule = 1;
                 resultat.coule = 1;
-                resultat.id_coule = valeur_case;
                 cible->nb_coules++;
             }
         }

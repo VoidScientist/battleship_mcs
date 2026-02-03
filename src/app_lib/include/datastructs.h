@@ -24,7 +24,7 @@ typedef struct {
 	userStatus_t status;
 	userRole_t role;
 	char address[ADDR_SIZE];
-	short port;
+	unsigned short port;
 
 } clientInfo_t;
 

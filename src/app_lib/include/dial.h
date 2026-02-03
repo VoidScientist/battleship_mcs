@@ -16,6 +16,9 @@
 #include "data.h"
 #include "repReq.h"
 #include "datastructs.h"
+#include "../../game_logic/include/bataille_navale.h"
+#include "../../game_logic/include/logic.h"
+#include "../../game_logic/include/structSerial.h"
 
 
 #define MAX_HOSTS_GET 10
@@ -44,6 +47,34 @@ typedef struct {
 } eCltThreadParams_t;
 
 
+typedef struct {
+	int 				equipeId;
+	int 				numeroJoueur;
+	socket_t 			*sockDial;
+	Jeu 				*jeu;
+	socket_t 			*clientsSockets;
+	int 				*nbClientsConnectes;
+	int 				*phasePlacementTermine;
+	pthread_mutex_t 	*mutexJeu;
+} gServThreadParams_t;
+
+
+typedef struct {
+	socket_t 				*sockAppel;
+	int 					*equipeId;
+	Resultat 				*dernierResultat;
+	Tour 					*tourActuel;
+	sem_t 					*semCanClose;
+	sem_t 					*semPlacementOk;
+	sem_t 					*semTirResultat;
+	sem_t 					*semTourActuel;
+	sem_t					*semStartGame;
+	sem_t					*semTourPlacement;
+	int						*monTourPlacement;
+	Jeu						*jeu;
+	int                     *attendsResultatTir;
+	volatile sig_atomic_t 	*partieTerminee;
+} gCltThreadParams_t;
 
 extern volatile sig_atomic_t mustDisconnect;
 
@@ -84,6 +115,21 @@ void dialSrvE2Clt(eServThreadParams_t *params);
  */
 void handleResponseSrvE2Clt();
 
+/**
+ * \fn 			dialClt2SrvG()
+ * \brief       Dialogue entre le client et le serveur de jeu
+ * 
+ * \param		params		Paramètres du thread client de jeu
+ */
+void dialClt2SrvG(gCltThreadParams_t *params);
+
+/**
+ * \fn 			dialSrvG2Clt()
+ * \brief       Dialogue entre le serveur de jeu et le client
+ * 
+ * \param		params		Paramètres du thread serveur de jeu
+ */
+void dialSrvG2Clt(gServThreadParams_t *params);
 
 /**
  * \brief      Envoie une requête via un flag et attends une sémaphore.

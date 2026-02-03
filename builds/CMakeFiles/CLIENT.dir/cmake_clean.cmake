@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CLIENT.dir/link.d"
   "CLIENT"
   "CLIENT.pdb"
   "CMakeFiles/CLIENT.dir/src/demo_app.c.o"
