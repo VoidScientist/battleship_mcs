@@ -29,11 +29,25 @@
  *	\brief		Numéro de port par défaut du serveur
  */
 #define PORT_SRV			50000
+/**
+ * @brief clients maximum supportés par le serveur d'enregistrement
+ */	
 #define MAX_CLIENTS 		64
+/**
+ * @brief temps de rafraichissement entre les affichages des clients
+ */
 #define DISPLAY_SLEEP 		0.1e9
-
+/**
+ * @brief format de "header" du tableau des clients
+ */
 #define DISPLAY_HEADER_FMT 	"| %-15s | %-15s | %-15s | %-15s | %-5s |\n"
+/**
+ * @brief format d'affichage des clients dans le tableau
+ */
 #define DISPLAY_FMT 		"| %-15s | %-15s | %-15s | %-15s | %-5d |\n"
+/**
+ * @brief séparateur du tableau
+ */
 #define DISPLAY_SEP 		"+-------------------------------------------------------------------------------+\n"
 /*
 *****************************************************************************************
@@ -59,23 +73,38 @@
  *	\brief		Nom de l'exécutable : libnet nécessite cette variable qui pointe sur argv[0]
  */
 char 			*progName;
-
-socket_t 		sockEcoute;		// socket d'écoute de demande de connexion d'un client
-
+/**
+ * @brief socket d'écoute de demande de connexion d'un client
+ */
+socket_t 		sockEcoute;		
+/**
+ * @brief liste des MAX_CLIENTS infos clients du serveur d'enregistrement
+ */
 clientInfo_t 	clients[MAX_CLIENTS];
+/**
+ * @brief curseur des clients, pointe vers une position libre
+ */
 int 			currentClient = 0;
-
+/**
+ * @brief id du thread d'affichage
+ */
 pthread_t 		displayThread;
+/**
+ * @brief flag de départ de l'affichage
+ */
 int 			startDisplay = 0;
-
+/**
+ * @brief flag d'arrêt du serveur, fait pour être changé dans des traitements de signaux
+ */
 volatile sig_atomic_t stopServer = 0;
 
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
-
-
+/**
+ * @brief      fonction de fermeture du serveur
+ */
 void bye() {
 
 	// Fermer la socket d'écoute
@@ -84,15 +113,19 @@ void bye() {
 	printf("Goodbye.\n");
 
 }
-
-
+/**
+ * @brief      Fonction de traitement des signaux
+ *
+ * @param[in]  code  code du signal
+ */
 void onSignal(int code) {
 
 	stopServer = code == SIGINT;
 
 }
-
-
+/**
+ * @brief      Fonction d'initialisation du serveur
+ */
 void initServer() {
 
 	atexit(bye);
@@ -104,15 +137,21 @@ void initServer() {
 	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction();");
 
 }
-
-
+/**
+ * @brief      Fonction qui vérifie s'il est possible d'accepter un client
+ *
+ * @return     1 si capable d'accepter, 0 sinon
+ */
 int canAccept() {
 
 	return currentClient < MAX_CLIENTS;
 
 }
-
-
+/**
+ * @brief      mets à jour le curseur de position libre d'infos clients 
+ *
+ * @param      current  pointeur vers le curseur
+ */
 void updateCurrentClient(int *current) {
 
 	for (int i = 0; i < MAX_CLIENTS; i++) {
@@ -129,15 +168,19 @@ void updateCurrentClient(int *current) {
 	*current = MAX_CLIENTS + 1;
 
 }
-
-
+/**
+ * @brief      callback de déconnexion client
+ *
+ * @param[in]  id    l'identifiant du client qui vient de se déconnecter
+ */
 void disconnectClient(int id) {
 
 	updateCurrentClient(&currentClient);
 
 }
-
-
+/**
+ * @brief      Fonction d'affichage des clients dans le terminal
+ */
 void displayClient() {
 
 	struct timespec ts;
@@ -243,8 +286,14 @@ void serveur (char *adrIP, int port) {
 
 }
 
-
-int main(int argc, char **argv) {
+/**
+ * @brief      Point d'entrée du program
+ *
+ * @param[in]  argc  The count of arguments
+ * @param      argv  The arguments array
+ *
+ */
+void main(int argc, char **argv) {
 
 	progName = argv[0];
 

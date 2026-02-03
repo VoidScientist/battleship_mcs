@@ -13,31 +13,25 @@
 #include "datastructs.h"
 /*
 *****************************************************************************************
- *	\noop		D E F I N I T I O N   DES   M A C R O S
+ *	\noop		D E C L A R A T I O N   DES   V A R I A B L E S    G L O B A L E S
  */
 /**
- *	\def		PAUSE(msg)
- *	\brief		Macro-fonction qui affiche msg et attend une entrée clavier  
+ * flag de déconnexion, fais pour être appelé dans un traitement de signal.
  */
-#define PAUSE(msg)	printf("%s [Appuyez sur entrée pour continuer]", msg); getchar();
-
-
-
 volatile sig_atomic_t mustDisconnect = 0;
-
+/**
+ * flag de récupération des hôtes. {CONNECT GET}
+ */
 int requestHosts;
-
-
 /*
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
 /**
- * \fn 			dialCltE2Srv()
  * \brief       fonction s'occupant du dialogue entre le client et le serveur d'enregistrement
  * 
- * \param		sockAppel		structure socket_t contenant le descripteur
- * 								de fichier de la socket d'appel
+ * \param		params   		eCltThreadParams_t contenant les paramètres pour
+ * 								le dialogue. Doit être alloué avec `malloc()`
  * 
  * \note 		s'occupe donc de l'envoi de requêtes et réception de réponses
  */
@@ -137,11 +131,10 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 
 }
 /**
- * \fn 			dialSrv2Clt()
  * \brief       fonction s'occupant du dialogue entre le serveur d'enregistrement et le client
  * 
- * \param		sockDial		structure socket_t contenant les informations
- * 								sur la socket de dialogue avec le client
+ * \param		*params		structure eServThreadParams contenant les paramètres
+ * 								pour le dialogue. Doit être alloué avec `malloc()`
  * 
  * \note		s'occupe donc de l'envoi de réponses et réception de réponses
  */
