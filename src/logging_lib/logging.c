@@ -11,7 +11,13 @@
 *****************************************************************************************
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
-
+/**
+ * @brief      fonction de logging
+ *
+ * @param      msg        message
+ * @param[in]  level      niveau de logging
+ * @param[in]  <unnamed>  paramètres à afficher
+ */
 void logMessage(char *msg, loglevel_t level, ...) {
 
 	va_list va;

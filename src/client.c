@@ -18,10 +18,10 @@
 #include <errno.h>
 #include <unistd.h>
 
-#include "game_logic/include/bataille_navale.h"
-#include "game_logic/include/affichage.h"
-#include "game_logic/include/logic.h"
-#include "game_logic/include/structSerial.h"
+#include "bataille_navale.h"
+#include "affichage.h"
+#include "logic.h"
+#include "structSerial.h"
 
 #include <dial.h>
 #include <datastructs.h>
@@ -155,7 +155,9 @@ void afficherInfosPartie() {
  *	\brief		Gestionnaire de signal SIGINT
  */
 void onSignal(int code) {
+
 	mustDisconnect = code == SIGINT;
+
 }
 
 /**
@@ -214,6 +216,7 @@ void initClient() {
  *	\brief		Fonction de nettoyage à la sortie
  */
 void onExit() {
+
 	int result;
 	
 	mustDisconnect = 1;
@@ -251,15 +254,18 @@ void envoyerPlacement(Placement *placement) {
  *	\brief		Envoie un tir au serveur et attend le résultat
  */
 Resultat envoyerTir(int ligne, int col) {
+	
+	int status = enum2status(REQ, SHOOT);
 	Tir tir = {
-		.ligne = ligne,
-		.col = col,
-		.equipe_id = monEquipeId
+
+		.ligne 		= ligne,
+		.col 		= col,
+		.equipe_id 	= monEquipeId
+	
 	};
 	
 	attendsResultatTir = 1;
 	
-	int status = enum2status(REQ, SHOOT);
 	sendRequest(&sockJeu, status, POST, &tir, (pFct)tir2str);
 	
 	sem_wait(&semTirResultat);
@@ -274,10 +280,14 @@ Resultat envoyerTir(int ligne, int col) {
  *	\brief		Envoie un message à tous les membres d'une équipe
  */
 void envoyerMessageEquipe(int equipeId, int tourStatus, Tour *tour) {
+
 	for (int i = equipeId; i < nbClientsConnectes; i += 2) {
+	
 		sendResponse(&clientsSockets[i], tourStatus, tour, (pFct)tour2str);
 		usleep(DELAY_MESSAGE_US);
+	
 	}
+
 }
 
 /**
@@ -285,11 +295,14 @@ void envoyerMessageEquipe(int equipeId, int tourStatus, Tour *tour) {
  *	\brief		Envoie le signal START_GAME à tous les clients
  */
 void envoyerSignalStartGame() {
+	
 	int status = enum2status(ACK, START_GAME);
+	
 	for (int i = 0; i < nbClientsConnectes; i++) {
 		sendResponse(&clientsSockets[i], status, "GO", NULL);
 		usleep(DELAY_MESSAGE_US);
 	}
+	
 	sleep(DELAY_START_GAME);
 }
 
@@ -298,6 +311,7 @@ void envoyerSignalStartGame() {
  *	\brief		Envoie les signaux de début de placement aux deux équipes
  */
 void envoyerSignauxPlacement() {
+	
 	int tourStatus = enum2status(ACK, NEXT_TURN);
 	
 	Tour tourEquipeA = {EQUIPE_A, 0, 0};
@@ -305,6 +319,7 @@ void envoyerSignauxPlacement() {
 	
 	envoyerMessageEquipe(EQUIPE_A, tourStatus, &tourEquipeA);
 	envoyerMessageEquipe(EQUIPE_B, tourStatus, &tourEquipeB);
+
 }
 
 /**
@@ -312,10 +327,12 @@ void envoyerSignauxPlacement() {
  *	\brief		Envoie tous les signaux de démarrage de partie
  */
 void envoyerSignauxDemarrage() {
+
 	pthread_mutex_lock(&mutexJeu);
 	envoyerSignalStartGame();
 	envoyerSignauxPlacement();
 	pthread_mutex_unlock(&mutexJeu);
+
 }
 
 /*
@@ -328,21 +345,23 @@ void envoyerSignauxDemarrage() {
  *	\brief		Lit et valide un placement de bateau
  */
 int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
-	int bateaux_ids[] = {2, 3, 4, 5, 6};
-	int bateaux_longueurs[] = {5, 4, 3, 3, 2};
+
+	Orientation orient;
+	int 	bateaux_ids[] 		= {2, 3, 4, 5, 6};
+	int 	bateaux_longueurs[] = {5, 4, 3, 3, 2};
+	int 	ligne, col;
+	char 	orient_char;
 	
 	clear_screen();
 	printf("\n=== Placement %s ===\n", equipe->nom);
 	printf("\n=== C'EST VOTRE TOUR ! ===\n");
-	printf("\nBateau %d/%d (longueur %d)\n", numBateau + 1, NB_BATEAUX, 
-	       bateaux_longueurs[numBateau]);
+	printf("\nBateau %d/%d (longueur %d)\n", numBateau + 1, NB_BATEAUX, bateaux_longueurs[numBateau]);
+
 	afficher_equipe(equipe);
 	
-	int ligne, col;
-	char orient_char;
+	orient = (orient_char == 'H') ? HORIZONTAL : VERTICAL;
 	lire_bateau(&ligne, &col, &orient_char);
 	
-	Orientation orient = (orient_char == 'H') ? HORIZONTAL : VERTICAL;
 	
 	if (placer_bateau(&equipe->grille, bateaux_ids[numBateau], 
 	                   bateaux_longueurs[numBateau], ligne, col, orient)) {
@@ -362,12 +381,14 @@ int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
  *	\brief		Gère le placement d'un bateau
  */
 void placerUnBateau(Equipe *equipe, int numBateau) {
+	
+	Placement placement;
+	int ok = 0;
+	
 	printf("En attente de votre tour de placement...\n");
 	sem_wait(&semTourPlacement);
 	
-	int ok = 0;
 	while (!ok) {
-		Placement placement;
 		if (lirePlacement(equipe, numBateau, &placement)) {
 			envoyerPlacement(&placement);
 			printf("Bateau place avec succes !\n");
@@ -486,6 +507,7 @@ void jouerReseau(Jeu *jeu) {
  *	\brief		Thread d'écoute du serveur de jeu
  */
 void *threadServeurJeu(void *params) {
+	
 	init_jeu(&jeuServeur);
 	printf("Serveur de jeu en ecoute sur le port %d\n", PORT_JEU);
 	
@@ -776,6 +798,8 @@ void lancerModePlayer() {
 		return;
 	}
 	
+
+	// ça on a pas => à greffer à ce que j'ai
 	clientInfo_t *host = selectionnerHost(nbHosts);
 	if (!host) {
 		printf("Erreur: HOST non trouve\n");

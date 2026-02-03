@@ -19,8 +19,6 @@
 #include "bataille_navale.h"
 #include "logic.h"
 #include "structSerial.h"
-
-
 /*
 *****************************************************************************************
  *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
