@@ -661,7 +661,7 @@ void lancerModePlayer() {
  */
 void client(char *adrIP, unsigned short port) {
 	
-	char userIP[USER_BUFFER_SIZE];
+	char userIP[INPUT_BUFFER_SIZE];
 	short userPort;
 	int choix;
 	

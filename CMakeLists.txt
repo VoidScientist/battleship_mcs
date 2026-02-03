@@ -27,6 +27,21 @@ add_library(
 target_include_directories(LIB_INET PUBLIC "${LIB_INET_PATH}/include")
 target_link_libraries(LIB_INET PUBLIC LIB_LOGGING)
 
+
+add_library(
+	LIB_GAME
+	"${LIB_GAME_PATH}/include/bataille_navale.h"
+	"${LIB_GAME_PATH}/include/affichage.h"
+	"${LIB_GAME_PATH}/include/logic.h"
+	"${LIB_GAME_PATH}/include/structSerial.h"
+	"${LIB_GAME_PATH}/logic.c"
+	"${LIB_GAME_PATH}/affichage.c"
+	"${LIB_GAME_PATH}/structSerial.c"
+)
+target_include_directories(LIB_GAME PUBLIC "${LIB_GAME_PATH}/include")
+
+
+
 add_library(
 	LIB_APP
 	"${LIB_APP_PATH}/include/repReq.h"
@@ -42,24 +57,14 @@ add_library(
 )
 target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
 target_link_libraries(LIB_APP PUBLIC LIB_INET)
+target_link_libraries(LIB_APP PUBLIC LIB_GAME)
 
-add_library(
-	LIB_GAME
-	"${LIB_GAME_PATH}/include/bataille_navale.h"
-	"${LIB_GAME_PATH}/include/affichage.h"
-	"${LIB_GAME_PATH}/include/logic.h"
-	"${LIB_GAME_PATH}/include/structSerial.h"
-	"${LIB_GAME_PATH}/logic.c"
-	"${LIB_GAME_PATH}/affichage.c"
-	"${LIB_GAME_PATH}/structSerial.c"
-)
-target_include_directories(LIB_GAME PUBLIC "${LIB_GAME_PATH}/include")
 
 add_executable(server "${SRC}/serveurEnregistrement.c")
-target_link_libraries(server LIB_APP LIB_GAME)
+target_link_libraries(server LIB_APP LIB_APP)
 
 add_executable(client "${SRC}/client_louis.c")
-target_link_libraries(client LIB_APP LIB_GAME)
+target_link_libraries(client LIB_GAME LIB_APP)
 
 add_executable(client_mat "${SRC}/client.c")
-target_link_libraries(client_mat LIB_GAME LIB_APP)
+target_link_libraries(client_mat LIB_APP LIB_APP)
