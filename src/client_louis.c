@@ -121,12 +121,10 @@ void onExit() {
  */
 void onDisplayHosts() {
 
-	for (int i = 0; i < MAX_HOSTS_GET; i++) {
-		createClientInfo(&hosts[i], "", 0, "", 0);
-		hosts[i].status 	= DISCONNECTED;
-	}
+	resetClientInfoArray(hosts, MAX_HOSTS_GET);
 
 	postRequest(&requestHosts, &semRequestFin);
+	
 	displayHosts(hosts, MAX_HOSTS_GET);
 
 }
@@ -167,6 +165,7 @@ void client(char *adrIP, unsigned short port) {
 	short				userPort;
 	eCltThreadParams_t	*params;
 	playerMenuParams_t	menuParams;
+	clientInfo_t 		chosenHost;
 	
 
 	initClient();
@@ -192,9 +191,9 @@ void client(char *adrIP, unsigned short port) {
 	menuParams.showHosts	= onDisplayHosts;
 	menuParams.exitProgram	= onExit;
 	menuParams.hosts 		= hosts;
+	menuParams.chosenHost   = &chosenHost;
 
 	displayPlayerMenu(menuParams);
-
 
 
 

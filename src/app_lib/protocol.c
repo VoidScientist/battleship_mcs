@@ -51,14 +51,11 @@ statusRange_t getStatusRange(short code) {
 action_t getAction(short code) {
 	switch (code % 100) {
 		case 1: return CONNECT;
-		case 2: return CELL;
-		case 3: return GAME;
-		case 4: return CURRENT_PLAYER;
-		case 5: return PLACE;
-		case 6: return SHOOT;
-		case 7: return NEXT_TURN;
-		case 8: return END_GAME;
-		case 9: return START_GAME;
+		case 2: return PLACE;
+		case 3: return SHOOT;
+		case 4: return NEXT_TURN;
+		case 5: return END_GAME;
+		case 6: return START_GAME;
 		default: return CONNECT;
 
 	}

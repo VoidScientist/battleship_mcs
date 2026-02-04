@@ -69,12 +69,14 @@ typedef struct {
 	callback 		exitProgram;
 	/// pointeur vers la liste d'hôtes maintenue par le client
 	clientInfo_t	*hosts;
+	/// pointeur vers l'hôte choisi
+	clientInfo_t	*chosenHost;
 	
 } playerMenuParams_t;
 /**
  * @brief 	Enum d'états possibles du menu. (pages)
  */
-typedef enum {MAIN_MENU, JOIN_MENU} menuState_t;
+typedef enum {MAIN_MENU, JOIN_MENU, CLOSE_MENU} menuState_t;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S

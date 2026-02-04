@@ -1,7 +1,7 @@
 /**
  *	\file		logic.c
  *	\brief		Fichier qui contient la logique du jeu
- *	\author		MARTEL Mathieu
+ *	\author		MARTEL Mathieu / ARCELON Louis
  *	\version	1.0
  */
 
@@ -176,4 +176,12 @@ void tour(Jeu *jeu, int ligne, int col, int *rejouer) {
     } else {
         jeu->equipe_active = 1 - jeu->equipe_active;
     }
+}
+
+/**
+ *  \fn         Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId)
+ *  \brief      Retourne l'équipe correspondant à l'ID
+ */
+Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId) {
+    return (equipeId == EQUIPE_A) ? &jeu->equipeA : &jeu->equipeB;
 }

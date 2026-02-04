@@ -35,11 +35,9 @@
  *	\noop		C O N S T A N T E S
  */
 // Réseau
-#define IP_SERV_ENR			"0.0.0.0"
+#define BIND_ALL			"0.0.0.0"
 #define PORT_SERV_ENR		50000
 #define PORT_JEU			50001
-#define LOCALHOST			"127.0.0.1"
-#define BIND_ALL			"0.0.0.0"
 
 // Limites
 #define MAX_JOUEURS			10
@@ -59,10 +57,6 @@
 #define BUFFER_SIZE			100
 #define BUFFER_SMALL		20
 
-// Équipes
-#define EQUIPE_A			0
-#define EQUIPE_B			1
-
 /*
 *****************************************************************************************
  *	\noop		M A C R O S
@@ -73,7 +67,7 @@
 *****************************************************************************************
  *	\noop		V A R I A B L E S   G L O B A L E S
  */
-char *progName;
+char 			*progName;
 
 // Serveur d'enregistrement
 socket_t 		sockEnregistrement;
@@ -81,7 +75,6 @@ clientInfo_t 	self;
 clientInfo_t	hosts[MAX_HOSTS_GET];
 sem_t			semCanClose;
 sem_t 			semRequestFin;
-pthread_t 		threadEnregistrement;
 
 // Serveur de jeu (HOST)
 Jeu				jeuServeur;
@@ -90,7 +83,6 @@ int				nbClientsConnectes = 0;
 int				phasePlacementTermine[2] = {0, 0};
 pthread_mutex_t	mutexJeu = PTHREAD_MUTEX_INITIALIZER;
 socket_t 		sockEcouteJeu;
-pthread_t 		threadEcouteJeu;
 
 // Client de jeu
 socket_t 		sockJeu;
@@ -100,7 +92,6 @@ int 			monEquipeId;
 int 			monIndexJoueur;
 Resultat 		dernierResultat;
 Tour			tourActuel;
-volatile sig_atomic_t partieTerminee = 0;
 sem_t 			semPlacementOk;
 sem_t 			semTirResultat;
 sem_t			semTourActuel;
@@ -115,31 +106,15 @@ int             attendsResultatTir = 0;
  */
 
 /**
- *	\fn			Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId)
- *	\brief		Retourne l'équipe correspondant à l'ID
- */
-Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId) {
-	return (equipeId == EQUIPE_A) ? &jeu->equipeA : &jeu->equipeB;
-}
-
-/**
- *	\fn			int estJoueurPrincipal()
- *	\brief		Vérifie si c'est le joueur principal de l'équipe
- */
-int estJoueurPrincipal() {
-	return monIndexJoueur == monEquipeId;
-}
-
-/**
  *	\fn			void afficherInfosPartie()
  *	\brief		Affiche les informations de la partie en cours
  */
-void afficherInfosPartie() {
+void afficherInfosPartie(clientInfo_t *client) {
 	printf("\n===========================================\n");
 	printf("  SERVEUR DE JEU CREE AVEC SUCCES !\n");
 	printf("===========================================\n");
-	printf("Votre IP : %s\n", self.address);
-	printf("Votre port : %d\n", self.port);
+	printf("Votre IP : %s\n", client->address);
+	printf("Votre port : %d\n", client->port);
 	printf("\nLes autres joueurs peuvent maintenant\n");
 	printf("se connecter a votre partie.\n");
 	printf("\n===========================================\n");
@@ -160,11 +135,19 @@ void onSignal(int code) {
 
 }
 
+
 /**
- *	\fn			void initSemaphores()
- *	\brief		Initialise tous les sémaphores
+ *	\fn			void initClient()
+ *	\brief		Initialise le client complet
  */
-void initSemaphores() {
+void initClient() {
+	
+	struct sigaction sa;
+	CHECK(sigemptyset(&sa.sa_mask), "sigemptyset()");
+	sa.sa_handler = onSignal;
+	sa.sa_flags   = 0;
+	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction()");
+
 	CHECK(sem_init(&semCanClose, 0, 0), "sem_init()");
 	CHECK(sem_init(&semRequestFin, 0, 0), "sem_init()");
 	CHECK(sem_init(&semPlacementOk, 0, 0), "sem_init()");
@@ -172,43 +155,11 @@ void initSemaphores() {
 	CHECK(sem_init(&semTourActuel, 0, 0), "sem_init()");
 	CHECK(sem_init(&semStartGame, 0, 0), "sem_init()");
 	CHECK(sem_init(&semTourPlacement, 0, 0), "sem_init()");
-}
-
-/**
- *	\fn			void initSignaux()
- *	\brief		Initialise la gestion des signaux
- */
-void initSignaux() {
-	struct sigaction sa;
-	CHECK(sigemptyset(&sa.sa_mask), "sigemptyset()");
-	sa.sa_handler = onSignal;
-	sa.sa_flags = 0;
-	CHECK(sigaction(SIGINT, &sa, NULL), "sigaction()");
-}
-
-/**
- *	\fn			void initHostsBuffer()
- *	\brief		Initialise le buffer des hosts
- */
-void initHostsBuffer() {
-	for (int i = 0; i < MAX_HOSTS_GET; i++) {
-		createClientInfo(&hosts[i], "", 0, "", 0);
-		hosts[i].status = DISCONNECTED;
-	}
-}
-
-/**
- *	\fn			void initClient()
- *	\brief		Initialise le client complet
- */
-void initClient() {
-	initSignaux();
-	initSemaphores();
 	
 	monTourPlacement = 0;
-	monIndexJoueur = -1;
+	monIndexJoueur 	 = -1;
 	
-	initHostsBuffer();
+	resetClientInfoArray(hosts, MAX_HOSTS_GET);
 }
 
 /**
@@ -234,6 +185,19 @@ void onExit() {
 	exit(EXIT_SUCCESS);
 }
 
+/**
+ * @brief     nettoyage, requêtes et affichage des hôtes
+ */
+void onDisplayHosts() {
+
+	resetClientInfoArray(hosts, MAX_HOSTS_GET);
+
+	postRequest(&requestHosts, &semRequestFin);
+	
+	displayHosts(hosts, MAX_HOSTS_GET);
+
+}
+
 /*
 *****************************************************************************************
  *	\noop		F O N C T I O N S   R É S E A U
@@ -245,7 +209,7 @@ void onExit() {
  */
 void envoyerPlacement(Placement *placement) {
 	int status = enum2status(REQ, PLACE);
-	sendRequest(&sockJeu, status, POST, placement, (pFct)place2str);
+	sendRequest(&sockJeu, status, POST, placement, (pFct) place2str);
 	sem_wait(&semPlacementOk);
 }
 
@@ -273,20 +237,6 @@ Resultat envoyerTir(int ligne, int col) {
 	attendsResultatTir = 0;
 	
 	return dernierResultat;
-}
-
-/**
- *	\fn			void envoyerMessageEquipe(int equipeId, int tourStatus, Tour *tour)
- *	\brief		Envoie un message à tous les membres d'une équipe
- */
-void envoyerMessageEquipe(int equipeId, int tourStatus, Tour *tour) {
-
-	for (int i = equipeId; i < nbClientsConnectes; i += 2) {
-	
-		sendResponse(&clientsSockets[i], tourStatus, tour, (pFct)tour2str);
-		usleep(DELAY_MESSAGE_US);
-	
-	}
 
 }
 
@@ -317,8 +267,8 @@ void envoyerSignauxPlacement() {
 	Tour tourEquipeA = {EQUIPE_A, 0, 0};
 	Tour tourEquipeB = {EQUIPE_B, 0, 0};
 	
-	envoyerMessageEquipe(EQUIPE_A, tourStatus, &tourEquipeA);
-	envoyerMessageEquipe(EQUIPE_B, tourStatus, &tourEquipeB);
+	envoyerAEquipe(clientsSockets, nbClientsConnectes, EQUIPE_A, tourStatus, &tourEquipeA, (pFct) tour2str);
+	envoyerAEquipe(clientsSockets, nbClientsConnectes, EQUIPE_B, tourStatus, &tourEquipeB, (pFct) tour2str);
 
 }
 
@@ -363,13 +313,14 @@ int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
 	lire_bateau(&ligne, &col, &orient_char);
 	
 	
-	if (placer_bateau(&equipe->grille, bateaux_ids[numBateau], 
-	                   bateaux_longueurs[numBateau], ligne, col, orient)) {
-		placement->id = bateaux_ids[numBateau];
-		placement->longueur = bateaux_longueurs[numBateau];
-		placement->ligne = ligne;
-		placement->col = col;
-		placement->orient = orient;
+	if (placer_bateau(&equipe->grille, bateaux_ids[numBateau], bateaux_longueurs[numBateau], ligne, col, orient)) {
+		
+		placement->id 			= bateaux_ids[numBateau];
+		placement->longueur 	= bateaux_longueurs[numBateau];
+		placement->ligne 		= ligne;
+		placement->col 			= col;
+		placement->orient 		= orient;
+		
 		return 1;
 	}
 	
@@ -445,15 +396,19 @@ void afficherResultatTir(Resultat resultat) {
  *	\brief		Exécute un tour de jeu complet
  */
 void executerTour(Equipe *equipe) {
+
+	int 		ligne, col;
+	Resultat 	resultat;
+
 	clear_screen();
 	printf("\n--- C'est votre tour ! ---\n");
 	afficher_equipe(equipe);
 	afficher_vue(equipe);
 	
-	int ligne, col;
+	
 	lire_coords(&ligne, &col);
 	
-	Resultat resultat = envoyerTir(ligne, col);
+	resultat = envoyerTir(ligne, col);
 	
 	// Mettre à jour la vue
 	equipe->vue[resultat.ligne][resultat.col] = 
@@ -476,6 +431,7 @@ void executerTour(Equipe *equipe) {
  *	\brief		Boucle principale de jeu
  */
 void jouerReseau(Jeu *jeu) {
+
 	clear_screen();
 	printf("\n=== Debut de la partie ===\n");
 	
@@ -488,7 +444,7 @@ void jouerReseau(Jeu *jeu) {
 		
 		if (partieTerminee) break;
 		
-		if (!estJoueurPrincipal()) {
+		if (monIndexJoueur != monEquipeId) {
 			printf("\nC'est au tour de votre coéquipier principal...\n");
 			continue;
 		}
@@ -507,7 +463,10 @@ void jouerReseau(Jeu *jeu) {
  *	\brief		Thread d'écoute du serveur de jeu
  */
 void *threadServeurJeu(void *params) {
-	
+
+	pthread_t thread;
+	int equipeId, numeroJoueur;
+
 	init_jeu(&jeuServeur);
 	printf("Serveur de jeu en ecoute sur le port %d\n", PORT_JEU);
 	
@@ -515,26 +474,27 @@ void *threadServeurJeu(void *params) {
 		socket_t *sockDial = malloc(sizeof(socket_t));
 		*sockDial = accepterClt(sockEcouteJeu);
 		
+		
 		pthread_mutex_lock(&mutexJeu);
-		clientsSockets[nbClientsConnectes] = *sockDial;
-		int equipeId = nbClientsConnectes % 2;
-		int numeroJoueur = nbClientsConnectes;
-		nbClientsConnectes++;
+		
+			clientsSockets[nbClientsConnectes] 	= *sockDial;
+			equipeId 							= nbClientsConnectes % 2;
+			numeroJoueur 						= nbClientsConnectes++;
+		
 		pthread_mutex_unlock(&mutexJeu);
 		
 		printf("Joueur %d connecte (equipe %d)\n", numeroJoueur + 1, equipeId);
 		
-		gServThreadParams_t *threadParams = malloc(sizeof(gServThreadParams_t));
-		threadParams->equipeId = equipeId;
-		threadParams->numeroJoueur = numeroJoueur;
-		threadParams->sockDial = sockDial;
-		threadParams->jeu = &jeuServeur;
-		threadParams->clientsSockets = clientsSockets;
-		threadParams->nbClientsConnectes = &nbClientsConnectes;
+		gServThreadParams_t *threadParams 	= malloc(sizeof(gServThreadParams_t));
+		threadParams->equipeId 				= equipeId;
+		threadParams->numeroJoueur 			= numeroJoueur;
+		threadParams->sockDial 				= sockDial;
+		threadParams->jeu 					= &jeuServeur;
+		threadParams->clientsSockets 		= clientsSockets;
+		threadParams->nbClientsConnectes 	= &nbClientsConnectes;
 		threadParams->phasePlacementTermine = phasePlacementTermine;
-		threadParams->mutexJeu = &mutexJeu;
+		threadParams->mutexJeu 				= &mutexJeu;
 		
-		pthread_t thread;
 		pthread_create(&thread, 0, (void*)(void*)dialSrvG2Clt, threadParams);
 		pthread_detach(thread);
 	}
@@ -548,8 +508,11 @@ void *threadServeurJeu(void *params) {
  *	\brief		Crée et démarre le serveur de jeu
  */
 void creerServeurJeu() {
+
+	pthread_t 	threadEcouteJeu;
+
 	printf("Creation du serveur de jeu sur le port %d...\n", PORT_JEU);
-	sockEcouteJeu = creerSocketEcoute(BIND_ALL, PORT_JEU);
+	sockEcouteJeu = creerSocketEcoute(BIND_ALL, self.port);
 	
 	pthread_create(&threadEcouteJeu, 0, threadServeurJeu, NULL);
 	pthread_detach(threadEcouteJeu);
@@ -564,14 +527,12 @@ void creerServeurJeu() {
  */
 void attendreJoueurs() {
 	printf("\nAttendez que les joueurs rejoignent...\n");
-	printf("Nombre de joueurs connectes: %d", nbClientsConnectes);
-	fflush(stdout);
+	printf("Nombre de joueurs connectes: %d\n", nbClientsConnectes);
 	
 	int dernierNb = nbClientsConnectes;
 	while (nbClientsConnectes < MIN_JOUEURS) {
 		if (nbClientsConnectes != dernierNb) {
-			printf("\rNombre de joueurs connectes: %d", nbClientsConnectes);
-			fflush(stdout);
+			printf("\rNombre de joueurs connectes: %d\n", nbClientsConnectes);
 			dernierNb = nbClientsConnectes;
 		}
 		sleep(1);
@@ -585,63 +546,28 @@ void attendreJoueurs() {
 *****************************************************************************************
  *	\noop		F O N C T I O N S   C O N N E X I O N
  */
-
-/**
- *	\fn			gCltThreadParams_t* creerParamsThreadClient()
- *	\brief		Crée les paramètres du thread client
- */
-gCltThreadParams_t* creerParamsThreadClient() {
-	gCltThreadParams_t *params = malloc(sizeof(gCltThreadParams_t));
-	params->sockAppel = &sockJeu;
-	params->equipeId = &monEquipeId;
-	params->dernierResultat = &dernierResultat;
-	params->tourActuel = &tourActuel;
-	params->semCanClose = &semCanClose;
-	params->semPlacementOk = &semPlacementOk;
-	params->semTirResultat = &semTirResultat;
-	params->semTourActuel = &semTourActuel;
-	params->partieTerminee = &partieTerminee;
-	params->semStartGame = &semStartGame;
-	params->monTourPlacement = &monTourPlacement;
-	params->semTourPlacement = &semTourPlacement;
-	params->jeu = &jeu;
-	params->attendsResultatTir = &attendsResultatTir;
-	return params;
-}
-
-/**
- *	\fn			void recevoirAssignationEquipe(rep_t *response)
- *	\brief		Traite l'assignation d'équipe du serveur
- */
-void recevoirAssignationEquipe(rep_t *response) {
-	char *token = strtok(response->data, ",");
-	if (token) {
-		monEquipeId = atoi(token);
-		token = strtok(NULL, ",");
-		if (token) {
-			monIndexJoueur = atoi(token);
-		}
-	}
-	printf("Assigne a l'equipe %d (joueur %d)\n", monEquipeId, monIndexJoueur);
-}
-
 /**
  *	\fn			int connecterAuServeurJeu(char *ip, int port)
  *	\brief		Établit la connexion au serveur de jeu
  */
 int connecterAuServeurJeu(char *ip, int port) {
+
+	gCltThreadParams_t 	*params;
+	int 				status;
+	rep_t				response;
+	Equipe 				*monEquipe;
+	Joueur 				joueur 		= {.id = 0};
+
 	init_jeu(&jeu);
 	
 	printf("\nConnexion au serveur de jeu %s:%d...\n", ip, port);
 	sockJeu = connecterClt2Srv(ip, port);
 	
-	Joueur joueur = {.id = 0};
 	strcpy(joueur.nom, self.name);
 	
-	int status = enum2status(REQ, CONNECT);
+	status = enum2status(REQ, CONNECT);
 	sendRequest(&sockJeu, status, POST, &joueur, (pFct)joueur2str);
 	
-	rep_t response;
 	rcvResponse(&sockJeu, &response);
 	
 	if (getStatusRange(response.id) != ACK || getAction(response.id) != CONNECT) {
@@ -649,35 +575,30 @@ int connecterAuServeurJeu(char *ip, int port) {
 		return 0;
 	}
 	
-	recevoirAssignationEquipe(&response);
+	sscanf(response.data, "%d,%d", &monEquipeId, &monIndexJoueur);
 	
-	Equipe *monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
+	monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
 	ajouter_joueur(monEquipe, self.name);
 	
-	gCltThreadParams_t *params = creerParamsThreadClient();
+	params 						= malloc(sizeof(gCltThreadParams_t));
+	params->sockAppel 			= &sockJeu;
+	params->equipeId 			= &monEquipeId;
+	params->dernierResultat 	= &dernierResultat;
+	params->tourActuel 			= &tourActuel;
+	params->semCanClose 		= &semCanClose;
+	params->semPlacementOk 		= &semPlacementOk;
+	params->semTirResultat 		= &semTirResultat;
+	params->semTourActuel 		= &semTourActuel;
+	params->semStartGame 		= &semStartGame;
+	params->monTourPlacement 	= &monTourPlacement;
+	params->semTourPlacement 	= &semTourPlacement;
+	params->jeu 				= &jeu;
+	params->attendsResultatTir 	= &attendsResultatTir;
+
 	pthread_create(&threadDialJeu, 0, (void*)(void*)dialClt2SrvG, params);
 	
 	return 1;
 }
-
-/**
- *	\fn			void demarrerThreadEnregistrement()
- *	\brief		Démarre le thread de dialogue avec le serveur d'enregistrement
- */
-void demarrerThreadEnregistrement(char *ip, short port) {
-	sockEnregistrement = connecterClt2Srv(ip, port);
-	
-	eCltThreadParams_t *params = malloc(sizeof(eCltThreadParams_t));
-	params->sockAppel = &sockEnregistrement;
-	params->infos = &self;
-	params->hostBuffer = hosts;
-	params->semCanClose = &semCanClose;
-	params->semRequestFin = &semRequestFin;
-	
-	pthread_create(&threadEnregistrement, 0, (void*)(void*)dialClt2SrvE, params);
-	sleep(DELAY_SERVER_START);
-}
-
 /*
 *****************************************************************************************
  *	\noop		F O N C T I O N S   M O D E S   D E   J E U
@@ -688,6 +609,9 @@ void demarrerThreadEnregistrement(char *ip, short port) {
  *	\brief		Lance le client de jeu et la partie
  */
 void lancerClientJeu(char *ip, int port) {
+
+	Equipe *monEquipe;
+
 	if (!connecterAuServeurJeu(ip, port)) return;
 	
 	printf("\nEn attente que le HOST lance la partie...\n");
@@ -696,7 +620,7 @@ void lancerClientJeu(char *ip, int port) {
 	printf("\nLa partie commence !\n");
 	sleep(DELAY_START_GAME);
 	
-	Equipe *monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
+	monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
 	placerEquipeReseau(monEquipe);
 	jouerReseau(&jeu);
 }
@@ -706,10 +630,13 @@ void lancerClientJeu(char *ip, int port) {
  *	\brief		Mode HOST - Crée et héberge une partie
  */
 void lancerModeHost() {
+
+	Equipe *monEquipe;
+
 	printf("\n=== MODE HOST ===\n");
 	
 	creerServeurJeu();
-	afficherInfosPartie();
+	afficherInfosPartie(&self);
 	
 	printf("Appuyez sur Entree quand vous etes pret\n");
 	printf("a rejoindre votre propre serveur...\n");
@@ -717,7 +644,7 @@ void lancerModeHost() {
 	getchar();
 	
 	printf("\nConnexion a votre propre serveur...\n");
-	if (!connecterAuServeurJeu(LOCALHOST, PORT_JEU)) return;
+	if (!connecterAuServeurJeu(self.address, self.port)) return;
 	
 	attendreJoueurs();
 	envoyerSignauxDemarrage();
@@ -725,89 +652,9 @@ void lancerModeHost() {
 	printf("\nLa partie commence !\n");
 	sleep(DELAY_START_GAME);
 	
-	Equipe *monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
+	monEquipe = obtenirMonEquipe(&jeu, monEquipeId);
 	placerEquipeReseau(monEquipe);
 	jouerReseau(&jeu);
-}
-
-/**
- *	\fn			clientInfo_t* selectionnerHost(int nbHosts)
- *	\brief		Permet à l'utilisateur de sélectionner un host
- */
-clientInfo_t* selectionnerHost(int nbHosts) {
-	printf("\nChoisir une partie (1-%d): ", nbHosts);
-	int choix;
-	scanf("%d", &choix);
-	getchar();
-	
-	if (choix < 1 || choix > nbHosts) {
-		printf("Choix invalide\n");
-		return NULL;
-	}
-	
-	int idx = 0;
-	for (int i = 0; i < MAX_HOSTS_GET; i++) {
-		if (hosts[i].role == HOST && strlen(hosts[i].name) > 0) {
-			idx++;
-			if (idx == choix) {
-				return &hosts[i];
-			}
-		}
-	}
-	
-	return NULL;
-}
-
-/**
- *	\fn			int afficherHostsDisponibles()
- *	\brief		Affiche les hosts disponibles et retourne leur nombre
- */
-int afficherHostsDisponibles() {
-	int nbHosts = 0;
-	
-	printf("\n=== Parties disponibles ===\n");
-	for (int i = 0; i < MAX_HOSTS_GET; i++) {
-		if (hosts[i].role == HOST && strlen(hosts[i].name) > 0) {
-			printf("%d. %s (%s:%d)\n", nbHosts + 1, hosts[i].name, 
-			       hosts[i].address, hosts[i].port);
-			nbHosts++;
-		}
-	}
-	
-	return nbHosts;
-}
-
-/**
- *	\fn			void lancerModePlayer()
- *	\brief		Mode PLAYER - Rejoint une partie existante
- */
-void lancerModePlayer() {
-	printf("\n=== MODE PLAYER ===\n");
-	
-	self.role = PLAYER;
-	initHostsBuffer();
-	
-	printf("Recuperation de la liste des parties disponibles...\n");
-	postRequest(&requestHosts, &semRequestFin);
-	
-	int nbHosts = afficherHostsDisponibles();
-	
-	if (nbHosts == 0) {
-		printf("\nAucune partie disponible.\n");
-		printf("Attendez qu'un joueur cree une partie (MODE HOST).\n");
-		return;
-	}
-	
-
-	// ça on a pas => à greffer à ce que j'ai
-	clientInfo_t *host = selectionnerHost(nbHosts);
-	if (!host) {
-		printf("Erreur: HOST non trouve\n");
-		return;
-	}
-	
-	printf("\nConnexion a la partie de %s...\n", host->name);
-	lancerClientJeu(host->address, host->port);
 }
 
 /*
@@ -816,66 +663,51 @@ void lancerModePlayer() {
  */
 
 /**
- *	\fn			void configurerClient()
- *	\brief		Configure les informations du client
- */
-void configurerClient(int choixMode) {
-	printf("\nConfiguration du profil utilisateur:\n");
-	printf("Nom d'utilisateur (3-10 chars): ");
-	scanf("%10s", self.name);
-	getchar();
-	
-	if (choixMode == 1) {
-		self.role = HOST;
-		self.port = PORT_JEU;
-		strcpy(self.address, LOCALHOST);
-	} else {
-		self.role = PLAYER;
-		self.port = 0;
-		strcpy(self.address, "");
-	}
-	
-	self.status = CONNECTED;
-}
-
-/**
- *	\fn			int afficherMenuPrincipal()
- *	\brief		Affiche le menu et retourne le choix
- */
-int afficherMenuPrincipal() {
-	int choix;
-	
-	printf("\n=== BATAILLE NAVALE ===\n");
-	printf("1. Creer une partie (HOST)\n");
-	printf("2. Rejoindre une partie (PLAYER)\n");
-	printf("Choix: ");
-	scanf("%d", &choix);
-	getchar();
-	
-	return choix;
-}
-
-/**
  *	\fn			void client(char *adrIP, unsigned short port)
  *	\brief		Point d'entrée principal du client
  */
 void client(char *adrIP, unsigned short port) {
-	char userIP[INPUT_BUFFER_SIZE];
-	short userPort;
-	
+
+	char 				userIP[INPUT_BUFFER_SIZE];
+	short 				userPort;
+	pthread_t 			threadEnregistrement;
+	playerMenuParams_t	menuParams;
+	clientInfo_t 		chosenHost;
+
+
 	initClient();
+
 	getSrvEAddress(adrIP, port, userIP, &userPort);
 	
-	int choix = afficherMenuPrincipal();
-	configurerClient(choix);
+	setupUserInfos(&self);
+		
+	sockEnregistrement = connecterClt2Srv(userIP, userPort);
 	
-	printf("\nConnexion au serveur d'enregistrement...\n");
-	demarrerThreadEnregistrement(userIP, userPort);
+	eCltThreadParams_t *params 	= malloc(sizeof(eCltThreadParams_t));
+	params->sockAppel 			= &sockEnregistrement;
+	params->infos 				= &self;
+	params->hostBuffer 			= hosts;
+	params->semCanClose 		= &semCanClose;
+	params->semRequestFin 		= &semRequestFin;
 	
-	if (choix == 1) {
+	pthread_create(&threadEnregistrement, 0, (void*)(void*)dialClt2SrvE, params);
+	pthread_detach(threadEnregistrement);
+	
+	menuParams.showHosts	= onDisplayHosts;
+	menuParams.exitProgram	= onExit;
+	menuParams.hosts 		= hosts;
+	menuParams.chosenHost   = &chosenHost;
+
+	if (self.role == HOST) {
+
 		lancerModeHost();
+
 	} else {
-		lancerModePlayer();
+
+		displayPlayerMenu(menuParams);
+
+
+		lancerClientJeu(chosenHost.address, chosenHost.port);
 	}
 	
 	printf("\n=== Fin de la partie ===\n");
@@ -895,8 +727,8 @@ int main(int argc, char** argv) {
 	if (argc < 3) {
 		fprintf(stderr, "usage : %s @IP port\n", basename(progName));
 		fprintf(stderr, "lancement du [PID:%d] connecte a [%s:%d]\n", 
-		        getpid(), IP_SERV_ENR, PORT_SERV_ENR);
-		client(IP_SERV_ENR, PORT_SERV_ENR);
+		        getpid(), BIND_ALL, PORT_SERV_ENR);
+		client(BIND_ALL, PORT_SERV_ENR);
 	} else {
 		fprintf(stderr, "lancement du client [PID:%d] connecte a [%s:%d]\n",
 		        getpid(), argv[1], atoi(argv[2]));

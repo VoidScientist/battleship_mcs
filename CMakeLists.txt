@@ -68,3 +68,5 @@ target_link_libraries(client LIB_GAME LIB_APP)
 
 add_executable(client_mat "${SRC}/client.c")
 target_link_libraries(client_mat LIB_APP LIB_APP)
+
+add_compile_options("-Wall")

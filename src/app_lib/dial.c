@@ -25,16 +25,16 @@
 #define ACK_CONNECT		201
 #define ERR_CONNECT		301
 
-#define REQ_PLACE		105
-#define ACK_PLACE		205
-#define ERR_PLACE		305
+#define REQ_PLACE		102
+#define ACK_PLACE		202
+#define ERR_PLACE		302
 
-#define REQ_SHOOT		106
-#define ACK_SHOOT		206
+#define REQ_SHOOT		103
+#define ACK_SHOOT		203
 
-#define ACK_NEXT_TURN	207
-#define ACK_END_GAME	208
-#define ACK_START_GAME	209
+#define ACK_NEXT_TURN	204
+#define ACK_END_GAME	205
+#define ACK_START_GAME	206
 
 // Délais
 #define DELAY_MESSAGE_US		10000
@@ -62,6 +62,8 @@ int tourPlacementJoueur[2] = {0, 0};
 int requestHosts;
 
 volatile sig_atomic_t mustDisconnect = 0;
+volatile int partieTerminee = 0;
+
 
 /*
 *****************************************************************************************
@@ -303,21 +305,12 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
  *	\noop		U T I L I T A I R E S   J E U   C L I E N T
  */
 /**
- *	\fn			Equipe* obtenirEquipe(Jeu *jeu, int equipeId)
- *	\brief		Retourne l'équipe correspondant à l'ID
- */
-Equipe* obtenirEquipe(Jeu *jeu, int equipeId) {
-
-	return (equipeId == EQUIPE_A) ? &jeu->equipeA : &jeu->equipeB;
-
-}
-/**
  *	\fn			void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId)
  *	\brief		Traite le placement d'un coéquipier
  */
 void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId) {
 	
-	Equipe *monEquipe = obtenirEquipe(jeu, equipeId);
+	Equipe *monEquipe = obtenirMonEquipe(jeu, equipeId);
 	
 	placer_bateau(&monEquipe->grille, placement->id, placement->longueur, placement->ligne, placement->col, placement->orient);
 	
@@ -330,7 +323,7 @@ void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId) {
  */
 void traiterTirRecu(Resultat *resultat, Jeu *jeu, int equipeId) {
 
-	Equipe *monEquipe = obtenirEquipe(jeu, equipeId);
+	Equipe *monEquipe = obtenirMonEquipe(jeu, equipeId);
 
 	if (resultat->touche) {
 	
@@ -392,8 +385,6 @@ void dialClt2SrvG(gCltThreadParams_t *params) {
 	int 		*equipeId 			= params->equipeId;
 	int 		*attendsResultatTir = params->attendsResultatTir;
 	
-	volatile sig_atomic_t *partieTerminee = params->partieTerminee;
-
 	free(params);
 
 	while (1) {
@@ -499,7 +490,7 @@ void dialClt2SrvG(gCltThreadParams_t *params) {
 					logMessage("DEFAITE\n", DEBUG);
 				}
 
-				*partieTerminee = 1;
+				partieTerminee = 1;
 				break;
 
 			}
@@ -663,7 +654,7 @@ void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoue
 	Joueur joueur;
 	str2joueur(request->data, &joueur);
 
-	Equipe *equipe = obtenirEquipe(jeu, equipeId);
+	Equipe *equipe = obtenirMonEquipe(jeu, equipeId);
 	ajouter_joueur(equipe, joueur.nom);
 
 	char buffer[BUFFER_SMALL];
@@ -696,7 +687,7 @@ int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients
 
 	Placement 	placement;
 	int 		prochainJoueur;
-	Equipe 		*equipe 		= obtenirEquipe(jeu, equipeId);
+	Equipe 		*equipe 		= obtenirMonEquipe(jeu, equipeId);
 
 	str2place(request->data, &placement);
 	
@@ -753,8 +744,8 @@ void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients,
 
 	int 	nextEquipe;
 
-	Equipe 		*attaquant 	= obtenirEquipe(jeu, tir.equipe_id);
-	Equipe 		*defenseur 	= obtenirEquipe(jeu, 1 - tir.equipe_id);
+	Equipe 		*attaquant 	= obtenirMonEquipe(jeu, tir.equipe_id);
+	Equipe 		*defenseur 	= obtenirMonEquipe(jeu, 1 - tir.equipe_id);
 
 	Resultat 	resultat 	= tirer(&defenseur->grille, attaquant->vue, tir.ligne, tir.col);
 
@@ -795,6 +786,8 @@ void dialSrvG2Clt(gServThreadParams_t *params) {
 	
 	req_t 			request;
 
+	int 			running 	= 1;
+
 	// Extraction des paramètres
 
 	int 			equipeId 				= params->equipeId;
@@ -811,12 +804,8 @@ void dialSrvG2Clt(gServThreadParams_t *params) {
 
 	free(params);
 
-	int running = 1;
-
 	while (running) {
 
-		
-		
 		rcvRequest(sockDial, &request);
 
 		// Traitement par code de requête avec verbe
@@ -876,7 +865,7 @@ void dialSrvG2Clt(gServThreadParams_t *params) {
 
 			default:
 				
-				sendResponse(sockDial, enum2status(ERR, GAME), "Requête non gérée", NULL);
+				sendResponse(sockDial, enum2status(ERR, getAction(request.id)), "Requête non gérée", NULL);
 				
 				break;
 			

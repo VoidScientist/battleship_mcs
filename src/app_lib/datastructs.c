@@ -72,3 +72,18 @@ int getHostsAmount(clientInfo_t *clients, int size) {
 	return result;
 
 }
+
+/**
+ * @brief      remet à zéro un tableau de clientInfo_t
+ *
+ * @param      arr   le tableau
+ * @param[in]  size  la taille du tableau
+ */
+void resetClientInfoArray(clientInfo_t *arr, int size) {
+
+	for (int i = 0; i < size; i++) {
+		createClientInfo(&arr[i], "", 0, "", 0);
+		arr[i].status = DISCONNECTED;
+	}
+
+}

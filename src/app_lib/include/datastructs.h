@@ -94,6 +94,12 @@ void str2clientInfo(char *str, clientInfo_t *infos);
  * @return     le nombre d'hôtes parmis les clients
  */
 int getHostsAmount(clientInfo_t *clients, int size);
-
+/**
+ * @brief      remet à zéro un tableau de clientInfo_t
+ *
+ * @param      arr   le tableau
+ * @param[in]  size  la taille du tableau
+ */
+void resetClientInfoArray(clientInfo_t *arr, int size);
 
 #endif /* DATASTRUCTS_H */

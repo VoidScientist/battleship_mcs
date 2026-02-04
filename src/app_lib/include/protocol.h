@@ -22,7 +22,7 @@ typedef enum {REQ, ACK, ERR} statusRange_t;
 /**
  * @brief enum contenant les actions du protocole
  */
-typedef enum {CONNECT, CELL, GAME, CURRENT_PLAYER, PLACE, SHOOT, NEXT_TURN, END_GAME, START_GAME} action_t;
+typedef enum {CONNECT, PLACE, SHOOT, NEXT_TURN, END_GAME, START_GAME} action_t;
 
 /*
 *****************************************************************************************

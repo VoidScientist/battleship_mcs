@@ -1,7 +1,7 @@
 /**
  *	\file		logic.h
  *	\brief		Fichier Header de logic.c
- *	\author		MARTEL Mathieu
+ *	\author		MARTEL Mathieu / ARCELON Louis
  *	\version	1.0
  */
  
@@ -10,7 +10,13 @@
  *	\noop		I N C L U D E S   S P E C I F I Q U E S
  */
 #include "bataille_navale.h"
-
+/*
+*****************************************************************************************
+ *	\noop		D E F I N I T I O N   DES   C O N S T A N T E S
+ */
+// Équipes
+#define EQUIPE_A			0
+#define EQUIPE_B			1
  /*
  *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S
@@ -124,31 +130,8 @@
  
  void tour(Jeu *jeu, int ligne, int col, int *rejouer);
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+/**
+ *  \fn         Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId)
+ *  \brief      Retourne l'équipe correspondant à l'ID
+ */
+Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId);

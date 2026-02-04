@@ -279,6 +279,8 @@ void displayHosts(clientInfo_t *hosts, int amount) {
 
 	printf("\n╔===[Hôtes disponibles]===╗\n");
 	printf("║                         ║\n");
+	printf("║      0.    Retour       ║\n");
+	printf("║                         ║\n");
 
 	for (int i = 0; i < amount; i++) {
 
@@ -311,6 +313,7 @@ void displayPlayerMenu(playerMenuParams_t params) {
 
 			case MAIN_MENU: displayMainMenu(params, &state); break;
 			case JOIN_MENU: displayJoinMenu(params, &state); break;
+			case CLOSE_MENU: return;
 
 		}
 		
@@ -383,10 +386,13 @@ void displayJoinMenu(playerMenuParams_t params, menuState_t *state) {
 
 	int 	result;
 	int 	maxAct;
-	int 	action  = 0;
+	int 	action  = -1;
 
-	callback	exitProgram = params.exitProgram;
-	callback	showHosts 	= params.showHosts;
+	clientInfo_t	*hosts 		= params.hosts;
+	clientInfo_t 	*chosenHost = params.chosenHost;
+
+	callback		exitProgram = params.exitProgram;
+	callback		showHosts 	= params.showHosts;
 
 	showHosts();
 
@@ -403,7 +409,7 @@ void displayJoinMenu(playerMenuParams_t params, menuState_t *state) {
 
 	do {
 
-		printf("\nAction (1-%d): ", maxAct);
+		printf("\nAction (0-%d): ", maxAct);
 		result = retrieveInput("%d", &action);
 
 		if (result == USE_DEFAULT) {
@@ -426,6 +432,20 @@ void displayJoinMenu(playerMenuParams_t params, menuState_t *state) {
 				break;
 		}
 
-	} while (action <= 0 || action > maxAct);
+	} while (action < 0 || action > maxAct);
+
+
+	switch (action) {
+
+		case 0:
+			*state = MAIN_MENU;
+			break;
+
+		default:
+			*state 		= CLOSE_MENU;
+			*chosenHost = hosts[action - 1];
+			break;
+
+	}
 
 }

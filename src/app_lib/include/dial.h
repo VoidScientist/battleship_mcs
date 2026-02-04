@@ -96,7 +96,6 @@ typedef struct {
 	int						*monTourPlacement;
 	Jeu						*jeu;
 	int                     *attendsResultatTir;
-	volatile sig_atomic_t 	*partieTerminee;
 } gCltThreadParams_t;
 
 /**
@@ -107,6 +106,7 @@ extern volatile sig_atomic_t mustDisconnect;
  * @brief 	flag de récupération des hôtes. {CONNECT GET}
  */
 extern int requestHosts;
+extern volatile int partieTerminee;
 /*
 *****************************************************************************************
  *	\noop		P R O T O T Y P E S   DES   F O N C T I O N S
@@ -153,5 +153,30 @@ void dialSrvG2Clt(gServThreadParams_t *params);
  */
 void postRequest(int *reqVar, sem_t *semReqAck);
 
+void envoyerATous(socket_t *sockets, int nb, int status, void *data, pFct serializer);
+
+void envoyerAEquipe(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer);
+
+void envoyerACoequipiers(socket_t *sockets, int nb, int equipeId, int numJoueur, int status, void *data, pFct serializer);
+
+void envoyerAAdversaires(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer);
+
+int calculerProchainJoueur(int equipeId, int nbClients);
+
+void envoyerNextTurnPlacement(socket_t *sockets, int nb, int prochainJoueur);
+
+void demarrerPhaseJeu(socket_t *sockets, int nb);
+
+void envoyerNextTurnJeu(socket_t *sockets, int nb, int equipe);
+
+void envoyerVictoire(socket_t *sockets, int nb, int equipeGagnante, Jeu *jeu);
+
+void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoueur, req_t *request);
+
+void traiterDeconnexion(socket_t *sockDial, int *running);
+
+int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients, Jeu *jeu, int equipeId, int numeroJoueur, int *phasePlacementTermine, req_t *request);
+
+void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients, Jeu *jeu, req_t *request);
 
 #endif /* DIAL_H */
