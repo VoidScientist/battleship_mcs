@@ -1,7 +1,7 @@
 /**
  *	\file		dial.c
  *	\brief		Fichier implémentation représentant les dialogues applicatifs
- *	\author		ARCELON Louis
+ *	\author		ARCELON Louis / MARTEL Mathieu
  *	\date		28 janvier 2026
  *	\version	2.0
  */
@@ -21,36 +21,56 @@
  *	\noop		C O N S T A N T E S
  */
 // Codes de status
+/** @brief Code de requête de connexion */
 #define REQ_CONNECT		101
+/** @brief Code d'ack de réception de connexion */
 #define ACK_CONNECT		201
+/** @brief Code d'erreur de connexion */
 #define ERR_CONNECT		301
 
+/** @brief Code de requête de placement */
 #define REQ_PLACE		102
+/** @brief Code d'ack de réception de placement */
 #define ACK_PLACE		202
+/** @brief Code d'erreur de placement */
 #define ERR_PLACE		302
 
+/** @brief Code de requête de tir */
 #define REQ_SHOOT		103
+/** @brief Code d'ack de réception de tir */
 #define ACK_SHOOT		203
 
+/** @brief Code de changement de tour */
 #define ACK_NEXT_TURN	204
+/** @brief Code de fin de partie */
 #define ACK_END_GAME	205
+/** @brief Code de début de partie */
 #define ACK_START_GAME	206
 
 // Délais
+/** @brief Délai entre l'envoi de messages (10 ms) */
 #define DELAY_MESSAGE_US		10000
+/** @brief Délai avant broadcast aux adversaires (50 ms) */
 #define DELAY_BROADCAST_US		50000
+/** @brief Délai après la fin du placement (2 s) */
 #define DELAY_PLACEMENT_END_S	2
 
 // Équipes
+/** @brief Id de l'équipe A */
 #define EQUIPE_A	0
+/** @brief Id de l'équipe B */
 #define EQUIPE_B	1
 
 // Phases
+/** @brief Phase de placement des bateaux */
 #define PHASE_PLACEMENT	0
+/** @brief Phase de jeu (bataille) */
 #define PHASE_JEU		1
 
 // Tailles buffer
+/** @brief Taille standard des buffers */
 #define BUFFER_SIZE		100
+/** @brief Taille des petits buffers */
 #define BUFFER_SMALL	20
 
 /*
@@ -58,10 +78,16 @@
  *	\noop		V A R I A B L E S   G L O B A L E S
  */
 
+/** @brief Suivi du joueur courant pour le placement dans chaque équipe */
 int tourPlacementJoueur[2] = {0, 0};
+
+/** @brief Flag de récupération des hosts */
 int requestHosts;
 
+/** @brief Flag de demande de déconnexion */
 volatile sig_atomic_t mustDisconnect = 0;
+
+/** @brief Flag indiquant la fin de partie */
 volatile int partieTerminee = 0;
 
 
@@ -69,13 +95,13 @@ volatile int partieTerminee = 0;
 *****************************************************************************************
  *	\noop		D I A L O G U E S   E N R E G I S T R E M E N T   ( N O N   M O D I F I É )
  */
+
 /**
- * \brief       fonction s'occupant du dialogue entre le client et le serveur d'enregistrement
+ * @brief Dialogue entre le client et le serveur d'enregistrement
  * 
- * \param		params   		eCltThreadParams_t contenant les paramètres pour
- * 								le dialogue. Doit être alloué avec `malloc()`
+ * @param params        Paramètres du thread (alloué avec malloc)
  * 
- * \note 		s'occupe donc de l'envoi de requêtes et réception de réponses
+ * @note S'occupe de l'envoi de requêtes et réception de réponses
  */
 void dialClt2SrvE(eCltThreadParams_t *params) {
 
@@ -172,13 +198,13 @@ void dialClt2SrvE(eCltThreadParams_t *params) {
 	}
 
 }
+
 /**
- * \brief       fonction s'occupant du dialogue entre le serveur d'enregistrement et le client
+ * @brief Dialogue entre le serveur d'enregistrement et le client
  * 
- * \param		*params		structure eServThreadParams contenant les paramètres
- * 								pour le dialogue. Doit être alloué avec `malloc()`
+ * @param params        Paramètres du thread (alloué avec malloc)
  * 
- * \note		s'occupe donc de l'envoi de réponses et réception de réponses
+ * @note S'occupe de l'envoi de réponses et réception de requêtes
  */
 void dialSrvE2Clt(eServThreadParams_t *params) {
 
@@ -304,9 +330,13 @@ void dialSrvE2Clt(eServThreadParams_t *params) {
 *****************************************************************************************
  *	\noop		U T I L I T A I R E S   J E U   C L I E N T
  */
+
 /**
- *	\fn			void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId)
- *	\brief		Traite le placement d'un coéquipier
+ * @brief Traite le placement d'un coéquipier
+ * 
+ * @param placement     Placement effectué par le coéquipier
+ * @param jeu           Partie de jeu en cours
+ * @param equipeId      Id de l'équipe
  */
 void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId) {
 	
@@ -317,9 +347,13 @@ void traiterPlacementCoequipier(Placement *placement, Jeu *jeu, int equipeId) {
 	logMessage("Coéquipier a placé un bateau\n", DEBUG);
 
 }
+
 /**
- *	\fn			void traiterTirRecu(Resultat *resultat, Jeu *jeu, int equipeId)
- *	\brief		Traite un tir reçu de l'adversaire
+ * @brief Traite un tir recu de l'adversaire
+ * 
+ * @param resultat      Résultat du tir adverse
+ * @param jeu           Partie de jeu en cours
+ * @param equipeId      Id de l'équipe
  */
 void traiterTirRecu(Resultat *resultat, Jeu *jeu, int equipeId) {
 
@@ -338,9 +372,14 @@ void traiterTirRecu(Resultat *resultat, Jeu *jeu, int equipeId) {
 	}
 
 }
+
 /**
- *	\fn			void traiterTourPlacement(Tour *tour, int equipeId, int *monTourPlacement, sem_t *semTourPlacement)
- *	\brief		Traite un signal de tour de placement
+ * @brief Traite un signal de tour de placement
+ * 
+ * @param tour             Tour de jeu recu
+ * @param equipeId         Id de l'équipe
+ * @param monTourPlacement Indicateur de tour de placement
+ * @param semTourPlacement Sémaphore de tour de placement
  */
 void traiterTourPlacement(Tour *tour, int equipeId, int *monTourPlacement, sem_t *semTourPlacement) {
 	
@@ -361,9 +400,11 @@ void traiterTourPlacement(Tour *tour, int equipeId, int *monTourPlacement, sem_t
 *****************************************************************************************
  *	\noop		D I A L O G U E   C L I E N T   J E U
  */
+
 /**
- *	\fn			void dialClt2SrvG(gCltThreadParams_t *params)
- *	\brief		Dialogue entre le client et le serveur de jeu
+ * @brief Dialogue entre le client et le serveur de jeu
+ * 
+ * @param params        Paramètres du thread (alloué avec malloc)
  */
 void dialClt2SrvG(gCltThreadParams_t *params) {
 	
@@ -510,8 +551,13 @@ void dialClt2SrvG(gCltThreadParams_t *params) {
  */
 
 /**
- *	\fn			void envoyerATous(socket_t *sockets, int nb, int status, void *data, pFct serializer)
- *	\brief		Envoie un message à tous les clients
+ * @brief Envoie un message à tous les clients
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
  */
 void envoyerATous(socket_t *sockets, int nb, int status, void *data, pFct serializer) {
 	
@@ -525,8 +571,14 @@ void envoyerATous(socket_t *sockets, int nb, int status, void *data, pFct serial
 }
 
 /**
- *	\fn			void envoyerAEquipe(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer)
- *	\brief		Envoie un message à tous les membres d'une équipe
+ * @brief Envoie un message à tous les membres d'une équipe
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
  */
 void envoyerAEquipe(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer) {
 
@@ -539,8 +591,15 @@ void envoyerAEquipe(socket_t *sockets, int nb, int equipeId, int status, void *d
 }
 
 /**
- *	\fn			void envoyerACoequipiers(socket_t *sockets, int nb, int equipeId, int numJoueur, int status, void *data, pFct serializer)
- *	\brief		Envoie un message aux coéquipiers (pas au joueur lui-même)
+ * @brief Envoie un message aux coéquipiers (pas au joueur lui-même)
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param numJoueur     Numéro du joueur à exclure
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
  */
 void envoyerACoequipiers(socket_t *sockets, int nb, int equipeId, int numJoueur, int status, void *data, pFct serializer) {
 
@@ -557,8 +616,14 @@ void envoyerACoequipiers(socket_t *sockets, int nb, int equipeId, int numJoueur,
 }
 
 /**
- *	\fn			void envoyerAAdversaires(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer)
- *	\brief		Envoie un message à l'équipe adverse
+ * @brief Envoie un message à l'équipe adverse
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
  */
 void envoyerAAdversaires(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer) {
 	
@@ -575,8 +640,12 @@ void envoyerAAdversaires(socket_t *sockets, int nb, int equipeId, int status, vo
 }
 
 /**
- *	\fn			int calculerProchainJoueur(int equipeId, int nbClients)
- *	\brief		Calcule le prochain joueur pour le placement
+ * @brief Calcule le prochain joueur pour le placement
+ * 
+ * @param equipeId      Id de l'équipe actuelle
+ * @param nbClients     Nombre de clients connectés
+ * 
+ * @return Id du prochain joueur
  */
 int calculerProchainJoueur(int equipeId, int nbClients) {
 
@@ -590,8 +659,11 @@ int calculerProchainJoueur(int equipeId, int nbClients) {
 }
 
 /**
- *	\fn			void envoyerNextTurnPlacement(socket_t *sockets, int nb, int prochainJoueur)
- *	\brief		Envoie NEXT_TURN pour le placement
+ * @brief Envoie NEXT_TURN pour le placement
+ * 
+ * @param sockets           Tableau des sockets clients
+ * @param nb                Nombre de clients
+ * @param prochainJoueur    Id du prochain joueur
  */
 void envoyerNextTurnPlacement(socket_t *sockets, int nb, int prochainJoueur) {
 
@@ -601,8 +673,10 @@ void envoyerNextTurnPlacement(socket_t *sockets, int nb, int prochainJoueur) {
 }
 
 /**
- *	\fn			void demarrerPhaseJeu(socket_t *sockets, int nb)
- *	\brief		Démarre la phase de jeu après placement
+ * @brief Démarre la phase de jeu après placement
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
  */
 void demarrerPhaseJeu(socket_t *sockets, int nb) {
 
@@ -616,8 +690,11 @@ void demarrerPhaseJeu(socket_t *sockets, int nb) {
 }
 
 /**
- *	\fn			void envoyerNextTurnJeu(socket_t *sockets, int nb, int equipe)
- *	\brief		Envoie NEXT_TURN pendant la phase de jeu
+ * @brief Envoie NEXT_TURN pendant la phase de jeu
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipe        Id de l'équipe dont c'est le tour
  */
 void envoyerNextTurnJeu(socket_t *sockets, int nb, int equipe) {
 
@@ -627,8 +704,12 @@ void envoyerNextTurnJeu(socket_t *sockets, int nb, int equipe) {
 }
 
 /**
- *	\fn			void envoyerVictoire(socket_t *sockets, int nb, int equipeGagnante, Jeu *jeu)
- *	\brief		Envoie le message de victoire
+ * @brief Envoie le message de victoire
+ * 
+ * @param sockets          Tableau des sockets clients
+ * @param nb               Nombre de clients
+ * @param equipeGagnante   Id de l'équipe gagnante
+ * @param jeu              Partie de jeu en cours
  */
 void envoyerVictoire(socket_t *sockets, int nb, int equipeGagnante, Jeu *jeu) {
 
@@ -647,8 +728,13 @@ void envoyerVictoire(socket_t *sockets, int nb, int equipeGagnante, Jeu *jeu) {
  */
 
 /**
- *	\fn			void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoueur, req_t *request)
- *	\brief		Traite une requête de connexion
+ * @brief Traite une requête de connexion
+ * 
+ * @param sockDial      Socket du client
+ * @param jeu           Partie de jeu en cours
+ * @param equipeId      Id de l'équipe
+ * @param numeroJoueur  Numéro du joueur
+ * @param request       Requête recue
  */
 void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoueur, req_t *request) {
 	Joueur joueur;
@@ -665,8 +751,10 @@ void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoue
 }
 
 /**
- *	\fn			void traiterDeconnexion(socket_t *sockDial, int *running)
- *	\brief		Traite une requête de déconnexion
+ * @brief Traite une requête de déconnexion
+ * 
+ * @param sockDial      Socket du client
+ * @param running       Flag de boucle du thread
  */
 void traiterDeconnexion(socket_t *sockDial, int *running) {
 
@@ -676,10 +764,18 @@ void traiterDeconnexion(socket_t *sockDial, int *running) {
 }
 
 /**
- *	\fn			int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients, 
- *	                                  Jeu *jeu, int equipeId, int numeroJoueur, 
- *	                                  int *phasePlacementTermine, req_t *request)
- *	\brief		Traite une requête de placement
+ * @brief Traite une requête de placement
+ * 
+ * @param sockDial                 Socket du client
+ * @param clientsSockets           Tableau des sockets clients
+ * @param nbClients                Nombre de clients connectés
+ * @param jeu                      Partie de jeu en cours
+ * @param equipeId                 Id de l'équipe
+ * @param numeroJoueur             Numéro du joueur
+ * @param phasePlacementTermine    État du placement par équipe
+ * @param request                  Requête recue
+ * 
+ * @return 1: Succès | 0: Echec
  */
 int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients,
                      Jeu *jeu, int equipeId, int numeroJoueur,
@@ -732,9 +828,13 @@ int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients
 }
 
 /**
- *	\fn			void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients,
- *	                             Jeu *jeu, req_t *request)
- *	\brief		Traite une requête de tir
+ * @brief Traite une requête de tir
+ * 
+ * @param sockDial         Socket du client
+ * @param clientsSockets   Tableau des sockets clients
+ * @param nbClients        Nombre de clients connectés
+ * @param jeu              Partie de jeu en cours
+ * @param request          Requête recue
  */
 void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients,
                 Jeu *jeu, req_t *request) {
@@ -779,8 +879,9 @@ void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients,
  */
 
 /**
- *	\fn			void dialSrvG2Clt(gServThreadParams_t *params)
- *	\brief		Dialogue entre le serveur de jeu et le client
+ * @brief Dialogue entre le serveur de jeu et le client
+ * 
+ * @param params        Paramètres du thread (alloué avec malloc)
  */
 void dialSrvG2Clt(gServThreadParams_t *params) {
 	
@@ -878,11 +979,12 @@ void dialSrvG2Clt(gServThreadParams_t *params) {
 	free(sockDial);
 
 }
+
 /**
- * \brief      Envoie une requête via un flag et attends une sémaphore.
- *
- * \param      reqVar     Flag de la requête
- * \param      semReqAck  Sémaphore d'attente
+ * @brief Envoie une requête via un flag et attends une sémaphore
+ * 
+ * @param reqVar  		Flag de la requête
+ * @param semReqAck 	Sémaphore d'attente
  */
 void postRequest(int *reqVar, sem_t *semReqAck) {
 
