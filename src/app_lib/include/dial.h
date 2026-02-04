@@ -70,32 +70,37 @@ typedef struct {
 } eCltThreadParams_t;
 
 
+/**
+ * @brief Paramètres du thread serveur de jeu pour dialogue avec un client
+ */
 typedef struct {
-	int 				equipeId;
-	int 				numeroJoueur;
-	socket_t 			*sockDial;
-	Jeu 				*jeu;
-	socket_t 			*clientsSockets;
-	int 				*nbClientsConnectes;
-	int 				*phasePlacementTermine;
-	pthread_mutex_t 	*mutexJeu;
+	int 				equipeId;				/**< Id de l'équipe du joueur */
+	int 				numeroJoueur;			/**< Numéro du joueur */
+	socket_t 			*sockDial;				/**< Socket de dialogue avec le client */
+	Jeu 				*jeu;					/**< Pointeur vers l'état du jeu */
+	socket_t 			*clientsSockets;		/**< Tableau des sockets clients */
+	int 				*nbClientsConnectes;	/**< Nombre de clients connectés */
+	int 				*phasePlacementTermine;	/**< Etat du placement par équipe */
+	pthread_mutex_t 	*mutexJeu;				/**< Mutex de protection du jeu */
 } gServThreadParams_t;
 
-
+/**
+ * @brief Paramètres du thread client de jeu pour dialogue avec le serveur
+ */
 typedef struct {
-	socket_t 				*sockAppel;
-	int 					*equipeId;
-	Resultat 				*dernierResultat;
-	Tour 					*tourActuel;
-	sem_t 					*semCanClose;
-	sem_t 					*semPlacementOk;
-	sem_t 					*semTirResultat;
-	sem_t 					*semTourActuel;
-	sem_t					*semStartGame;
-	sem_t					*semTourPlacement;
-	int						*monTourPlacement;
-	Jeu						*jeu;
-	int                     *attendsResultatTir;
+	socket_t 				*sockAppel;				/**< Socket de connexion au serveur */
+	int 					*equipeId;				/**< Id de l'équipe */
+	Resultat 				*dernierResultat;		/**< Résultat du dernier tir reçu */
+	Tour 					*tourActuel;			/**< Tour actuel de la partie */
+	sem_t 					*semCanClose;			/**< Sémaphore de fermeture propre */
+	sem_t 					*semPlacementOk;		/**< Sémaphore de validation placement */
+	sem_t 					*semTirResultat;		/**< Sémaphore de résultat de tir */
+	sem_t 					*semTourActuel;			/**< Sémaphore de changement de tour */
+	sem_t					*semStartGame;			/**< Sémaphore de début de partie */
+	sem_t					*semTourPlacement;		/**< Sémaphore de tour de placement */
+	int						*monTourPlacement;		/**< Indicateur de tour de placement */
+	Jeu						*jeu;					/**< Pointeur vers l'état du jeu */
+	int                     *attendsResultatTir;	/**< Indicateur d'attente de résultat */
 } gCltThreadParams_t;
 
 /**
