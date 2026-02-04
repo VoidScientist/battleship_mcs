@@ -309,8 +309,9 @@ int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
 
 	afficher_equipe(equipe);
 	
-	orient = (orient_char == 'H') ? HORIZONTAL : VERTICAL;
 	lire_bateau(&ligne, &col, &orient_char);
+	orient = (orient_char == 'H') ? HORIZONTAL : VERTICAL;
+	
 	
 	
 	if (placer_bateau(&equipe->grille, bateaux_ids[numBateau], bateaux_longueurs[numBateau], ligne, col, orient)) {
