@@ -157,31 +157,132 @@ void dialSrvG2Clt(gServThreadParams_t *params);
  * \param      semReqAck  Sémaphore d'attente
  */
 void postRequest(int *reqVar, sem_t *semReqAck);
-
+/**
+ * @brief Envoie un message à tous les clients
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
+ */
 void envoyerATous(socket_t *sockets, int nb, int status, void *data, pFct serializer);
-
+/**
+ * @brief Envoie un message à tous les membres d'une équipe
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
+ */
 void envoyerAEquipe(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer);
-
+/**
+ * @brief Envoie un message aux coéquipiers (pas au joueur lui-même)
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param numJoueur     Numéro du joueur à exclure
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
+ */
 void envoyerACoequipiers(socket_t *sockets, int nb, int equipeId, int numJoueur, int status, void *data, pFct serializer);
-
+/**
+ * @brief Envoie un message à l'équipe adverse
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipeId      Id de l'équipe
+ * @param status        Code de status du message
+ * @param data          Données à envoyer
+ * @param serializer    Fonction de sérialisation
+ */
 void envoyerAAdversaires(socket_t *sockets, int nb, int equipeId, int status, void *data, pFct serializer);
-
+/**
+ * @brief Calcule le prochain joueur pour le placement
+ * 
+ * @param equipeId      Id de l'équipe actuelle
+ * @param nbClients     Nombre de clients connectés
+ * 
+ * @return Id du prochain joueur
+ */
 int calculerProchainJoueur(int equipeId, int nbClients);
-
+/**
+ * @brief Envoie NEXT_TURN pour le placement
+ * 
+ * @param sockets           Tableau des sockets clients
+ * @param nb                Nombre de clients
+ * @param prochainJoueur    Id du prochain joueur
+ */
 void envoyerNextTurnPlacement(socket_t *sockets, int nb, int prochainJoueur);
-
+/**
+ * @brief Démarre la phase de jeu après placement
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ */
 void demarrerPhaseJeu(socket_t *sockets, int nb);
-
+/**
+ * @brief Envoie NEXT_TURN pendant la phase de jeu
+ * 
+ * @param sockets       Tableau des sockets clients
+ * @param nb            Nombre de clients
+ * @param equipe        Id de l'équipe dont c'est le tour
+ */
 void envoyerNextTurnJeu(socket_t *sockets, int nb, int equipe);
-
+/**
+ * @brief Envoie le message de victoire
+ * 
+ * @param sockets          Tableau des sockets clients
+ * @param nb               Nombre de clients
+ * @param equipeGagnante   Id de l'équipe gagnante
+ * @param jeu              Partie de jeu en cours
+ */
 void envoyerVictoire(socket_t *sockets, int nb, int equipeGagnante, Jeu *jeu);
-
+/**
+ * @brief Traite une requête de connexion
+ * 
+ * @param sockDial      Socket du client
+ * @param jeu           Partie de jeu en cours
+ * @param equipeId      Id de l'équipe
+ * @param numeroJoueur  Numéro du joueur
+ * @param request       Requête recue
+ */
 void traiterConnexion(socket_t *sockDial, Jeu *jeu, int equipeId, int numeroJoueur, req_t *request);
-
+/**
+ * @brief Traite une requête de déconnexion
+ * 
+ * @param sockDial      Socket du client
+ * @param running       Flag de boucle du thread
+ */
 void traiterDeconnexion(socket_t *sockDial, int *running);
-
+/**
+ * @brief Traite une requête de placement
+ * 
+ * @param sockDial                 Socket du client
+ * @param clientsSockets           Tableau des sockets clients
+ * @param nbClients                Nombre de clients connectés
+ * @param jeu                      Partie de jeu en cours
+ * @param equipeId                 Id de l'équipe
+ * @param numeroJoueur             Numéro du joueur
+ * @param phasePlacementTermine    État du placement par équipe
+ * @param request                  Requête recue
+ * 
+ * @return 1: Succès | 0: Echec
+ */
 int traiterPlacement(socket_t *sockDial, socket_t *clientsSockets, int nbClients, Jeu *jeu, int equipeId, int numeroJoueur, int *phasePlacementTermine, req_t *request);
-
+/**
+ * @brief Traite une requête de tir
+ * 
+ * @param sockDial         Socket du client
+ * @param clientsSockets   Tableau des sockets clients
+ * @param nbClients        Nombre de clients connectés
+ * @param jeu              Partie de jeu en cours
+ * @param request          Requête recue
+ */
 void traiterTir(socket_t *sockDial, socket_t *clientsSockets, int nbClients, Jeu *jeu, req_t *request);
 
 #endif /* DIAL_H */

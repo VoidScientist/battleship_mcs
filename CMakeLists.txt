@@ -11,25 +11,25 @@ set(LIB_APP_PATH "${SRC}/app_lib")
 set(LIB_GAME_PATH "${SRC}/game_logic")
 
 add_library(
-	LIB_LOGGING
+	logging
 	"${LIB_LOGGING_PATH}/include/logging.h"
 	"${LIB_LOGGING_PATH}/logging.c"
 )
-target_include_directories(LIB_LOGGING PUBLIC "${LIB_LOGGING_PATH}/include")
+target_include_directories(logging PUBLIC "${LIB_LOGGING_PATH}/include")
 
 add_library(
-	LIB_INET 
+	inet 
 	"${LIB_INET_PATH}/include/session.h"
 	"${LIB_INET_PATH}/include/data.h"
 	"${LIB_INET_PATH}/session.c"
 	"${LIB_INET_PATH}/data.c"
 )
-target_include_directories(LIB_INET PUBLIC "${LIB_INET_PATH}/include")
-target_link_libraries(LIB_INET PUBLIC LIB_LOGGING)
+target_include_directories(inet PUBLIC "${LIB_INET_PATH}/include")
+target_link_libraries(inet PUBLIC logging)
 
 
 add_library(
-	LIB_GAME
+	game
 	"${LIB_GAME_PATH}/include/bataille_navale.h"
 	"${LIB_GAME_PATH}/include/affichage.h"
 	"${LIB_GAME_PATH}/include/logic.h"
@@ -38,12 +38,12 @@ add_library(
 	"${LIB_GAME_PATH}/affichage.c"
 	"${LIB_GAME_PATH}/structSerial.c"
 )
-target_include_directories(LIB_GAME PUBLIC "${LIB_GAME_PATH}/include")
+target_include_directories(game PUBLIC "${LIB_GAME_PATH}/include")
 
 
 
 add_library(
-	LIB_APP
+	app
 	"${LIB_APP_PATH}/include/repReq.h"
 	"${LIB_APP_PATH}/include/dial.h"
 	"${LIB_APP_PATH}/include/protocol.h"
@@ -55,18 +55,15 @@ add_library(
 	"${LIB_APP_PATH}/datastructs.c"
 	"${LIB_APP_PATH}/interface.c"
 )
-target_include_directories(LIB_APP PUBLIC "${LIB_APP_PATH}/include")
-target_link_libraries(LIB_APP PUBLIC LIB_INET)
-target_link_libraries(LIB_APP PUBLIC LIB_GAME)
+target_include_directories(app PUBLIC "${LIB_APP_PATH}/include")
+target_link_libraries(app PUBLIC inet)
+target_link_libraries(app PUBLIC game)
 
 
 add_executable(server "${SRC}/serveurEnregistrement.c")
-target_link_libraries(server LIB_APP LIB_APP)
+target_link_libraries(server app)
 
-add_executable(client "${SRC}/client_louis.c")
-target_link_libraries(client LIB_GAME LIB_APP)
-
-add_executable(client_mat "${SRC}/client.c")
-target_link_libraries(client_mat LIB_APP LIB_APP)
+add_executable(client "${SRC}/client.c")
+target_link_libraries(client app)
 
 add_compile_options("-Wall")
