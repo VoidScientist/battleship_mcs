@@ -88,16 +88,6 @@
  void joueur_suivant(Equipe *equipe);
  
  /**
- *	\fn					int position_valide(Grille *grille, int ligne, int col, int longueur, Orientation orient)
- *	\brief		Verifier si la position est valide pour poser un bateau
- *	\param 		grille : grille en cours
- *	\param 		ligne : numero de ligne
- *	\param 		col : numero de colonne
- *	\param 		longueur : longueur du bateau
- *	\param 		orient : orientation du bateau
- *	\ret		int: 0 (invalide) ou 1 (valide)
- */
- /**
   * @brief Vérifier si la position est valide pour poser un bateau
   * 
   * @param grille       Grille de la pose
