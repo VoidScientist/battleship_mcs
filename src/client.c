@@ -35,26 +35,47 @@
  *	\noop		C O N S T A N T E S
  */
 // Réseau
+/** @brief Adresse pour écouter sur toutes les interfaces réseau */
 #define BIND_ALL			"0.0.0.0"
+
+/** @brief Port du serveur d'enregistrement */
 #define PORT_SERV_ENR		50000
+
+/** @brief Port du serveur jeu */
 #define PORT_JEU			50001
 
 // Limites
+/** @brief Nombre max de joueurs par équipe */
 #define MAX_JOUEURS			10
+
+/** @brief Nombre mini de joueurs pour lancer la partie */
 #define MIN_JOUEURS			2
+
+/** @brief Nombre de types de bateaux différents */
 #define NB_TYPES_BATEAUX	5
 
 // Délais (microsecondes)
+/** @brief Délai entre l'envoi de messages (10 ms) */
 #define DELAY_MESSAGE_US	10000
+
+/** @brief Délai de stabilisation du serveur (100 ms) */
 #define DELAY_STABILIZE_US	100000
 
 // Délais (secondes)
+/** @brief Délai avant le début de la partie (1 s) */
 #define DELAY_START_GAME	1
+
+/** @brief Délai après la fin du placement (2 s) */
 #define DELAY_PLACEMENT		2
+
+/** @brief Délai de démarrage du serveur (1 s) */
 #define DELAY_SERVER_START	1
 
 // Tailles buffer
+/** @brief Taille standard des buffers de communication */
 #define BUFFER_SIZE			100
+
+/** @brief Taille des petits buffers */
 #define BUFFER_SMALL		20
 
 /*
@@ -72,37 +93,86 @@
 *****************************************************************************************
  *	\noop		V A R I A B L E S   G L O B A L E S
  */
+
+/** @brief Nom du programme */
 char 			*progName;
 
-// Serveur d'enregistrement
+// 						Serveur d'enregistrement
+/** @brief Socket de connexion au serveur d'enregistrement */
 socket_t 		sockEnregistrement;
+
+/** @brief Informations du client local */
 clientInfo_t 	self;
+
+/** @brief Liste des hosts disponibles */
 clientInfo_t	hosts[MAX_HOSTS_GET];
+
+/** @brief Sémaphore pour autoriser la fermeture propre */
 sem_t			semCanClose;
+
+/** @brief Sémaphore de fin de requête hosts */
 sem_t 			semRequestFin;
 
-// Serveur de jeu (HOST)
+// 						Serveur de jeu (HOST)
+/** @brief État du jeu côté serveur */
 Jeu				jeuServeur;
+
+/** @brief Sockets des clients connectés */
 socket_t		clientsSockets[MAX_JOUEURS];
+
+/** @brief Nombre de clients actuellement connectés */
 int				nbClientsConnectes = 0;
+
+/** @brief État du placement par équipe (0=A, 1=B) */
 int				phasePlacementTermine[2] = {0, 0};
+
+/** @brief Mutex pour protéger l'accès au jeu */
 pthread_mutex_t	mutexJeu = PTHREAD_MUTEX_INITIALIZER;
+
+/** @brief Socket d'écoute du serveur de jeu */
 socket_t 		sockEcouteJeu;
 
-// Client de jeu
+// 						Client de jeu
+/** @brief Socket de connexion au serveur de jeu */
 socket_t 		sockJeu;
+
+/** @brief Thread de dialogue avec le serveur */
 pthread_t 		threadDialJeu;
+
+/** @brief État du jeu côté client */
 Jeu				jeu;
+
+/** @brief Id de mon équipe */
 int 			monEquipeId;
+
+/** @brief Index de mon joueur */
 int 			monIndexJoueur;
+
+/** @brief Résultat du dernier tir reçu */
 Resultat 		dernierResultat;
+
+/** @brief Tour actuel de la partie */
 Tour			tourActuel;
+
+/** @brief Sémaphore de validation du placement */
 sem_t 			semPlacementOk;
+
+/** @brief Sémaphore de réception du résultat de tir */
 sem_t 			semTirResultat;
+
+/** @brief Sémaphore de changement de tour */
 sem_t			semTourActuel;
+
+/** @brief Sémaphore de début de partie */
 sem_t			semStartGame;
+
+/** @brief Indicateur du tour de placement */
 int				monTourPlacement;
+
+/** @brief Sémaphore de tour de placement */
 sem_t			semTourPlacement;
+
+/** @brief Indicateur d'attente de résultat de tir */
 int             attendsResultatTir = 0;
 
 /*
