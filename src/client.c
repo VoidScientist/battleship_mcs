@@ -61,6 +61,11 @@
 *****************************************************************************************
  *	\noop		M A C R O S
  */
+/**
+ *	\def		CHECK(sts, msg)
+ *	\brief		Macro-fonction qui vérifie que sts est égal -1 (cas d'erreur : sts==-1) 
+ *				En cas d'erreur, il y a affichage du message adéquat et fin d'exécution  
+ */
 #define CHECK(sts, msg) if ((sts)==-1) {perror(msg); exit(-1);}
 
 /*
@@ -108,7 +113,7 @@ int             attendsResultatTir = 0;
 /**
  * @brief Affiche les informations de la partie en cours
  * 
- * @param client 
+ * @param client 		Informations du client hôte de la partie 		
  */
 void afficherInfosPartie(clientInfo_t *client) {
 	printf("\n===========================================\n");
@@ -164,7 +169,7 @@ void initClient() {
 }
 
 /**
- * @brief Fonction de nettoyage à la sortie
+ * @brief Fonction à appeler pour fermer le client proprement
  */
 void onExit() {
 
@@ -206,7 +211,7 @@ void onDisplayHosts() {
 /**
  * @brief Envoie un placement au serveur
  * 
- * @param placement Le placement a envoyer
+ * @param placement 	Le placement a envoyer
  */
 void envoyerPlacement(Placement *placement) {
 	int status = enum2status(REQ, PLACE);
@@ -217,8 +222,8 @@ void envoyerPlacement(Placement *placement) {
 /**
  * @brief Envoie un tir au serveur et attend le résultat
  * 
- * @param ligne Numéro de ligne du tir
- * @param col Numéro de colonne du tir
+ * @param ligne 		Numéro de ligne du tir
+ * @param col 			Numéro de colonne du tir
  * 
  * @return Résultat du tir
  */
@@ -294,9 +299,9 @@ void envoyerSignauxDemarrage() {
 /**
  * @brief Lit et valide un placement de bateau
  * 
- * @param equipe Equipe qui place le bateau
- * @param numBateau Id du bateau placé
- * @param placement Placement voulu du bateau
+ * @param equipe 		Equipe qui place le bateau
+ * @param numBateau 	Id du bateau placé
+ * @param placement 	Placement voulu du bateau
  * 
  * @return 1: Réussite | 0: Echec du placement
  */
@@ -337,8 +342,8 @@ int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
 /**
  * @brief Gère le placmeent d'un bateau
  * 
- * @param equipe Equipe qui doit placer un bateau
- * @param numBateau Id du bateau qui doit être placé
+ * @param equipe 		Equipe qui doit placer un bateau
+ * @param numBateau 	Id du bateau qui doit être placé
  */
 void placerUnBateau(Equipe *equipe, int numBateau) {
 	
@@ -365,7 +370,7 @@ void placerUnBateau(Equipe *equipe, int numBateau) {
 /**
  * @brief Phase de placement complète
  * 
- * @param equipe Equipe du client
+ * @param equipe 		Equipe du client
  */
 void placerEquipeReseau(Equipe *equipe) {
 	for (int i = 0; i < NB_BATEAUX; i++) {
@@ -391,7 +396,7 @@ void attendreSonTour() {
 /**
  * @brief Affiche le résultat du tir
  * 
- * @param resultat Résultat du tir effectué
+ * @param resultat 		Résultat du tir effectué
  */
 void afficherResultatTir(Resultat resultat) {
 	if (resultat.touche) {
@@ -404,7 +409,7 @@ void afficherResultatTir(Resultat resultat) {
 /**
  * @brief Exécute un tour de jeu complet
  * 
- * @param equipe Equipe du client
+ * @param equipe 		Equipe du client
  */
 void executerTour(Equipe *equipe) {
 
@@ -438,13 +443,9 @@ void executerTour(Equipe *equipe) {
 }
 
 /**
- *	\fn			void jouerReseau(Jeu *jeu)
- *	\brief		Boucle principale de jeu
- */
-/**
  * @brief Boucle principale de jeu
  * 
- * @param jeu Jeu en cours
+ * @param jeu 			Jeu en cours
  */
 void jouerReseau(Jeu *jeu) {
 
@@ -475,15 +476,11 @@ void jouerReseau(Jeu *jeu) {
  */
 
 /**
- *	\fn			void *threadServeurJeu(void *params)
- *	\brief		Thread d'écoute du serveur de jeu
- */
-/**
  * @brief Thread d'écoute du serveur de jeu
  * 
- * @param params [description]
+ * @param params 		Paramètres du thread
  *  
- * @return [description]
+ * @return NULL
  */
 void *threadServeurJeu(void *params) {
 
@@ -527,8 +524,7 @@ void *threadServeurJeu(void *params) {
 }
 
 /**
- *	\fn			void creerServeurJeu()
- *	\brief		Crée et démarre le serveur de jeu
+ * @brief Crée et démarre le serveur de jeu
  */
 void creerServeurJeu() {
 
@@ -545,8 +541,7 @@ void creerServeurJeu() {
 }
 
 /**
- *	\fn			void attendreJoueurs()
- *	\brief		Attend que suffisamment de joueurs se connectent
+ * @brief Attend que suffisamment de joueurs se connectent
  */
 void attendreJoueurs() {
 	printf("\nAttendez que les joueurs rejoignent...\n");
@@ -569,9 +564,14 @@ void attendreJoueurs() {
 *****************************************************************************************
  *	\noop		F O N C T I O N S   C O N N E X I O N
  */
+
 /**
- *	\fn			int connecterAuServeurJeu(char *ip, int port)
- *	\brief		Établit la connexion au serveur de jeu
+ * @brief Établit la connexion au serveur de jeu
+ * 
+ * @param ip 			Adresse IP du serveur de jeu
+ * @param port 			Port du serveur de jeu
+ * 
+ * @return 1: Connexion réussi | 0: Echec de connexion
  */
 int connecterAuServeurJeu(char *ip, int port) {
 
@@ -628,8 +628,10 @@ int connecterAuServeurJeu(char *ip, int port) {
  */
 
 /**
- *	\fn			void lancerClientJeu(char *ip, int port)
- *	\brief		Lance le client de jeu et la partie
+ * @brief Lance le client de jeu et la partie
+ * 
+ * @param ip 			Adresse IP du serveur de jeu
+ * @param port 			Port du serveur de jeu
  */
 void lancerClientJeu(char *ip, int port) {
 
@@ -649,8 +651,7 @@ void lancerClientJeu(char *ip, int port) {
 }
 
 /**
- *	\fn			void lancerModeHost()
- *	\brief		Mode HOST - Crée et héberge une partie
+ * @brief Mode HOST - Crée et héberge une partie
  */
 void lancerModeHost() {
 
@@ -688,8 +689,8 @@ void lancerModeHost() {
 /**
  * @brief Point d'entrée principal du client
  * 
- * @param adrIP [description]
- * @param short [description]
+ * @param adrIP 		Adresse IP du serveur d'enregistrement
+ * @param short 		Port du serveur d'enregistrement
  */
 void client(char *adrIP, unsigned short port) {
 
@@ -743,8 +744,12 @@ void client(char *adrIP, unsigned short port) {
 }
 
 /**
- *	\fn			int main(int argc, char** argv)
- *	\brief		Point d'entrée du programme
+ * @brief Point d'entrée du programme
+ * 
+ * @param argc 			Nombre d'arguments de la ligne de commande
+ * @param argv 			Tableau des arguments de la ligne de commande
+ * 
+ * @return 0 si succès
  */
 int main(int argc, char** argv) {
 	progName = argv[0];
