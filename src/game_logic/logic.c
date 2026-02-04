@@ -178,10 +178,6 @@ void tour(Jeu *jeu, int ligne, int col, int *rejouer) {
     }
 }
 
-/**
- *  \fn         Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId)
- *  \brief      Retourne l'équipe correspondant à l'ID
- */
 Equipe* obtenirMonEquipe(Jeu *jeu, int equipeId) {
     return (equipeId == EQUIPE_A) ? &jeu->equipeA : &jeu->equipeB;
 }

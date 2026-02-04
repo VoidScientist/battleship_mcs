@@ -24,20 +24,10 @@
  *	\noop		I M P L E M E N T A T I O N   DES   F O N C T I O N S
  */
  
- /**
- *	\fn					void clear_screen()
- *	\brief		Clear le terminal
- */
 void clear_screen() {
         system("clear");
 }
 
- /**
- *	\fn					void afficher_grille(int grille[TAILLE][TAILLE], int montrer)
- *	\brief		Afficher une grille de jeu
- *	\param 		grille[TAILLE][TAILLE] : tableau 2 dimensions pour représenter la grille de jeu
- *	\param 		montrer : montrer ou non les bateaux
- */
 void afficher_grille(int grille[TAILLE][TAILLE], int montrer) {
     int valeur;
     
@@ -59,32 +49,16 @@ void afficher_grille(int grille[TAILLE][TAILLE], int montrer) {
     }
 }
 
- /**
- *	\fn					void afficher_equipe(Equipe *equipe)
- *	\brief		Afficher la grille d'une equipe
- *	\param 		equipe : l'equipe dont il faut afficher la grille
- */
 void afficher_equipe(Equipe *equipe) {
     printf("\nGrille %s:\n", equipe->nom);
     afficher_grille(equipe->grille.cases, 1);
 }
 
- /**
- *	\fn					void afficher_vue(Joueur *joueur)
- *	\brief		Afficher la grille de tirs
- *	\param 		Equipe : equipe
- */
 void afficher_vue(Equipe *equipe) {
     printf("\nGrille adverse:\n");
     afficher_grille(equipe->vue, 0);
 }
 
- /**
- *	\fn					void lire_coords(int *ligne, int *col)
- *	\brief		Lire les coordonnés d'un tir
- *	\param 		ligne : numero de la ligne
- *	\param 		col : numero de la colonne
- */
 void lire_coords(int *ligne, int *col) {
     char saisie[10];
     int valide = 0;
@@ -121,13 +95,6 @@ void lire_coords(int *ligne, int *col) {
     }
 }
 
- /**
- *	\fn					void lire_bateau(int *ligne, int *col, char *orient)
- *	\brief		Lire les informations pour placer un bateau
- *	\param 		ligne : numero de la ligne
- *	\param 		col : numero de la colonne
- *	\param 		orient : orientation du bateau
- */
 void lire_bateau(int *ligne, int *col, char *orient) {
     char saisie[10];
     int valide = 0;

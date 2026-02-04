@@ -106,8 +106,9 @@ int             attendsResultatTir = 0;
  */
 
 /**
- *	\fn			void afficherInfosPartie()
- *	\brief		Affiche les informations de la partie en cours
+ * @brief Affiche les informations de la partie en cours
+ * 
+ * @param client 
  */
 void afficherInfosPartie(clientInfo_t *client) {
 	printf("\n===========================================\n");
@@ -126,8 +127,9 @@ void afficherInfosPartie(clientInfo_t *client) {
  */
 
 /**
- *	\fn			void onSignal(int code)
- *	\brief		Gestionnaire de signal SIGINT
+ * @brief Gestionnaire de signal SIGINT
+ * 
+ * @param code 			Code du signal
  */
 void onSignal(int code) {
 
@@ -137,8 +139,7 @@ void onSignal(int code) {
 
 
 /**
- *	\fn			void initClient()
- *	\brief		Initialise le client complet
+ * @brief Initialise le client
  */
 void initClient() {
 	
@@ -163,8 +164,7 @@ void initClient() {
 }
 
 /**
- *	\fn			void onExit()
- *	\brief		Fonction de nettoyage à la sortie
+ * @brief Fonction de nettoyage à la sortie
  */
 void onExit() {
 
@@ -186,7 +186,7 @@ void onExit() {
 }
 
 /**
- * @brief     nettoyage, requêtes et affichage des hôtes
+ * @brief Nettoyage, requêtes et affichage des hôtes
  */
 void onDisplayHosts() {
 
@@ -204,8 +204,9 @@ void onDisplayHosts() {
  */
 
 /**
- *	\fn			void envoyerPlacement(Placement *placement)
- *	\brief		Envoie un placement au serveur
+ * @brief Envoie un placement au serveur
+ * 
+ * @param placement Le placement a envoyer
  */
 void envoyerPlacement(Placement *placement) {
 	int status = enum2status(REQ, PLACE);
@@ -214,8 +215,12 @@ void envoyerPlacement(Placement *placement) {
 }
 
 /**
- *	\fn			Resultat envoyerTir(int ligne, int col)
- *	\brief		Envoie un tir au serveur et attend le résultat
+ * @brief Envoie un tir au serveur et attend le résultat
+ * 
+ * @param ligne Numéro de ligne du tir
+ * @param col Numéro de colonne du tir
+ * 
+ * @return Résultat du tir
  */
 Resultat envoyerTir(int ligne, int col) {
 	
@@ -241,8 +246,7 @@ Resultat envoyerTir(int ligne, int col) {
 }
 
 /**
- *	\fn			void envoyerSignalStartGame()
- *	\brief		Envoie le signal START_GAME à tous les clients
+ * @brief Envoie le signale START_GAME à tous les clients
  */
 void envoyerSignalStartGame() {
 	
@@ -257,8 +261,7 @@ void envoyerSignalStartGame() {
 }
 
 /**
- *	\fn			void envoyerSignauxPlacement()
- *	\brief		Envoie les signaux de début de placement aux deux équipes
+ * @brief Envoies les signaux de début de placement aux deux équipes
  */
 void envoyerSignauxPlacement() {
 	
@@ -273,8 +276,7 @@ void envoyerSignauxPlacement() {
 }
 
 /**
- *	\fn			void envoyerSignauxDemarrage()
- *	\brief		Envoie tous les signaux de démarrage de partie
+ * @brief Envoie tous les signaux de démarrage de partie
  */
 void envoyerSignauxDemarrage() {
 
@@ -282,7 +284,6 @@ void envoyerSignauxDemarrage() {
 	envoyerSignalStartGame();
 	envoyerSignauxPlacement();
 	pthread_mutex_unlock(&mutexJeu);
-
 }
 
 /*
@@ -291,8 +292,13 @@ void envoyerSignauxDemarrage() {
  */
 
 /**
- *	\fn			int lirePlacement(Equipe *equipe, int numBateau, Placement *placement)
- *	\brief		Lit et valide un placement de bateau
+ * @brief Lit et valide un placement de bateau
+ * 
+ * @param equipe Equipe qui place le bateau
+ * @param numBateau Id du bateau placé
+ * @param placement Placement voulu du bateau
+ * 
+ * @return 1: Réussite | 0: Echec du placement
  */
 int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
 
@@ -329,8 +335,10 @@ int lirePlacement(Equipe *equipe, int numBateau, Placement *placement) {
 }
 
 /**
- *	\fn			void placerUnBateau(Equipe *equipe, int numBateau)
- *	\brief		Gère le placement d'un bateau
+ * @brief Gère le placmeent d'un bateau
+ * 
+ * @param equipe Equipe qui doit placer un bateau
+ * @param numBateau Id du bateau qui doit être placé
  */
 void placerUnBateau(Equipe *equipe, int numBateau) {
 	
@@ -355,8 +363,9 @@ void placerUnBateau(Equipe *equipe, int numBateau) {
 }
 
 /**
- *	\fn			void placerEquipeReseau(Equipe *equipe)
- *	\brief		Phase de placement complète
+ * @brief Phase de placement complète
+ * 
+ * @param equipe Equipe du client
  */
 void placerEquipeReseau(Equipe *equipe) {
 	for (int i = 0; i < NB_BATEAUX; i++) {
@@ -370,8 +379,7 @@ void placerEquipeReseau(Equipe *equipe) {
 }
 
 /**
- *	\fn			void attendreSonTour()
- *	\brief		Attend que ce soit le tour de l'équipe
+ * @brief Attend que ce soit le tour de l'équipe
  */
 void attendreSonTour() {
 	while (tourActuel.equipe_id != monEquipeId && !partieTerminee) {
@@ -381,8 +389,9 @@ void attendreSonTour() {
 }
 
 /**
- *	\fn			void afficherResultatTir(Resultat resultat)
- *	\brief		Affiche le résultat du tir
+ * @brief Affiche le résultat du tir
+ * 
+ * @param resultat Résultat du tir effectué
  */
 void afficherResultatTir(Resultat resultat) {
 	if (resultat.touche) {
@@ -393,8 +402,9 @@ void afficherResultatTir(Resultat resultat) {
 }
 
 /**
- *	\fn			void executerTour(Equipe *equipe)
- *	\brief		Exécute un tour de jeu complet
+ * @brief Exécute un tour de jeu complet
+ * 
+ * @param equipe Equipe du client
  */
 void executerTour(Equipe *equipe) {
 
@@ -431,6 +441,11 @@ void executerTour(Equipe *equipe) {
  *	\fn			void jouerReseau(Jeu *jeu)
  *	\brief		Boucle principale de jeu
  */
+/**
+ * @brief Boucle principale de jeu
+ * 
+ * @param jeu Jeu en cours
+ */
 void jouerReseau(Jeu *jeu) {
 
 	clear_screen();
@@ -462,6 +477,13 @@ void jouerReseau(Jeu *jeu) {
 /**
  *	\fn			void *threadServeurJeu(void *params)
  *	\brief		Thread d'écoute du serveur de jeu
+ */
+/**
+ * @brief Thread d'écoute du serveur de jeu
+ * 
+ * @param params [description]
+ *  
+ * @return [description]
  */
 void *threadServeurJeu(void *params) {
 
@@ -664,8 +686,10 @@ void lancerModeHost() {
  */
 
 /**
- *	\fn			void client(char *adrIP, unsigned short port)
- *	\brief		Point d'entrée principal du client
+ * @brief Point d'entrée principal du client
+ * 
+ * @param adrIP [description]
+ * @param short [description]
  */
 void client(char *adrIP, unsigned short port) {
 

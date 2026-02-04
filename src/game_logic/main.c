@@ -1,6 +1,6 @@
 /**
  *	\file		main.c
- *	\brief		Fichier principal du jeu. Gère les boucles de jeu.
+ *	\brief		Fichier principal du jeu pour le mode Local. Gère les boucles de jeu.
  *	\author		MARTEL Mathieu
  *	\version	1.0
  */
